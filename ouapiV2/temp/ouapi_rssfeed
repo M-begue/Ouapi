@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Acquire ouapi.org, a Unique API Domain</title>
+<link rel="canonical" href="https://ouapi.org/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%225%22%20fill%3D%22%23f59e0b%22%2F%3E%3Ctext%20x%3D%2216%22%20y%3D%2222%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2218%22%20font-weight%3D%22700%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EO%3C%2Ftext%3E%3C%2Fsvg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="ouapi.org is listed and ready for acquisition, offering a strong brand identity.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="author" content="Ouapi">
+<meta name="robots" content="index, follow">
+<style>* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "DM Sans", "Inter", system-ui, sans-serif; color: #0f172a; background: #ffffff; line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+.xd4baf8-wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+.xd4baf8-hdr { padding: 18px 0; border-bottom: 1px solid #eef2f7; background: #ffffff; }
+.xd4baf8-hdr-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.xd4baf8-logo { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 16px; color: #18181b; }
+.xd4baf8-logo svg { width: 28px; height: 28px; }
+.xd4baf8-nav { display: flex; gap: 18px; font-size: 14px; color: #475569; }
+.xd4baf8-nav a:hover { color: #3f3f46; }
+
+.xd4baf8-hero { padding: 88px 0; background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%); text-align: center; }
+.xd4baf8-hero-pretitle { color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; font-weight: 600; }
+.xd4baf8-hero-h1 { font-size: clamp(36px, 5.5vw, 64px); font-weight: 800; letter-spacing: -1.5px; color: #18181b; word-break: break-word; margin-bottom: 10px; }
+.xd4baf8-hero-sub { color: #475569; font-size: 18px; margin-bottom: 32px; }
+.xd4baf8-badges { display: flex; justify-content: center; gap: 8px; margin-bottom: 28px; flex-wrap: wrap; }
+.xd4baf8-badge { padding: 6px 12px; border: 1px solid #e2e8f0; border-radius: 999px; font-size: 12px; color: #475569; background: #ffffff; }
+.xd4baf8-cta { display: inline-block; padding: 14px 32px; border-radius: 20px; background: #3f3f46; color: #fff; font-weight: 700; font-size: 15px; transition: background 0.2s; }
+.xd4baf8-cta:hover { background: #18181b; }
+.xd4baf8-cta-secondary { background: transparent; color: #3f3f46; border: 2px solid #3f3f46; }
+
+.xd4baf8-sec { padding: 72px 0; }
+.xd4baf8-sec-alt { background: #fafafa; }
+.xd4baf8-h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; color: #18181b; text-align: center; margin-bottom: 10px; }
+.xd4baf8-sub { color: #64748b; text-align: center; max-width: 640px; margin: 0 auto 40px; font-size: 15px; }
+
+.xd4baf8-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.xd4baf8-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.xd4baf8-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.xd4baf8-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 24px; transition: border-color 0.2s, transform 0.2s; }
+.xd4baf8-card:hover { border-color: #3f3f46; transform: translateY(-2px); }
+.xd4baf8-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #18181b; }
+.xd4baf8-card p { font-size: 14px; color: #475569; }
+.xd4baf8-num { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 999px; background: #3f3f46; color: #fff; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+
+.xd4baf8-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 20px; text-align: center; }
+.xd4baf8-stat-num { font-size: 32px; font-weight: 800; color: #3f3f46; letter-spacing: -0.5px; }
+.xd4baf8-stat-lbl { font-size: 13px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+
+.xd4baf8-qa { border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
+.xd4baf8-qa:last-child { border-bottom: none; }
+.xd4baf8-qa h4 { font-size: 16px; font-weight: 700; color: #18181b; margin-bottom: 8px; }
+.xd4baf8-qa p { font-size: 14px; color: #475569; }
+
+.xd4baf8-note { background: #fafafa; border-left: 4px solid #3f3f46; padding: 24px; border-radius: 8px; display: flex; gap: 16px; align-items: flex-start; }
+.xd4baf8-note-avatar { width: 48px; height: 48px; border-radius: 999px; background: #3f3f46; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0; }
+.xd4baf8-note-name { font-weight: 700; color: #18181b; }
+.xd4baf8-note-role { font-size: 12px; color: #64748b; margin-bottom: 8px; }
+.xd4baf8-note-quote { font-size: 14px; color: #334155; font-style: italic; }
+
+.xd4baf8-pills { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.xd4baf8-pill { padding: 8px 14px; border-radius: 999px; background: #fafafa; color: #18181b; font-size: 13px; font-weight: 600; border: 1px solid #e2e8f0; }
+
+.xd4baf8-form { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 28px; max-width: 540px; margin: 0 auto; }
+.xd4baf8-input { width: 100%; padding: 12px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
+.xd4baf8-textarea { width: 100%; padding: 12px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; margin-bottom: 12px; min-height: 110px; resize: vertical; }
+
+.xd4baf8-body { max-width: 720px; margin: 0 auto; font-size: 16px; color: #334155; line-height: 1.75; }
+.xd4baf8-body h2 { font-size: 22px; font-weight: 700; color: #18181b; margin: 32px 0 12px; letter-spacing: -0.3px; }
+.xd4baf8-body h3 { font-size: 18px; font-weight: 700; color: #18181b; margin: 24px 0 10px; }
+.xd4baf8-body p { margin-bottom: 16px; }
+.xd4baf8-body ul, .xd4baf8-body ol { margin: 0 0 16px 20px; }
+.xd4baf8-body li { margin-bottom: 6px; }
+
+.xd4baf8-related { padding: 72px 0; background: #fafafa; border-top: 1px solid #e2e8f0; }
+.xd4baf8-rel-shell { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 24px 22px; box-shadow: 0 6px 24px rgba(15,23,42,0.04); }
+.xd4baf8-rel-kicker { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 700; margin-bottom: 6px; text-align: center; }
+.xd4baf8-rel-intro { max-width: 720px; margin: 4px auto 26px; text-align: center; color: #64748b; font-size: 14px; }
+
+/* layout: product_grid (ecommerce tile; each tile holds a single anchor) */
+.xd4baf8-pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 14px; }
+.xd4baf8-pg-tile { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; text-align: center; padding: 18px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; color: #18181b; font-weight: 800; font-size: 16px; line-height: 1.3; overflow-wrap: anywhere; word-break: break-word; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+.xd4baf8-pg-tile:hover { border-color: #3f3f46; color: #3f3f46; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(15,23,42,0.09); }
+
+/* layout: blog_feed (thumbnail + single title link) */
+.xd4baf8-bf-list { display: grid; gap: 14px; max-width: 780px; margin: 0 auto; }
+.xd4baf8-bf-item { display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: center; padding: 14px 18px; border: 1px solid #e2e8f0; border-radius: 20px; background: #ffffff; transition: border-color 0.2s, box-shadow 0.2s; }
+.xd4baf8-bf-item:hover { border-color: #3f3f46; box-shadow: 0 6px 18px rgba(15,23,42,0.06); }
+.xd4baf8-bf-thumb { width: 56px; height: 56px; border-radius: 12px; background: #fafafa; color: #18181b; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 20px; letter-spacing: -0.5px; }
+.xd4baf8-bf-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.xd4baf8-bf-title { font-size: 16px; font-weight: 700; color: #18181b; margin: 0; overflow-wrap: anywhere; }
+.xd4baf8-bf-title a { color: inherit; }
+.xd4baf8-bf-title a:hover { color: #3f3f46; }
+
+/* layout: listicle (blog-style content box) */
+.xd4baf8-ls-wrap { max-width: 760px; margin: 0 auto; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 26px 30px; line-height: 1.7; color: #334155; font-size: 15px; }
+.xd4baf8-ls-lead { color: #475569; font-size: 15px; margin-bottom: 14px; }
+.xd4baf8-ls-item { padding: 10px 0; border-bottom: 1px solid #eef2f7; }
+.xd4baf8-ls-item:last-child { border-bottom: none; }
+.xd4baf8-ls-num { display: inline-block; min-width: 32px; color: #3f3f46; font-family: ui-monospace, "SF Mono", monospace; font-weight: 700; }
+.xd4baf8-ls-p { font-size: 14px; color: #475569; margin: 0; }
+.xd4baf8-ls-p a { color: #18181b; text-decoration: underline; text-decoration-color: #cbd5e1; text-underline-offset: 3px; }
+.xd4baf8-ls-p a:hover { color: #3f3f46; text-decoration-color: #3f3f46; }
+
+/* layout: carousel (CSS scroll-snap, no JS; anchor text stays clean) */
+.xd4baf8-cr-outer { position: relative; padding: 0 4px; }
+.xd4baf8-cr-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 0 14px; scrollbar-width: thin; }
+.xd4baf8-cr-slide { flex: 0 0 260px; scroll-snap-align: start; display: flex; align-items: center; gap: 12px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 12px 16px; transition: border-color 0.2s, transform 0.2s; }
+.xd4baf8-cr-slide:hover { border-color: #3f3f46; transform: translateY(-3px); }
+.xd4baf8-cr-dot { flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; background: #fafafa; color: #3f3f46; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.xd4baf8-cr-link { flex: 1; min-width: 0; font-weight: 700; font-size: 15px; color: #18181b; overflow-wrap: anywhere; }
+.xd4baf8-cr-link:hover { color: #3f3f46; }
+.xd4baf8-cr-hint { margin-top: 10px; font-size: 12px; color: #94a3b8; text-align: center; }
+
+/* layout: table (single-column listing, one anchor per row) */
+.xd4baf8-tbl-wrap { max-width: 720px; margin: 0 auto; overflow-x: auto; }
+.xd4baf8-tbl { width: 100%; border-collapse: collapse; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; overflow: hidden; }
+.xd4baf8-tbl thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #64748b; padding: 12px 18px; background: #fafafa; border-bottom: 1px solid #e2e8f0; font-weight: 700; }
+.xd4baf8-tbl tbody td { padding: 0; border-bottom: 1px solid #eef2f7; font-size: 14px; color: #334155; vertical-align: middle; }
+.xd4baf8-tbl tbody tr:last-child td { border-bottom: none; }
+.xd4baf8-tbl tbody tr:nth-child(2n) td { background: #fcfdff; }
+.xd4baf8-tbl-link { display: block; padding: 14px 18px; font-weight: 600; color: #18181b; overflow-wrap: anywhere; }
+.xd4baf8-tbl-link:hover { color: #3f3f46; background: #fafafa; }
+
+/* layout: clean_rows (compact list; each row = single anchor) */
+.xd4baf8-cln-list { display: grid; gap: 8px; max-width: 820px; margin: 0 auto; }
+.xd4baf8-cln-item { display: block; padding: 14px 18px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; color: #18181b; font-weight: 600; font-size: 15px; overflow-wrap: anywhere; transition: border-color 0.2s, background 0.2s; }
+.xd4baf8-cln-item:hover { border-color: #3f3f46; color: #3f3f46; background: #fafafa; }
+
+.xd4baf8-ftr { padding: 48px 0 28px; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 13px; }
+.xd4baf8-ftr-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.xd4baf8-ftr-legal { margin-top: 16px; font-size: 12px; }
+
+@media (max-width: 780px) {
+  .xd4baf8-grid-3 { grid-template-columns: 1fr; }
+  .xd4baf8-grid-2 { grid-template-columns: 1fr; }
+  .xd4baf8-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .xd4baf8-rel-shell { padding: 18px 16px; }
+  .xd4baf8-pg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .xd4baf8-pg-tile { aspect-ratio: auto; min-height: 140px; padding: 14px; }
+  .xd4baf8-bf-item { grid-template-columns: 1fr; }
+  .xd4baf8-bf-thumb { display: none; }
+  .xd4baf8-cr-slide { flex-basis: 85%; }
+  .xd4baf8-ls-wrap { padding: 22px 20px; }
+  .xd4baf8-hero-h1 { font-size: clamp(28px, 8vw, 40px); }
+  .xd4baf8-sec { padding: 48px 0; }
+}</style>
+
+</head>
+<body>
+<header class="xd4baf8-hdr"><div class="xd4baf8-wrap xd4baf8-hdr-inner"><span class="xd4baf8-logo"><span>Ouapi</span></span><nav class="xd4baf8-nav"><a href="#xd4baf8-about">About</a><a href="#xd4baf8-top">Home</a><a href="#xd4baf8-inquire">Contact</a></nav></div></header>
+<section class="xd4baf8-hero"><div class="xd4baf8-wrap"><div class="xd4baf8-hero-pretitle">Exclusive Domain</div><h1 class="xd4baf8-hero-h1">ouapi.org</h1><p class="xd4baf8-hero-sub">Elevate Your API Brand</p><div class="xd4baf8-badges"><span class="xd4baf8-badge">Verified</span><span class="xd4baf8-badge">API Ready</span><span class="xd4baf8-badge">Org TLD</span></div><a href="#xd4baf8-inquire" class="xd4baf8-cta">Inquire Now</a></div></section>
+<section class="xd4baf8-sec xd4baf8-sec-alt"><div class="xd4baf8-wrap"><h2 class="xd4baf8-h2">Acquisition Process</h2><div class="xd4baf8-grid-4"><div class="xd4baf8-card"><div class="xd4baf8-num">1</div><h3>Inquire</h3><p>Submit your interest in ouapi.org</p></div><div class="xd4baf8-card"><div class="xd4baf8-num">2</div><h3>Pricing</h3><p>Receive a quote for the domain</p></div><div class="xd4baf8-card"><div class="xd4baf8-num">3</div><h3>Escrow</h3><p>Secure transfer process begins</p></div><div class="xd4baf8-card"><div class="xd4baf8-num">4</div><h3>Transfer</h3><p>Domain ownership is transferred to you</p></div></div></div></section>
+<section class="xd4baf8-sec"><div class="xd4baf8-wrap"><h2 class="xd4baf8-h2">Related Concepts</h2><p class="xd4baf8-sub">ouapi.org fits well with API, tech, and software brands</p><div class="xd4baf8-pills"><span class="xd4baf8-pill">API Tools</span><span class="xd4baf8-pill">Tech Platforms</span><span class="xd4baf8-pill">Software Solutions</span><span class="xd4baf8-pill">Data Services</span><span class="xd4baf8-pill">Cloud Integration</span></div></div></section>
+<section class="xd4baf8-sec"><div class="xd4baf8-wrap"><h2 class="xd4baf8-h2">Market Presence</h2><div class="xd4baf8-stats"><div><div class="xd4baf8-stat-num">9,087+</div><div class="xd4baf8-stat-lbl">Deals Closed</div></div><div><div class="xd4baf8-stat-num">114</div><div class="xd4baf8-stat-lbl">Countries</div></div><div><div class="xd4baf8-stat-num">99%</div><div class="xd4baf8-stat-lbl">Satisfaction</div></div><div><div class="xd4baf8-stat-num">21 days</div><div class="xd4baf8-stat-lbl">Avg Delivery</div></div></div></div></section>
+<section class="xd4baf8-sec"><div class="xd4baf8-wrap"><div class="xd4baf8-body"><h2>Introduction to ouapi.org</h2>
+<p>ouapi.org presents a unique opportunity for businesses and individuals looking to establish a strong online presence, particularly in the API and tech industries. The .org TLD lends credibility and trustworthiness, essential for any brand aiming to make a significant impact.</p>
+<h2>Brand Direction and Memorability</h2>
+<p>The structure of ouapi.org suggests a focus on API development and integration, making it an attractive choice for companies that specialize in these areas. The name is also memorable and easy to spell, which is crucial for brand recognition and customer retention. In a competitive digital landscape, a domain like ouapi.org can be a valuable asset, setting your brand apart from others.</p>
+<h2>Niche Fit and Future Potential</h2>
+<p>Given the rapid growth of the tech and software sectors, a domain like ouapi.org is not only relevant today but also holds great potential for the future. It can serve as the foundation for a variety of projects, from API marketplaces and developer platforms to blogs and communities focused on API development and best practices. If you're interested in acquiring ouapi.org and leveraging its potential to elevate your brand, we invite you to submit an inquiry and take the first step towards securing this valuable domain.</p></div></div></section>
+<section class="xd4baf8-sec xd4baf8-sec-alt"><div class="xd4baf8-wrap"><h2 class="xd4baf8-h2">Transaction Safety</h2><div class="xd4baf8-grid-3"><div class="xd4baf8-card"><h3>Escrow</h3><p>Secures your payment until transfer</p></div><div class="xd4baf8-card"><h3>Verification</h3><p>Ensures domain authenticity</p></div><div class="xd4baf8-card"><h3>Privacy</h3><p>Protects your personal and payment information</p></div></div></div></section>
+<section class="xd4baf8-sec xd4baf8-sec-alt"><div class="xd4baf8-wrap"><h2 class="xd4baf8-h2">Our Credibility</h2><p class="xd4baf8-sub">Reliable domain brokerage services since inception</p><div class="xd4baf8-grid-3"><div class="xd4baf8-card"><h3>Secure</h3><p>Escrow protects your transaction</p></div><div class="xd4baf8-card"><h3>Verified</h3><p>Domains are thoroughly vetted</p></div><div class="xd4baf8-card"><h3>Private</h3><p>Your information remains confidential</p></div></div></div></section>
+<section class="xd4baf8-related"><div class="xd4baf8-wrap"><div class="xd4baf8-rel-shell"><div class="xd4baf8-rel-kicker">Listing Spotlight</div><h2 class="xd4baf8-h2">More Premium Names</h2><p class="xd4baf8-rel-intro">These alternatives may complement your brand search.</p><div class="xd4baf8-bf-list"><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">T</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://theaestheticpoetic.com/">Theaestheticpoetic</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">C</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://clacufrj.org/">Visit Site</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">I</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://imagineanthology.com/">Imagineanthology</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">I</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://internallydisplacedpeople.org/">Buy this domain</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">K</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://khamama.com/">Own this domain</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">T</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://travellakeerie.com/">Visit Site</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">T</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://theballroom.org/">Theballroom</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">O</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://oggsie.com/">View Details</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">R</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://ratherprize.org/">View Details</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">E</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://evelyncormier.com/">Click here</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">T</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://texasjoethelegalmexican.com/">Visit texasjoethelegalmexican.com</a></h3></div></article><article class="xd4baf8-bf-item"><div class="xd4baf8-bf-thumb">W</div><div class="xd4baf8-bf-body"><h3 class="xd4baf8-bf-title"><a href="https://worldethicalfoundations.org/">Own this domain</a></h3></div></article></div></div></div></section>
+<section class="xd4baf8-sec" id="xd4baf8-inquire"><div class="xd4baf8-wrap"><h2 class="xd4baf8-h2">Inquiry Form</h2><p class="xd4baf8-sub">Submit your interest in acquiring ouapi.org today</p><div class="xd4baf8-form"><input class="xd4baf8-input" type="text" placeholder="Your name"><input class="xd4baf8-input" type="email" placeholder="Email"><textarea class="xd4baf8-textarea" placeholder="Message"></textarea><button class="xd4baf8-cta" type="button">Send Inquiry</button></div></div></section>
+<footer class="xd4baf8-ftr"><div class="xd4baf8-wrap"><div>Ouapi — Premium Domain</div><div class="xd4baf8-ftr-links"><a href="#xd4baf8-about">About</a> · <a href="#xd4baf8-inquire">Contact</a> · <a href="#xd4baf8-terms">Terms</a> · <a href="#xd4baf8-faq">FAQ</a></div><div class="xd4baf8-ftr-legal">© 2026 Ouapi — Domain Portfolio</div></div></footer>
+<p aria-hidden="true" style="display:none;">available entry directory name registry entry catalog archive directory reference vault record name available namespace reference vault reference registry brand vault listed asset asset name entry registry asset reference registry listed descriptor reference name descriptor listed premium brand index asset available.</p>
+<p aria-hidden="true" style="display:none;">archive brand listed archive archive catalog registry entry listed brand registry reference reference record directory vault registry available directory directory brand descriptor directory index archive vault available reference listed vault index namespace descriptor archive registry vault asset name premium reference vault listed asset descriptor.</p>
+
+</body>
+</html>

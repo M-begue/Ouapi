@@ -1,0 +1,6 @@
+ALTER TABLE `{TAB_SOFT_LICENCE}` CHANGE `agence_id` `hardware_id` INT( 10 ) NOT NULL , CHANGE `nb` `serial` VARCHAR( 255 ) NOT NULL;[END]
+ALTER TABLE `{TAB_PLUGIN}` ADD `title` VARCHAR( 255 ) NOT NULL AFTER `name` ;[END]
+UPDATE `{TAB_HARD_TYPE}` SET `verrou` = '1' WHERE `{TAB_HARD_TYPE}`.`id`=1;[END]
+UPDATE `{TAB_HARD_TYPE}` SET `verrou` = '1' WHERE `{TAB_HARD_TYPE}`.`id`=2;[END]
+UPDATE `{TAB_HARD_TYPE}` SET `verrou` = '1' WHERE `{TAB_HARD_TYPE}`.`id`=3;[END]
+UPDATE `{TAB_CONFIG}` SET `valeur` = '1.2' WHERE `{TAB_CONFIG}`.`nom` = 'gen_version';[END]
