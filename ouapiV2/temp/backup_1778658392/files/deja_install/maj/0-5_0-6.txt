@@ -1,0 +1,32 @@
+[F] config/connect.php [/F]
+[D_IF] // Tables OCS utilisées [/D_IF]
+define("TAB_OCS_HARD","hardware"); \n
+define("TAB_OCS_BIOS","bios"); \n
+define("TAB_OCS_SOFT","softwares"); \n
+\n
+\n
+// Champs OCS \n
+// HARDWARE \n
+define("COL_OCS_HARD_ID","ID"); \n
+define("COL_OCS_HARD_NAME","NAME"); \n
+define("COL_OCS_DOMAIN","DOMAIN"); \n
+define("COL_OCS_IPADDR","IPADDR"); \n
+define("COL_OCS_USERID","USERID"); \n
+define("COL_OCS_WORKG","WORKGROUP"); \n
+define("COL_OCS_PROCESST","PROCESSORT"); \n
+define("COL_OCS_PROCESSS","PROCESSORS"); \n
+define("COL_OCS_MEMORY","MEMORY"); \n
+define("COL_OCS_SWAP","SWAP"); \n
+define("COL_OCS_WINOWNER","WINOWNER"); \n
+define("COL_OCS_WINCOMPANY","WINCOMPANY"); \n
+define("COL_OCS_OSNAME","OSNAME"); \n
+define("COL_OCS_OSVERSION","OSVERSION"); \n
+define("COL_OCS_OSSP","OSCOMMENTS"); \n
+define("COL_OCS_LASTDATE","LASTDATE"); \n
+\n
+// SOFTWARE \n
+define("COL_OCS_SOFT_ID","ID"); \n
+define("COL_OCS_SOFT_VERSION","VERSION"); \n
+define("COL_OCS_SOFT_NAME","NAME"); \n
+define("COL_OCS_SOFT_HARDID","HARDWARE_ID"); \n
+

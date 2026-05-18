@@ -3,27 +3,29 @@
 class FileRecursive{
 	var $copie;
 	
-	function copie($dir, $dest, $filetype = '', $recursive = 1, $prefix = '', $create_dir = 1) 
+	function copie($dir, $dest, $filetype = '', $recursive = 1, $prefix = '', $create_dir = 1, $exclude = array()) 
 	{	  
 	  $hdir = opendir( $dir );
 	  
 	  while ( ($item = readdir( $hdir )) !== FALSE ) 
 	  {		
-	  	if($item=="." || $item==".." || $item=="temp") continue;
+	  	if($item=="." || $item=="..") continue;
 		
+		if (in_array($item, $exclude)) continue;
+
 		if ( is_dir( $dir.'/'.$item ) && $recursive == 1 ) 
 		{
 			if (!is_dir($dest.'/'.$item) && $create_dir ==1)
-				mkdir($dest.'/'.$item,0777,TRUE);		
+				mkdir($dest.'/'.$item,0777,true);		
 			
-			$this->copie($dir.'/'.$item, $dest.'/'.$item, $filetype, $recursive, $prefix);
+			$this->copie($dir.'/'.$item, $dest.'/'.$item, $filetype, $recursive, $prefix, $create_dir, $exclude);
 		}
 		elseif (!is_dir( $dir.'/'.$item ))
 		{
 		   if (($filetype != '' && strtoupper(substr(strrchr($item, '.'), 1)) == strtoupper($filetype)) || $filetype == '')
 		   {
 			   $res = copy($dir.'/'.$item, $dest.'/'.$prefix.$item);
-			   //echo 'Filtre: '.$filetype.' => (Résultat: '.$res.') '.$dir.'/'.$item.' => '.$dest.'/'.$prefix.$item.'<br/>';
+			   //echo 'Filtre: '.$filetype.' => (Rï¿½sultat: '.$res.') '.$dir.'/'.$item.' => '.$dest.'/'.$prefix.$item.'<br/>';
 			}
 		} 
 		else
@@ -54,7 +56,7 @@ class FileRecursive{
 				if	(preg_match('#^'.$prefix.'#',$item))
 				{
 					$res = unlink($dir.'/'.$item);
-					//echo '<b>Filtre: '.$filetype.' => (Résultat: '.$res.') '.$dir.'/'.$item.'</b><br/>';
+					//echo '<b>Filtre: '.$filetype.' => (Rï¿½sultat: '.$res.') '.$dir.'/'.$item.'</b><br/>';
 				}
 			}
 		} 

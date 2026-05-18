@@ -1,0 +1,10 @@
+[F] config/connect.php [/F]
+[D_IF] define("LDAP_HOST","your_ldap_host"); [/D_IF]
+define("LDAP_USER","your_ldap_user"); \n
+define("LDAP_MDP","your_ldap_pwd"); \n
+define("LDAP_PORT","your_ldap_port"); \n
+\n
+[D_IF] define("DB_OCS_HOST","your_ocs_host"); [/D_IF]
+define("DB_OCS_USER","your_ocs_user"); \n
+define("DB_OCS_MDP","your_ocs_pwd"); \n
+define("DB_OCS_TRANSM","your_ocs_database"); \n

@@ -1,0 +1,9 @@
+Suppr
+define("TAB_CONTRAT","ouapi_contrat");
+define("TAB_CONTRAT_TYPE","ouapi_co_type");
+define("TAB_FACTURE","ouapi_facture");
+define("TAB_FACTURE_TYPE","ouapi_fa_type");
+
+Ajout
+define("TAB_DOCS","ouapi_docs");
+define("TAB_DOCS_TYPE","ouapi_docs_type");

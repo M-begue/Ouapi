@@ -1,0 +1,9 @@
+Information: cette version de OUAPI supprime les rubriques factures et contrats. Ces deux rubriques fusionnent en une seule rubrique "Documents". Une perte de fonctionnalités est néanmoins possible: l'ensemble des champs de couts/loyer sont en effet tous regroupé dans le champ "Commentaire".\n
+\n
+[F] config/connect.php [/F]
+[A] 	define("TAB_USERS","ouapi_utilisateur");\n define("TAB_USERS_GRP","ouapi_ut_groupe"); [/A]
+define("TAB_DOCS","{DB_PREFIX}docs");\n
+define("TAB_DOCS_TYPE","{DB_PREFIX}docs_type");\n
+define("TAB_LIAISON_DOCS","{DB_PREFIX}liaison_docs");\n
+define("TAB_PLUGIN","{DB_PREFIX}plugin");\n
+define("TAB_SOFT_MARQUE","{DB_PREFIX}ha_marque");

@@ -1,0 +1,547 @@
+/****************************************************************************
+*                                                                           *
+*                  Copyright (c) 2008-2013 Nicolas BIDET                    *
+*                               OUAPI pack                                  *
+*        License http://www.gnu.org/licenses/ GNU/GPL Public License        *
+*                                                                           *
+****************************************************************************/
+
+--------------------------- Version 1.5 (16/03/2015) --------------------------
+
+                                [A] BUG FIX
+
+1. Correction du lien vers le flux RSS d'actus
+
+2. Correction du bug de possibilité d'ajout d'un champ perso vide
+
+3. Correction des droits sur les fiches matériels / périphériques / documents / utilisateurs
+
+4. Correction d'init du modèle lors de l'ajout/edition matériel/periph lorsque la marque existe 
+   (affichait tous les modeles sans filtrer par marque)
+   
+5. Correction du bug de plantage de la recherche lorsqu'elle contient une apostrophe
+
+6. Correction du bug de synchro de l'éditeur de logiciel lors de l'ajout d'un logiciel depuis OCS
+
+7. Correction du bug d'affichage des rebuts si plus de matériel dans le site
+
+8. Correction du bug d'affichage de colonne OCS dans la rubrique matériel lorsque l'on désactive OCS
+
+9. Correction et ajustement de différents bugs mineurs d'affichage et ajout d'icones manquants
+
+
+                             [B] OPTIMISATIONS
+
+1. Possibilité de supprimer les champs personnalisés
+
+2. Optimisation et refonte des fiches périphériques, utilisateurs, documents, logiciels
+
+3. Affichage des infos OCS dans la fiche périphérique
+
+4. Synchro de l'OS par LDAP (mappage du champ)
+
+5. Affichage du nombre d'éléments dans les onglets des fiches
+
+6. Possibilité de supprimer la liaison avec un matériel/periph/soft depuis la fiche document
+
+7. Suppression de la colonne "connexion" dans la rubrique matériel, regroupée avec la colonne "outils"
+
+8. Sous rubriques Matériels et Périphériques dans la rubrique réservation
+
+9. Dans Module OCS logiciels, bouton supplémentaire pour masquer logiciel
+
+10. Ajout de la rubrique réseau dans les résultats de recherche
+
+11. Sous rubriques pour OCS: Ecrans, Periphériques utilisateurs, Modems, Imprimantes
+
+12. Export au format CSV en remplacement de XLS
+
+13. Modification de l'affichage des documents liés dans les fiches: s'affichent par date décroissante et avec le type en tête de ligne + optimisation SQL
+
+14. Modification de l'affichage dans les résultats de recherche: ajout d'icones matériels, Périph, Accéder à la fiche...; texte recherché en couleur et caractères en gras, champs génériques en gris
+
+15. Ajout d'extensions utilisables pour documents liés: 'PDF','DOC','DOCX','RTF','XLS','XLSX','PPT','PPTX','TXT','CSV','ODS','ODT','ODP','JPG','GIF','RAR','ZIP','XML','BMP', 'MSG', 'KEY'
+
+16. Hyperlinks dans la fiche de périphérique pour accéder directement aux infos du matériel lié
+
+17. Ajout de l'info sur l'emplacement et le n° de série dans le "Detail des postes installés", section soft (uniquement sur template ShadeOfGray)
+
+18. Intégration partielle de jQueryUI (changement de datepicker)
+
+
+						[C] FONCTIONS SUPPLEMENTAIRES
+
+1. Possibilité de définir la colonne de regroupement dans les rubriques (documents, matériels, périphériques, users, resa)
+
+2. Possibilité de définir la colonne de tri par défaut dans toutes les rubriques
+
+3. Affichage des paramétrages du serveur OCS dans la rubrique admin OCS
+
+4. Affichage des informations des disques dans la section OCS de la fiche matériel + Refonte de la section
+
+5. Ajout d'une date de validité pour les documents
+
+6. Création d'une fiche "réseau"
+
+7. Suppression de sites
+
+8. Ajout de logiciels sur un PC depuis la fiche matériel
+
+9. Ajout de la langue English
+
+10. Ajout du thème ShadeOfGray
+
+
+						
+--------------------------- Version 1.4 (15/03/2013) --------------------------
+
+                                [A] BUG FIX
+
+1. Correction du bug de filtrage dans la rubrique périphérique
+
+2. Correction bug d'affichage de calendrier dans MAJ logiciel
+
+3. Correction bug d'affichage infos LDAP fiche utilisateur
+
+4. Correction bug de copie de matériel dans le cas d'une utilisation monosite.
+
+5. Correction du bug de synchro OCS du matériel portant l'ID 0
+
+6. Correction bugs dans les rubriques OCS et matériel si aucun résultat OCS trouvés
+
+7. Bug d'affichage des images de la légende de l'ajout de périph par OCS
+
+8. Correction bug de selection de la date de version d'un logiciel lors de sa création (Icone calendrier ne s'affichait pas)
+
+9. Correction du bug empechant l'édition des prises réseau 
+
+10. Correcion bug d'affichage des icones de légende dans le formulaire d'ajout/édition des périphs
+
+11. Correction du bug empechant le changement des mots de passe utilisateurs
+
+12. Correction bug d'affichage infobulle sur matériel réseau si apostrophe
+
+13. Correction bug d'édition des types de matériels (connexions HTTP/VNC n'étaient pas éditées)
+
+14. Correction bug d'affichage dans adm_materiel et adm_utilisateur lorsqu'une colonne est mal mappée dans la conf LDAP
+
+
+                             [B] OPTIMISATIONS
+
+1. Suppression rubrique "logiciels installés" dans fiche matériel quand OCS installé
+
+2. Aperçu des fichiers txt dans la fiche document
+	
+3. Choix de créer un accès à OUAPI à un utilisateur lors de sa création ou non
+
+4. Ajout de la colonne adresse IP dans l'affichage matériel
+
+5. Possibilité de supprimer la colonne "Connexion" dans la rubrique matériel
+
+6. Limite des équipements réseau à 96 ports pour éviter les boucles infinies lors de l'affichage du schéma du matériel
+
+7. Optimisation et refonte fiche matériel et lien téléchargement document rajouté sur la fiche
+
+8. Optimisation de la page de réglages LDAP
+
+9. Diverse améliorations graphiques
+
+10. Gestion du timeout LDAP (limite à 500 éléments en retour)
+
+11. Lien de téléchargement des documents attachés rajouté sur la fiche périphérique
+
+12. Rafraichissement des icones
+
+13. Optimisation du chargement du flux RSS OUAPI (1 x par jour) par mise en cache
+
+	
+						[C] FONCTIONS SUPPLEMENTAIRES
+						
+1. Ajout d'un menu de sous rubriques
+
+2. Sous rubriques pour OCS: Matériels, Logiciels, Périphériques
+
+3. Refonte de la rubrique OCS
+
+4. LDAP pour les matériels
+
+5. Edition des détails des documents (enfin !)
+
+6. Lien vers le document dans la fiche matériel/périphérique/logiciel
+
+7. Ajout possible de fichiers JPG et PNG dans les documents
+
+8. Activer / Désactiver les différentes rubriques
+
+9. Ajout de champs persos (VARCHAR,INT,FLOAT) dans les rubriques matériels, périphériques, utilisateurs, logiciels, réseau et documents
+
+10. Sous rubriques pour LDAP : Utilisateurs et Matériels
+
+11. Envoi des stats d'utilisation à ouapi.org
+
+12. Refonte du système d'édition / suppression des tables secondaires
+
+13. Pré-version de l'outil de mise à jour automatique
+
+
+--------------------------- Version 1.3 (31/07/2012) --------------------------
+
+                                [A] BUG FIX
+
+1. Correction du bug d'affichage des equipements connectés a l'équipement réseau
+
+2. Correction du bug de numéro de licence logiciel empéchant la saisie de lettres
+
+3. Correction du bug de suppression des alias OCS lors de la suppression d'un logiciel
+
+                             [B] OPTIMISATIONS
+
+1. Decoupage du fichier connect.php et creation d'un fichier param_ouapi.php contenant les nom de tables/champs de la base
+
+2. Correction de l'affichage du libellé "Rebut" dans le moteur de recherche
+
+3. Ajout d'alias matériel OCS "Low profile Desktop" 
+
+						[C] FONCTIONS SUPPLEMENTAIRES
+
+1. Filtrage des utilisateurs LDAP (contourne la limite des 500 users retournés)
+
+2. Ajout d'un mode guest: aucune authentification nécessaire
+
+3. Refonte de la section droits: système de cases à cocher plus souple
+   NOTE IMPORTANTE: A l'exception du groupe administrateur qui conserve tous les droits, tous les droits des autres groupes
+   devront être reparamétrés !
+
+4. Paramétrage de l'affichage des colonnes dans toutes les rubriques
+
+5. Infos OCS affichable dans les colonnes de la rubrique matériel
+
+6. Module LDAP séparé de la rubrique utilisateur
+
+7. Lien "Editer l'élément" dans le moteur de recherche
+
+8. (BETA) Mise à jour automatique de OUAPI
+
+9. Surlignage du résultat de recherche lors du clic sur "Accès rubrique"
+
+10. Ajout d'un calendrier imprimable dans la rubrique "Réservations"
+
+
+--------------------------- Version 1.2 (27/10/2011) --------------------------
+
+                                [A] BUG FIX
+
+1. Correction du bug du lien "accès à la rubrique" dans les résultats de recherche: ne renvoyait pas sur le bon site
+
+2. Correction bug affichage fiche periphérique dans la rubrique "Mon espace"
+								
+                             [B] OPTIMISATIONS
+
+1. Suppression de l'obligation de créer un accès Ouapi lors de la création d'un utilisateur
+
+2. Améliorations graphiques dans la section logiciels (Ajout d'icones d'état de synchro, d'informations en tete de page)
+
+3. Optimisations codage HTML (partiellement validé W3C)
+
+						[C] FONCTIONS SUPPLEMENTAIRES
+
+1. Modification de la gestion des licences logicielles:
+	- Suppression de la notion de nombre de licence mono/multisite
+	- Possibilité d'ajouter des numéros de licence
+
+2. Refonte de la section logicielle
+
+3. Nom de champ de la base SQL créée en tant que globales (HA_ID, HA_NAME, ...)
+
+4. Ajout d'un "Nom long" pour les plugin (title)
+
+5. Ajout d'une notion d'alias OCS pour les types de matériels
+
+6. Verrouillage de certains enregistrements en BDD (edition possible, suppression interdite)
+
+7. Possibilité de "délier" un périph d'un matériel depuis la fiche matériel
+
+8. Ajout d'utilisateurs en masse avec LDAP
+													
+--------------------------- Version 1.1 (08/06/2011) --------------------------
+
+                                [A] BUG FIX
+
+1. Bug d'affichage de l'erreur de connexion OCS dans la section periphériques
+
+2. Bug de comptabilisation du nombre installations d'un logiciel sur un site donné
+
+3. Bug d'édition de matériel dans un contexte monosite: l'agence ne remontait pas
+
+                             [B] OPTIMISATIONS
+
+1. Toutes les images sont inclues dans le template
+
+2. Les doublons logiciels OCS sont masqués sur la fiche matériel
+
+3. Modification graphiques: 
+	* Surlignage de la ligne courante
+	* Dégradé sur le fond des cellules de titre et arrière plan
+	* Boutons changeant de couleur au passage de la souris
+	* Surlignage du résultat de recherche courant
+
+
+                       [C] FONCTIONS SUPPLEMENTAIRES
+
+1. Export excel de la liste de documents
+
+2. Ajout d'un Favicon
+					   
+3. Gestion documentaire élargie
+
+4. Gestion de plugin rubrique
+
+5. Ajout d'une marque aux logiciels
+
+6. Ajout des logiciels par OCS
+
+7. Mode debug (forcer affichage erreurs PHP, requetes sql, erreurs sql)
+
+8. Ajout de 2 champs dans la table entreprise
+
+--------------------------- Version 1.0 (14/04/2010) --------------------------
+
+                                [A] BUG FIX
+
+1. Correction du bug LDAP a l'étape 6 d'installation
+
+2. Correction du bug d'affichage de la date de relevé des infos OCS
+
+3. Correction du bug d'affichage des rebuts dans la liste de liaisons Factures -> Matériels et Contrats -> Matériels
+
+4. Correction de "rebus" en "rebut"
+
+5. Correction du bug UTF8 sur la premiere page d'installation
+
+6. Vérification des droits sur le répertoire contenant la licence
+
+7. Correction d'un bug de recherche dans les sous-tables dans le moteur de recherche
+
+                             [B] OPTIMISATIONS
+
+1. Sécurisation des $_GET de la page accueil.php							 
+
+2. Suppression du fichier PDF lors de la suppression d'une facture/contrat.
+
+3. Infobulles sur les boutons de menu
+							 
+                       [C] FONCTIONS SUPPLEMENTAIRES
+
+1. Remontée OCS des périphériques
+
+2. Défilement annuel du calendrier
+
+3. Moteur de recherche affiche les résultats de tous les sites.
+
+4. Liaison dynamique des tables marque et modele
+
+--------------------------- Version 1.0beta (10/12/2010) --------------------------
+
+                                [A] BUG FIX
+
+1. Correction du bug des droits d'ajout des tables dans l'ajout de périph
+
+                             [B] OPTIMISATIONS
+
+1. Controle de la bonne connexion OCS dans les rubriques hard et ocs
+
+2. Ameliorations LDAP
+	- Ajout de la description des paramètres
+	- Ajout du paramètrage des champ de correspondance pour le nom, prenom, mail,login
+
+3. Controle de l'existance de la référence d'une facture (empèche les doublons)
+	
+
+                       [C] FONCTIONS SUPPLEMENTAIRES
+
+1. Tri par colonne dans la section users
+
+2. Activation & désactivation OCS/LDAP/Multisite (sans perte de paramètres)
+
+3. Système de templates de phpBB
+
+4. Choix du template par défaut
+
+5. Nouveau template (proBlue)
+
+6. Création d'une fiche contrat
+
+7. Rattachement d'éléments (hard,periph et softs) à un contrat
+
+8. Filtre et sites dans une liste déroulante
+
+9. Possibilité de supprimer la liaison d'un élément (Matériel, Logiciel, Periph) à une facture/contrat
+
+10. Affichage des infos LDAP (si installé) dans la fiche user
+
+
+--------------------------- Version 0.6 (25/07/2010) --------------------------
+
+                                 [A] BUG FIX
+
+1. Compatible php 5.3 (remplacement des fonctions ereg)
+
+2. Suppression des bugs d'affichage des noms de logiciels OCS
+
+
+                              [B] OPTIMISATIONS
+
+1. Ajout du numéro de série comme critère clé OCS
+
+2. Mise en Base de données des paramètres OCS et LDAP
+
+3. Optimisation de l'outil de MAJ/Install de OUAPI
+
+4. Creation d'un fichier séparé pour les paramètres OCS "config/param_ocs.php"
+							  
+						[C] FONCTIONS SUPPLEMENTAIRES
+
+1. Ajout d'une fonction "Recherche"
+
+2. Ajout d'un champ "Date de mise en service" pour les matériels et périphériques
+
+3. Création d'une Fiche Utilisateurs
+
+4. Fonction Suppression de contrats
+						
+--------------------------- Version 0.5 (28/02/2010) --------------------------
+
+                                 [A] BUG FIX
+
+1. Correction bug d'affichage des periphériques dans "Mon espace"
+
+2. Correction bug d'affichage caractères UTF8 OCS
+
+3. Correction bug d'affichage des Erreurs de type "Notice"
+
+4. Correction bug d'affichage de l'OS et de la réservation dans le détail Fiche / OCS matériel
+
+5. Correction du bug d'install de la table "ut_groupe"
+
+6. Correction du bug d'affichage des réservations pour une réservation terminant le premier jour du mois
+
+
+                              [B] OPTIMISATIONS
+
+1. Simplification de la section Logicielle d'OCS
+
+2. Optimisations SQL dans accueil.php et functions_fiches.php
+
+3. Suppression de la fenêtre de confirmation de fermeture sous IE (Merci à Marc !)
+
+4. Filtrage de l'affichage des logiciels OCS également dans la fiche matériel
+
+5. Amélioration de la rubrique "Contrats"
+
+6. Suppression des prolongations de contrats
+
+ALTER TABLE `ouapi_contrat` DROP `prolongation_contrat_id`  
+
+
+                         [C] FONCTIONS SUPPLEMENTAIRES
+
+1. Implémentation du système de template de PHPbb à toutes les rubriques de accueil.php
+
+2. Rajout d'un fil de news RSS des actus de Ouapi.org dans la partie Admin
+
+3. Ajout de PDF possible pour les contrats
+
+4. Refonte du système de reservations
+
+Conversion des dates en timestamp
+UPDATE reservation SET date_deb=unix_timestamp(date_deb)
+UPDATE reservation SET date_fin=unix_timestamp(concat(date_fin,' 23:59:59'))
+
+Ajout d'un champ objet dans la table Ouapi Reservation
+ALTER TABLE `ouapi_reservation` ADD `object` VARCHAR( 255 ) NOT NULL AFTER `periph_id` ;
+
+5. Simplification de la section logicielle d'OCS
+
+ALTER TABLE `ouapi_soft_ocs_alias` DROP `ocs_soft_version`, DROP `ouapi_soft_version`, DROP `ouapi_soft_date`;
+ALTER TABLE `ouapi_soft_ocs_alias` DROP PRIMARY KEY, ADD PRIMARY KEY(`ocs_soft_name`);
+ALTER TABLE `ouapi_soft_ocs_alias` ADD UNIQUE (`id`);
+ALTER TABLE `ouapi_soft_ocs_alias` CHANGE `id` `id` INT( 11 ) NOT NULL AUTO_INCREMENT  
+
+6. Critères OCS deviennent global
+UPDATE ouapi_config SET globale="1" WHERE nom LIKE "OCS_%"
+
+7. Colonnes OCS supplémentaires
+
+define("COL_OCS_HARD_ID","ID");
+define("COL_OCS_WINCOMPANY","WINCOMPANY");
+define("COL_OCS_HARD_NAME","NAME");
+define("COL_OCS_DOMAIN","DOMAIN");
+define("COL_OCS_IPADDR","IPADDR");
+define("COL_OCS_OSNAME","OSNAME");
+define("COL_OCS_LASTDATE","LASTDATE");
+define("COL_OCS_USERID","USERID");
+
+7. Le champ Version devient texte
+ALTER TABLE `ouapi_software` CHANGE `dern_version_num` `dern_version_num` VARCHAR( 20 ) NULL DEFAULT NULL  
+
+8. Suppression de la rubrique MAJ logiciel
+
+ALTER TABLE `ouapi_software` DROP `nom_raccourci`;
+ALTER TABLE `software` DROP `suivi_maj` 
+
+
+--------------------------- Version 0.3 (01/09/09) --------------------------
+
+                                 [A] BUG FIX
+
+1. Fix bug de synchro LDAP dans adm_utilisateurs.php
+Changement de la méthode de récupération de la racine LDAP
+
+2. Fix bug de $_SESSION["int_lang"] dans index.php
+Sur certaines plateformes, la variable de session int lang ne s'initialisait pas. 
+
+3. Fix bug d'affichage du Service pack dans les infos OCS
+Correction du bug d'affichage du service pack dans le détail OCS d'un matériel
+
+4. Fix bug affichage des utilisateurs
+Correction d'un bug d'affichage de l'état des utilisateurs
+
+5. Fix bug affichage des infos bulles
+Correction du bug qui empechait l'affichage des infos bules dans Firefox
+
+                              [B] OPTIMISATIONS
+
+4. Optimisations SQL dans accueil.php / adm_ocs.php / adm_logiciels.php
+
+5. Optimisations du tableau $lang
+
+6. Optimisation du paramètrage OCS
+Un seul menu déroulant "Critère clé" au lieu de 2 (Critère clé OCS et de votre base)
+
+7. Optimisation de la page logiciels
+L'icone de maj (CD) n'apparait plus s'il n'y a pas de suivi des MAJ du logiciel
+
+                         [C] FONCTIONS SUPPLEMENTAIRES
+
+Principalement axée sur le module OCS. L'objectif etant d'être toujours plus simple à utiliser
+
+8. Ajout d'une colonne "état" dans le module de synchro OCS. Remplace les 3 sous tableaux précédents:
+   Nouveau matériel, Matériel existant, Matériel existant sur un autre site
+
+9. Ajout d'une colonne "Dernière MAJ OCS" dans le module OCS, la fiche matériel et la synchro logiciels:
+   Il s'agit de la date à laquelle OCS a reçu des infos du poste pour la dernière fois.
+
+10. Ajout de la synchro logicielle OUAPI <-> OCS:
+    Il s'agit là de la fonctionalité majeure ajoutée à cette version. Il est maintenant possible, 
+    
+    * Dans le module OCS:
+       - D'obtenir la liste complète de tous les logiciels installés sur les postes
+       - De voir pour chacun des logiciels sur quel poste il est installé
+       - De créer des "alias" pour lier un logiciel référencé dans OCS à un logiciel référencé dans OUAPI
+       - De masquer les logiciels qui ne vous intéressent pas
+       - De filtrer les logiciels qui ne vous intéressent pas grçace à 3 filtres prédéfinis (KB, Update et Microsoft)
+
+    * Dans la fiche matériel:
+       - De voir la liste OCS complète des logiciels installés sur le poste
+
+    * Dans le menu logiciels:

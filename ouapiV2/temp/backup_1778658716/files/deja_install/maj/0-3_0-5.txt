@@ -1,0 +1,10 @@
+[F] config/connect.php [/F]
+[A] // Champs OCS\n// HARDWARE [/A]
+define("COL_OCS_HARD_ID","ID");\n
+define("COL_OCS_WINCOMPANY","WINCOMPANY");\n
+define("COL_OCS_HARD_NAME","NAME");\n
+define("COL_OCS_DOMAIN","DOMAIN");\n
+define("COL_OCS_IPADDR","IPADDR");\n
+define("COL_OCS_OSNAME","OSNAME");\n
+define("COL_OCS_LASTDATE","LASTDATE");\n
+define("COL_OCS_USERID","USERID");\n
