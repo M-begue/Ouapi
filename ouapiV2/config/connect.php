@@ -2,7 +2,7 @@
 // Paramètres SQL
 define("DB_HOST","localhost");
 define("DB_USER","root");
-define("DB_MDP","");
+define("DB_MDP","aim");
 define("DB_TRANSM","ouapi");
 
 // Prefixe des tables

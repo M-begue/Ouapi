@@ -10,6 +10,11 @@ declare(strict_types=1);
 *                                                                           *
 ****************************************************************************/
 
+// Afficher les erreurs pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $req1 = new db_use;
 $affichage = '';
 

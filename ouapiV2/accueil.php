@@ -8,7 +8,10 @@
 *                                                                           *
 ****************************************************************************/
 
-
+// Afficher les erreurs pour le débogage
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 $affichage = '';
 if (!isset($lang))
@@ -2896,9 +2899,9 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			if (isset($_GET["archive"]) && $_GET["archive"] == "1")
 				$suivi_archive = "";
 			else 
-				$suivi_archive = " AND (" . TAB_DOCS . "." . DO_DATEARCHIVE . " = '0000-00-00' 
-                       			   OR " . TAB_DOCS . "." . DO_DATEARCHIVE . " IS NULL 
-                                   OR " . TAB_DOCS . "." . DO_DATEARCHIVE . " > CURRENT_DATE)";
+				$suivi_archive = " AND (DATE_FORMAT(" . TAB_DOCS . "." . DO_DATEARCHIVE . ", '%Y-%m-%d') = '0000-00-00' 
+                       				   OR " . TAB_DOCS . "." . DO_DATEARCHIVE . " IS NULL 
+                       				   OR " . TAB_DOCS . "." . DO_DATEARCHIVE . " > CURRENT_DATE)";
 
 			(trim($cols_groupcol) != '')?($sql_groupcol = $cols_groupcol.','):($sql_groupcol = '');
 			$requete = "SELECT ".TAB_DOCS.".*,
