@@ -8,7 +8,7 @@
 	<br/>
   <p class="contenu" id="{form_post.ID}">{form_post.OK}<br/>
   <br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>&nbsp;
+	<a href="javascript:goToHomeWithRubrique()">{form_post.CLOSE}</a>&nbsp;
 	<!-- BEGIN back -->
 	<a href="{form_post.back.BACK_PAGE}">{form_post.back.BACK}</a>
 	<!-- END back -->

@@ -189,6 +189,9 @@ else
 	{
 		if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 		{			
+			// Construire le paramètre de redirection pour revenir à cette page après ajout d'un élément
+			$redirect_page = urlencode('page=adm_reseau.php&action=Ajouter&agence_id='.$_GET['agence_id']);
+			
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_netw_add"],
 			  'ACTION' => 'index.php?page=adm_reseau.php&amp;action=Ajouter&amp;agence_id='.$_GET["agence_id"],
@@ -274,7 +277,7 @@ else
 			if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 			{
 				$template->assign_block_vars('form.empl.action', array(
-				  'LINK' => 'index.php?page=adm_tables.php&amp;table=empl&amp;agence_id='.$_GET["agence_id"].'&amp;action=Ajouter&amp;slct_site=1',
+				  'LINK' => 'index.php?page=adm_tables.php&amp;table=empl&amp;agence_id='.$_GET["agence_id"].'&amp;action=Ajouter&amp;slct_site=1&amp;redirect_page='.$redirect_page,
 				  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 				  'LIBELLE' => $lang["add"],
 				));
@@ -324,6 +327,9 @@ else
 		// EDITER
 		elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 		{
+			// Construire le paramètre de redirection pour revenir à cette page après modification d'un élément
+			$redirect_page = urlencode('page=adm_reseau.php&action=Editer&agence_id='.$_GET['agence_id'].'&id='.$_GET['id']);
+			
 			$requete = "SELECT * FROM ".TAB_RESEAU." WHERE id='".$_GET["id"]."'";
 			$tab_gen = $req1->db_use_query($requete);
 
@@ -400,7 +406,7 @@ else
 			if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 			{
 				$template->assign_block_vars('form.empl.action', array(
-				  'LINK' => 'index.php?page=adm_tables.php&amp;table=empl&amp;agence_id='.$_GET["agence_id"].'&amp;action=Ajouter&amp;slct_site=1',
+				  'LINK' => 'index.php?page=adm_tables.php&amp;table=empl&amp;agence_id='.$_GET["agence_id"].'&amp;action=Ajouter&amp;slct_site=1&amp;redirect_page='.$redirect_page,
 				  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 				  'LIBELLE' => $lang["add"],
 				));

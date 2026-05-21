@@ -9,27 +9,27 @@
 		<!-- BEGIN add -->
 		<p class="toolbox">
 			<img src="{r_soft.add.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_soft.add.LINK}" target="_blank">{r_soft.add.TEXT}</a>
+			<a href="{r_soft.add.LINK}">{r_soft.add.TEXT}</a>
 		</p>
 		<!-- END add -->
 		
 		<!-- BEGIN hardtype -->
 		<p class="toolbox">
 			<img src="{r_soft.hardtype.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_soft.hardtype.LINK}" target="_blank">{r_soft.hardtype.TEXT}</a>
+			<a href="{r_soft.hardtype.LINK}">{r_soft.hardtype.TEXT}</a>
 		</p>
 		<!-- END hardtype -->
 		
 		<!-- BEGIN display -->
 		<p class="toolbox">
 			<img src="{r_soft.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_soft.display.LINK}" target="_blank">{r_soft.display.TEXT}</a>
+			<a href="{r_soft.display.LINK}">{r_soft.display.TEXT}</a>
 		</p>
 		<!-- END display -->		
 
 	<!-- BEGIN tab_soft -->
 		<!-- BEGIN export -->
-		<form method="post" name="formexport" action="index.php?page=export.php&amp;export=soft&amp;type=excel" target="_blank">
+		<form method="post" name="formexport" action="index.php?page=export.php&amp;export=soft&amp;type=excel">
 			<input type="hidden" name="nom" value="{r_soft.tab_soft.export.NOM}" />
 			<input type="hidden" name="export_data" value="{r_soft.tab_soft.export.DATA}" />
 			<p class="toolbox">
@@ -60,7 +60,7 @@
 				<td class="row1"><img src="{r_soft.tab_soft.type.list.IMG_STATUS}" alt='' />&nbsp;{r_soft.tab_soft.type.list.COL_STATUS}</td>
 				<td class="row1">
 					<!-- BEGIN tools --> 
-					<a href="{r_soft.tab_soft.type.list.tools.LINK}" target="_blank">
+					<a href="{r_soft.tab_soft.type.list.tools.LINK}">
 					<img src="{r_soft.tab_soft.type.list.tools.IMAGE}" border="0" title="{r_soft.tab_soft.type.list.tools.TITLE}" alt="" /></a> 
 					<!-- END tools --> 
 				</td>

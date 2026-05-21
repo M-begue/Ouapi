@@ -31,7 +31,7 @@
 			<!-- END list -->
 		</select>
 		<!-- BEGIN action -->
-			<a href="{form.empl.action.LINK}" target="_blank"><img src="{form.empl.action.IMAGE}" border="0" title="{form.empl.action.LIBELLE}" alt="" /></a>
+			<a href="{form.empl.action.LINK}"><img src="{form.empl.action.IMAGE}" border="0" title="{form.empl.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<br/>
 		<!-- END empl -->
@@ -75,7 +75,7 @@
 
 <!-- BEGIN form_post -->
 	<br/><p class="contenu" id="{form_post.ID}">{form_post.OK}<br/><br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>&nbsp;
+	<a href="javascript:goToHomeWithRubrique()">{form_post.CLOSE}</a>&nbsp;
 	<!-- BEGIN back -->
 		<a href="{form_post.back.BACK_PAGE}">{form_post.back.BACK}</a>
 	<!-- END back -->

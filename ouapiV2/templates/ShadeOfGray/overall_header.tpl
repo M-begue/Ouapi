@@ -20,6 +20,106 @@
 	<!-- BEGIN opt_js_var -->
 		{opt_js_var.NAME} = '{opt_js_var.VALUE}';
 	<!-- END opt_js_var -->
+	
+	// Fonction pour conserver la rubrique en changeant de site
+	function submitSiteForm() {
+		var url = window.location.href;
+		var rubriqueMatcher = /[?&]rubrique=([^&]*)/;
+		var match = url.match(rubriqueMatcher);
+		var rubrique = match ? match[1] : '';
+		
+		// Ne créer l'input que si la rubrique existe
+		if (rubrique) {
+			var rubriqueInput = document.getElementById('form1_rubrique');
+			if (!rubriqueInput) {
+				rubriqueInput = document.createElement('input');
+				rubriqueInput.type = 'hidden';
+				rubriqueInput.name = 'rubrique';
+				rubriqueInput.id = 'form1_rubrique';
+				document.forms['form1'].appendChild(rubriqueInput);
+			}
+			rubriqueInput.value = rubrique;
+		}
+		
+		// Soumettre le formulaire
+		document.forms['form1'].submit();
+	}
+	
+	function goBackAndRefresh() {
+    	// 1. On stocke un flag dans le sessionStorage pour dire à la page de destination de se rafraîchir
+    	sessionStorage.setItem('forceRefresh', 'true');
+    
+    	// 2. On retourne 2 pages en arrière
+    	window.history.go(-2);
+	}
+
+	// Fonction pour retourner à l'accueil avec la bonne rubrique
+	function goToHomeWithRubrique() {
+    	var url = window.location.href;
+    
+    	// 1. Récupérer la page actuelle
+ 		var pageMatcher = /[?&]page=([^&]*)/;
+    	var match = url.match(pageMatcher);
+    	var page = match ? match[1] : '';
+    
+    	// 2. Récupérer agence_id depuis l'URL
+    	var agenceMatcher = /[?&]agence_id=([^&]*)/;
+    	var matchAgence = url.match(agenceMatcher);
+    	var agenceId = matchAgence ? matchAgence[1] : '';
+    
+    	// Si pas trouvé dans l'URL, chercher dans les selects
+    	if (!agenceId) {
+        	var selectAgence = document.querySelector('select[name="agence_id"]');
+        	if (selectAgence && selectAgence.value) {
+            	agenceId = selectAgence.value;
+        	}
+    	}
+    
+    	// Si toujours pas trouvé, chercher dans les inputs
+    	if (!agenceId) {
+        	var inputAgence = document.querySelector('input[name="agence_id"]');
+        	if (inputAgence && inputAgence.value) {
+            	agenceId = inputAgence.value;
+        	}
+    	}
+    
+    	// Mapping des pages vers les rubriques
+    	var pageToRubrique = {
+        	'adm_materiels.php': 'hard',
+        	'adm_peripheriques.php': 'periph',
+        	'adm_logiciels.php': 'soft',
+        	'adm_utilisateurs.php': 'users',
+        	'adm_reseau.php': 'netw',
+        	'reservations.php': 'resa',
+        	'adm_docs.php': 'docs',
+        	'adm_ocs.php': 'ocs'
+    	};
+    
+    	var rubrique = pageToRubrique[page] || '';
+    	
+    	var returnUrl = 'index.php?page=accueil.php';
+    
+    	if (agenceId) {
+        	returnUrl += '&agence_id=' + agenceId;
+    	}
+    	if (rubrique) {
+        	returnUrl += '&rubrique=' + rubrique;
+    	}
+    
+    	window.location.href = returnUrl;
+	}
+
+	// Ce code s'exécute automatiquement à chaque chargement de page
+	window.addEventListener('pageshow', function(event) {
+    	// Si le flag 'forceRefresh' est présent dans le stockage de session
+    	if (sessionStorage.getItem('forceRefresh') === 'true') {
+     	// IMPORTANT : On le supprime immédiatement pour éviter une boucle infinie de rafraîchissements
+        	sessionStorage.removeItem('forceRefresh');
+        
+        	// On force le rechargement de la page sans le cache
+        	window.location.reload(true);
+    	}
+	});
 	</script> 
 
 	<script src="scripts/scripts.js" type="text/javascript"></script> 
@@ -60,7 +160,7 @@
 	<!-- BEGIN switch_multisite -->
 	<form name="form1" action="index.php" method="get"><p class="button">
 	<input type="hidden" name="page" value="accueil.php" />
-	<select name="agence_id" class="site" onchange="form1.submit()" onmouseover="{HELP_SITE_BUTTON}" onmouseout="tooltip.hide();">
+	<select name="agence_id" class="site" onchange="submitSiteForm()" onmouseover="{HELP_SITE_BUTTON}" onmouseout="tooltip.hide();">
 			<!-- BEGIN switch_sites -->
 			<option value="{head.switch_multisite.switch_sites.SITE_ID}" {head.switch_multisite.switch_sites.SELECT}>{head.switch_multisite.switch_sites.LIBELLE}</option>			
 			<!-- END switch_sites -->

@@ -329,12 +329,15 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 	}
 	else
 	{		
+		// Construire le paramètre de redirection pour revenir à cette page après ajout d'un élément
+		$redirect_page = urlencode('page=adm_logiciels.php&action=Ajouter&agence_id='.$_GET['agence_id']);
+		
 		$requete = "SELECT * FROM ".TAB_AGENCES." WHERE id='".$_GET["agence_id"]."'";
 		$tab = $req1->db_use_query($requete);
 
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_add"],
-		  'ACTION' => 'index.php?page=adm_logiciels.php&action=Ajouter'
+		  'ACTION' => 'index.php?page=adm_logiciels.php&action=Ajouter&agence_id=' . intval($_GET['agence_id']),
 		));
 
 		// Nom
@@ -365,7 +368,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.marque.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=hard_marque&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=hard_marque&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -717,7 +720,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'suppr')
 						
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_del"],
-		  'ACTION' => 'index.php?page=adm_logiciels.php&action=suppr&s_id='.$_GET['s_id'],
+		  'ACTION' => 'index.php?page=adm_logiciels.php&action=suppr&s_id='.$_GET['s_id'].'&amp;agence_id='.$_GET['agence_id'],
 		));
 
 		$template->assign_block_vars('form.softname', array(
@@ -770,12 +773,15 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Edit')
 	}
 	else
 	{
+		// Construire le paramètre de redirection pour revenir à cette page après modification d'un élément
+		$redirect_page = urlencode('page=adm_logiciels.php&action=Edit&agence_id='.$_GET['agence_id'].'&s_id='.$_GET['s_id']);
+		
 		$requete = "SELECT * FROM ".TAB_SOFT." WHERE id='".$_GET['s_id']."'";
 		$tab_soft = $req1->db_use_query($requete);
 
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_title_edit"],
-		  'ACTION' => 'index.php?page=adm_logiciels.php&amp;action=Edit&amp;id='.$_GET['s_id'],
+		  'ACTION' => 'index.php?page=adm_logiciels.php&amp;action=Edit&amp;id='.$_GET['s_id'].'&amp;agence_id='.$_GET['agence_id'],
 		));
 
 		// Editeur du logiciel
@@ -810,7 +816,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Edit')
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.marque.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -908,7 +914,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'maj')
 
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_title_maj"],
-		  'ACTION' => 'index.php?page=adm_logiciels.php&action=maj&id='.$_GET['s_id'],
+		  'ACTION' => 'index.php?page=adm_logiciels.php&action=maj&id='.$_GET['s_id'].'&amp;agence_id='.$_GET['agence_id'],
 		));
 				
 		$template->assign_block_vars('form.vnum', array(

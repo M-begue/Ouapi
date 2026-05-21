@@ -5,18 +5,18 @@
 *																																                                *
 **********************************************************************************************-->
 <!-- BEGIN r_netw -->
-	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=netw&amp;type=excel" target="_blank">	
+	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=netw&amp;type=excel">	
 		<!-- BEGIN add -->		
 		<p class="toolbox">
 			<img src="{r_netw.add.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
-			<a href="{r_netw.add.LINK}" target="_blank">{r_netw.add.TEXT}</a>
+			<a href="{r_netw.add.LINK}">{r_netw.add.TEXT}</a>
 		</p>
 		<!-- END add -->
 		
 		<!-- BEGIN display -->
 		<p class="toolbox">
 			<img src="{r_netw.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_netw.display.LINK}" target="_blank">{r_netw.display.TEXT}</a>
+			<a href="{r_netw.display.LINK}">{r_netw.display.TEXT}</a>
 		</p>
 		<!-- END display -->		
 		
@@ -32,7 +32,7 @@
 		<!-- BEGIN hardtype -->
 		<p class="toolbox">
 			<img src="{r_netw.hardtype.IMAGE}" border="0" alt="" /> 
-			<a href="{r_netw.hardtype.LINK}" target="_blank">{r_netw.hardtype.TEXT}</a>
+			<a href="{r_netw.hardtype.LINK}">{r_netw.hardtype.TEXT}</a>
 		</p>
 		<!-- END hardtype -->
 	</form>
@@ -48,7 +48,7 @@
 			<td style="background-color:#BDBDBD;padding:2px;padding-right:10px;color:white;vertical-align:top;">
 				<font style="font-size:10px"><b>{r_netw.equipmt.NAME}</b><br/>
 				<!-- BEGIN ip -->
-				<a href="http://{r_netw.equipmt.NAME}" target="_blank">{r_netw.equipmt.NAME}</a>
+				<a href="http://{r_netw.equipmt.NAME}">{r_netw.equipmt.NAME}</a>
 				<!-- END ip -->
 				</font>
 			</td>
@@ -80,7 +80,7 @@
 			<!-- END cols -->								
 			<td class="row1">
 			<!-- BEGIN tools --> 
-				<a href="{r_netw.tab_netw.list.tools.LINK}" target="_blank">
+				<a href="{r_netw.tab_netw.list.tools.LINK}">
 				<img src="{r_netw.tab_netw.list.tools.IMAGE}" border="0" title="{r_netw.tab_netw.list.tools.TITLE}" alt="" /></a> 
 			<!-- END tools --> 
 			</td>

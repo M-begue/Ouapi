@@ -176,9 +176,12 @@ else
 	/****************************/
 	if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 	{
+		// Construire le paramètre de redirection pour revenir à cette page après ajout d'un élément
+		$redirect_page = urlencode('page=adm_materiels.php&action=Ajouter&agence_id='.$_GET['agence_id']);
+		
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_add"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=Ajouter',
+		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=Ajouter&agence_id=' . intval($_GET['agence_id']),
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 
@@ -460,7 +463,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.marque.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -468,7 +471,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.modele.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_modele&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_modele&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -476,7 +479,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.os.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_os&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_os&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -484,7 +487,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -500,7 +503,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.emplacement.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=empl&amp;agence_id='.$_GET["agence_id"].'&amp;action=Ajouter&amp;slct_site=1',
+			  'LINK' => 'index.php?page=adm_tables.php&table=empl&amp;agence_id='.$_GET["agence_id"].'&amp;action=Ajouter&amp;slct_site=1&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -508,7 +511,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.cpu.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=ref_cpu&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=ref_cpu&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -516,7 +519,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.ram_type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=ref_ram_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=ref_ram_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -524,7 +527,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.disque_type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=ref_disque_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=ref_disque_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -541,16 +544,27 @@ else
 	/****************************/
 	elseif (isset($_GET['action']) && $_GET['action'] == 'editer')
 	{
+		// Construire le paramètre de redirection pour revenir à cette page après modification d'un élément
+		$redirect_page = urlencode('page=adm_materiels.php&action=editer&agence_id='.$_GET['agence_id'].'&h_id='.$_GET['h_id']);
+		
 		$main_tab = $req1->db_use_query("SELECT * FROM ".TAB_HARD." WHERE ".HA_ID."='".$_GET["h_id"]."'");
 		
-		if ($main_tab[0]["creation_date"] != '')
-			$creation_date = date("d-m-Y",(int)$main_tab[0]["creation_date"]).' ';
-		else
-			$creation_date = date("d-m-Y").' ';
+		if (!empty($main_tab[0]["creation_date"]) && $main_tab[0]["creation_date"] != '0000-00-00') {
+			$timestamp = strtotime((string)$main_tab[0]["creation_date"]);
+			
+			// Vérifier si strtotime a bien réussi à convertir la date
+			if ($timestamp !== false) {
+				$creation_date = date("d-m-Y", $timestamp) . ' ';
+			} else {
+				$creation_date = date("d-m-Y") . ' ';
+			}
+		} else {
+			$creation_date = date("d-m-Y") . ' ';
+		}
 		
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_edit"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=editer&amp;h_id='.$_GET['h_id'],
+		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=editer&amp;h_id='.$_GET['h_id'].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 
@@ -952,7 +966,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.marque.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=hard_marque&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=hard_marque&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -960,7 +974,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.modele.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=hard_modele&action=Ajouter&parent='.$main_tab[0]["marque_id"],
+			  'LINK' => 'index.php?page=adm_tables.php&table=hard_modele&action=Ajouter&parent='.$main_tab[0]["marque_id"].'&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -968,7 +982,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.os.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=hard_os&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=hard_os&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -976,7 +990,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=hard_type&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=hard_type&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -992,7 +1006,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.emplacement.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=empl&agence_id='.$_GET["agence_id"].'&action=Ajouter&slct_site=1',
+			  'LINK' => 'index.php?page=adm_tables.php&table=empl&agence_id='.$_GET["agence_id"].'&action=Ajouter&slct_site=1&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1000,7 +1014,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.cpu.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=ref_cpu&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=ref_cpu&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1008,7 +1022,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.ram_type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=ref_ram_type&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=ref_ram_type&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1016,7 +1030,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.disque_type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&table=ref_disque_type&action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&table=ref_disque_type&action=Ajouter&redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1046,7 +1060,7 @@ else
 		
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_copy"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&action=Ajouter',
+		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=Ajouter&agence_id=' . intval($_GET['agence_id']),
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 
@@ -2540,7 +2554,7 @@ else
 
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_syncocs"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=editer&amp;h_id='.$_GET['h_id'],
+		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=editer&amp;h_id='.$_GET['h_id'].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 		
@@ -3259,7 +3273,7 @@ else
 
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_syncldap"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&action=editer&h_id='.$_GET['h_id'],
+		  'ACTION' => 'index.php?page=adm_materiels.php&action=editer&h_id='.$_GET['h_id'].'&agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 		
@@ -3808,9 +3822,11 @@ else
 		$requete = "SELECT * FROM ".TAB_HARD." WHERE id='".$_GET["h_id"]."'";
 		$tab = $req1->db_use_query($requete);
 
+		$agence_id = isset($tab[0]["agence_id"]) ? $tab[0]["agence_id"] : (isset($_GET['agence_id']) ? $_GET['agence_id'] : 0);
+
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_rebus"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&action=rebus&h_id='.$_GET['h_id'],
+		  'ACTION' => 'index.php?page=adm_materiels.php&action=rebus&h_id='.$_GET['h_id'].'&agence_id='.$agence_id,
 		));
 
 		$template->assign_block_vars('form.hardname', array(
@@ -3845,7 +3861,7 @@ else
 
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_del"],
-		  'ACTION' => 'index.php?page=adm_materiels.php&action=supprimer&h_id='.$_GET['h_id'],
+		  'ACTION' => 'index.php?page=adm_materiels.php&action=supprimer&h_id='.$_GET['h_id'].'&agence_id='.$_GET['agence_id'],
 		));
 
 		$template->assign_block_vars('form.hardname', array(

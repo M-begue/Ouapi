@@ -187,9 +187,12 @@ else
 	//Ajouter
 	if (isset($_GET['action']) && $_GET['action'] == 'add')
 	{
+		// Construire le paramètre de redirection pour revenir à cette page après ajout d'un élément
+		$redirect_page = urlencode('page=adm_peripheriques.php&action=add&agence_id='.$_GET['agence_id']);
+		
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_periph_title_add"],
-		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=add',
+		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=add&agence_id=' . intval($_GET['agence_id']),
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 
@@ -360,7 +363,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -368,7 +371,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.marque.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -376,7 +379,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.modele.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_modele&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_modele&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -867,6 +870,9 @@ else
 	// Editer
 	elseif (isset($_GET['action']) && $_GET['action'] == 'editer')
 	{
+		// Construire le paramètre de redirection pour revenir à cette page après modification d'un élément
+		$redirect_page = urlencode('page=adm_peripheriques.php&action=editer&agence_id='.$_GET['agence_id'].'&p_id='.$_GET['p_id']);
+		
 		$requete = "SELECT * FROM ".TAB_PERIPH." WHERE id='".$_GET["p_id"]."'";
 		$main_tab = $req1->db_use_query($requete);
 
@@ -896,7 +902,7 @@ else
 
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_periph_title_edit"],
-		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=editer&amp;p_id='.$_GET["p_id"],
+		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=editer&amp;p_id='.$_GET["p_id"].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 
@@ -1129,7 +1135,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1137,7 +1143,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.marque.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1145,7 +1151,7 @@ else
 		if ((preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
 		{
 			$template->assign_block_vars('form.modele.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_modele&amp;action=Ajouter&amp;parent='.$marque,
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=periph_modele&amp;action=Ajouter&amp;parent='.$marque.'&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -1791,7 +1797,7 @@ else
 
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_periph_title_copy"],
-		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=add',
+		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=add'.'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 
@@ -2057,9 +2063,11 @@ else
 		$requete = "SELECT * FROM ".TAB_PERIPH." WHERE id='".$_GET["p_id"]."'";
 		$tab = $req1->db_use_query($requete);
 
+		$agence_id = isset($tab[0]["agence_id"]) ? $tab[0]["agence_id"] : (isset($_GET['agence_id']) ? $_GET['agence_id'] : 0);
+
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_periph_title_rebus"],
-		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=rebus&amp;p_id='.$_GET['p_id'],
+		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=rebus&amp;p_id='.$_GET['p_id'].'&amp;agence_id='.$agence_id,
 		));
 		
 		$template->assign_block_vars('form.periphname', array(
@@ -2140,7 +2148,7 @@ else
 
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_periph_title_del"],
-		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=supprimer&amp;p_id='.$_GET['p_id'],
+		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=supprimer&amp;p_id='.$_GET['p_id'].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
 		));
 		

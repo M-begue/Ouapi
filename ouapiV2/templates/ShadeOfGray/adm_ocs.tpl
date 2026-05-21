@@ -64,6 +64,6 @@
 	<br/>
   <p class="contenu" id="mess_retour">{form_post.OK}<br/>
   <br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>
+	<a href="javascript:goToHomeWithRubrique()">{form_post.CLOSE}</a>
   </p><br/>
 <!-- END form_post -->

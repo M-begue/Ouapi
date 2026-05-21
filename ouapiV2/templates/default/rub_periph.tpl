@@ -16,11 +16,11 @@
 
 	<!-- BEGIN add -->
 	<p class="toolbox"><img src="{r_periph.add.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
-	<a href="{r_periph.add.LINK}" target="_blank">{r_periph.add.TEXT}</a></p>
+	<a href="{r_periph.add.LINK}">{r_periph.add.TEXT}</a></p>
 	<!-- END add -->
 
 	<!-- BEGIN display -->
-	<p class="toolbox"><img src="{r_periph.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_periph.display.LINK}" target="_blank">{r_periph.display.TEXT}</a></p>
+	<p class="toolbox"><img src="{r_periph.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_periph.display.LINK}">{r_periph.display.TEXT}</a></p>
 	<!-- END display -->		
 
 	<!-- BEGIN rebus -->
@@ -29,7 +29,7 @@
 
 	<!-- BEGIN tab_periph -->
 		<!-- BEGIN export -->
-		<form method="post" name="formexport" action="index.php?page=export.php&amp;export=periph&amp;type=excel" target="_blank">
+		<form method="post" name="formexport" action="index.php?page=export.php&amp;export=periph&amp;type=excel">
 		<p class="toolbox">
 		<input type="hidden" name="nom" value="{r_periph.tab_periph.export.NOM}" /><input type="hidden" name="export_data" value="{r_periph.tab_periph.export.DATA}" />
 		<img src="{r_periph.tab_periph.export.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
@@ -67,7 +67,7 @@
 								
 				<td class="{r_periph.tab_periph.group.list.CLASS}">
 				<!-- BEGIN tools --> 
-					<a href="{r_periph.tab_periph.group.list.tools.LINK}" target="_blank"><img src="{r_periph.tab_periph.group.list.tools.IMAGE}" border="0" title="{r_periph.tab_periph.group.list.tools.TITLE}" alt="" /></a> 
+				<a href="{r_periph.tab_periph.group.list.tools.LINK}"><img src="{r_periph.tab_periph.group.list.tools.IMAGE}" border="0" title="{r_periph.tab_periph.group.list.tools.TITLE}" alt="" /></a> 
 				<!-- END tools --> 
 				&nbsp;</td>
 			</tr>

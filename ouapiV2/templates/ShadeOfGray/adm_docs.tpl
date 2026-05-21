@@ -114,7 +114,7 @@
 			<!-- END list -->
 		</select>
 		<!-- BEGIN action -->
-		<a href="{form.type.action.LINK}" target="_blank"><img src="{form.type.action.IMAGE}" border="0" title="{form.type.action.LIBELLE}" alt="" /></a>
+		<a href="{form.type.action.LINK}"><img src="{form.type.action.IMAGE}" border="0" title="{form.type.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<br/>
 		<!-- END type -->
@@ -189,7 +189,7 @@
 	<br/>
   <p class="contenu" id="{form_post.ID}">{form_post.OK}<br/>
   <br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>&nbsp;
+	<a href="javascript:goToHomeWithRubrique()">{form_post.CLOSE}</a>&nbsp;
 	<!-- BEGIN back -->
 	<a href="{form_post.back.BACK_PAGE}">{form_post.back.BACK}</a>
 	<!-- END back -->

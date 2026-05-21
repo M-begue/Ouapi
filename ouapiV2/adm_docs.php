@@ -47,6 +47,10 @@ function get_docs_pfield_columns(db_use $db): array
 /*********************************************/
 if (isset($_GET['action']) && $_GET['action'] == 'add')
 {
+	$agence_id_current = isset($_GET['agence_id']) ? $_GET['agence_id'] : (isset($_POST['agence_id']) ? $_POST['agence_id'] : 0);
+	// Construire le paramètre de redirection pour revenir à cette page après ajout d'un élément
+	$redirect_page = urlencode('page=adm_docs.php&action=add&agence_id=' . $agence_id_current);
+	
 	if (isset($_POST['soumettre']))
 	{
 		$err = array();
@@ -161,7 +165,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 	{
 		$template->assign_block_vars('form', array(
 			'TITLE' => $lang["adm_docs_add_title"],
-			'ACTION' => 'index.php?page=adm_docs.php&amp;action=add',
+			'ACTION' => 'index.php?page=adm_docs.php&amp;action=add&agence_id=' . $agence_id_current,
 		));
 
 		// Type
@@ -184,7 +188,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		if (preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 		{
 			$template->assign_block_vars('form.type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=docs_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=docs_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -326,22 +330,22 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 		$ref = format_string_db($_POST['ref']);
 		$type = $_POST['type'];
 		$entreprise = $_POST['entreprise'];
-		$date = mktime(
-    			0, 
-    			0, 
-    			0, 
-    			(int)substr($_POST['date'], 3, 2), // Mois
-    			(int)substr($_POST['date'], 0, 2), // Jour
-    			(int)substr($_POST['date'], 6, 4)  // Année
-			);
-		$date_archive = mktime(
-    			0, 
-    			0, 
-    			0, 
-    			(int)substr($_POST['date_archive'], 3, 2), // Mois
-    			(int)substr($_POST['date_archive'], 0, 2), // Jour
-    			(int)substr($_POST['date_archive'], 6, 4)  // Année
-			);
+		$date = date('Y-m-d', mktime(
+                0, 
+                0, 
+                0, 
+                (int)substr($_POST['date'], 3, 2), // Mois
+                (int)substr($_POST['date'], 0, 2), // Jour
+                (int)substr($_POST['date'], 6, 4)  // Année
+            ));
+		$date_archive = date('Y-m-d', mktime(
+                0, 
+                0, 
+                0, 
+                (int)substr($_POST['date_archive'], 3, 2), // Mois
+                (int)substr($_POST['date_archive'], 0, 2), // Jour
+                (int)substr($_POST['date_archive'], 6, 4)  // Année
+            ));
 		$agence_id = $_POST['agence_id'];
 		$commentaire = format_text_db($_POST['commentaire']);
 
@@ -412,11 +416,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 	}
 	else
 	{
+		// Construire le paramètre de redirection pour revenir à cette page après modification d'un élément
+		$redirect_page = urlencode('page=adm_docs.php&action=edit&agence_id='.$_GET['agence_id'].'&id='.$_GET['id']);
+		
 		$tab_doc = $req1->db_use_query("SELECT * FROM ".TAB_DOCS." WHERE ".DO_ID."='".intval($_GET["id"])."'");
 		
 		$template->assign_block_vars('form', array(
 			'TITLE' => $lang["adm_docs_edit_title"],
-			'ACTION' => 'index.php?page=adm_docs.php&amp;action=edit&id='.$tab_doc[0][DO_ID],
+			'ACTION' => 'index.php?page=adm_docs.php&amp;action=edit&id='.$tab_doc[0][DO_ID].'&amp;agence_id='.$_GET['agence_id'],
 		));
 
 		// Type
@@ -451,7 +458,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 		if (preg_match('`;'.RGHT_GEN_TABLEEDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 		{
 			$template->assign_block_vars('form.type.action', array(
-			  'LINK' => 'index.php?page=adm_tables.php&amp;table=docs_type&amp;action=Ajouter',
+			  'LINK' => 'index.php?page=adm_tables.php&amp;table=docs_type&amp;action=Ajouter&amp;redirect_page='.$redirect_page,
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/arrow_add.gif',
 			  'LIBELLE' => $lang["add"],
 			));
@@ -503,9 +510,19 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 		));
 		
 		// Date
+		if (!empty($tab_doc[0][DO_DATE]) && $tab_doc[0][DO_DATE] != '0000-00-00') {
+			$timestamp = strtotime((string)$tab_doc[0][DO_DATE]);
+			if ($timestamp !== false) {
+				$date_display = date("d-m-Y", $timestamp)." ";
+			} else {
+				$date_display = date("d-m-Y")." ";
+			}
+		} else {
+			$date_display = date("d-m-Y")." ";
+		}
 		$template->assign_block_vars('form.date', array(
 		  'TITLE' => $lang["adm_docs_date"],
-		  'VALUE' => date("d-m-Y", (int)$tab_doc[0][DO_DATE])." ",
+		  'VALUE' => $date_display,
 		  'DISABLED' => 'readonly',
 		));
 		$template->assign_block_vars('form.date.action', array(
@@ -515,10 +532,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 		));
 		
 		// Date de validit�
-		if (trim($tab_doc[0][DO_DATEARCHIVE]) != '')
-			$date_archive = date("d-m-Y", (int)$tab_doc[0][DO_DATEARCHIVE])." ";
-		else
+		if (!empty($tab_doc[0][DO_DATEARCHIVE]) && $tab_doc[0][DO_DATEARCHIVE] != '0000-00-00') {
+			$timestamp = strtotime((string)$tab_doc[0][DO_DATEARCHIVE]);
+			if ($timestamp !== false) {
+				$date_archive = date("d-m-Y", $timestamp)." ";
+			} else {
+				$date_archive = '31-12-2035 ';
+			}
+		} else {
 			$date_archive = '31-12-2035 ';
+		}
 		$template->assign_block_vars('form.date_archive', array(
 		  'TITLE' => $lang["adm_docs_date_archive"],
 		  'VALUE' => $date_archive,
@@ -818,18 +841,28 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del_elmt')
 /*********************************************/
 elseif (isset($_GET['action']) && $_GET['action'] == 'del')
 {
+	$id = intval($_GET['id']);
+	$tab_docs = $req1->db_use_query("SELECT ".TAB_DOCS.".*,
+		  ".TAB_ENTREPRISE.".raison_sociale,
+		  ".TAB_DOCS_TYPE.".libelle AS l_type
+	FROM ".TAB_DOCS." 
+		  LEFT JOIN ".TAB_ENTREPRISE." ON ".TAB_ENTREPRISE.".id = ".TAB_DOCS.".entreprise_id
+		  LEFT JOIN ".TAB_DOCS_TYPE." ON ".TAB_DOCS_TYPE.".id = ".TAB_DOCS.".type_id
+	WHERE ".TAB_DOCS.".id='".$_GET['id']."'");
+
+	$agence_id_current = isset($tab_docs[0]['agence_id']) ? $tab_docs[0]['agence_id'] : (isset($_GET['agence_id']) ? $_GET['agence_id'] : (isset($_POST['agence_id']) ? $_POST['agence_id'] : 0));
+	// Construire le paramètre de redirection pour revenir à cette page après ajout d'un élément
+	$redirect_page = urlencode('page=adm_docs.php&action=del&agence_id=' . $agence_id_current);
+
 	if (isset($_POST['soumettre']))
-	{
-		$id = intval($_GET['id']);
-		$tab = $req1->db_use_query("SELECT * FROM ".TAB_DOCS." WHERE id='".$id."'");
-		
+	{	
 		$warning = array();
 		
-		if (is_file('data/'.$tab[0]["agence_id"].'/'.$tab[0]["path"]))
+		if (is_file('data/'.$tab_docs[0]["agence_id"].'/'.$tab_docs[0]["path"]))
 		{
-			if (is_writable('data/'.$tab[0]["agence_id"].'/'.$tab[0]["path"]))
+			if (is_writable('data/'.$tab_docs[0]["agence_id"].'/'.$tab_docs[0]["path"]))
 			{
-				unlink('data/'.$tab[0]["agence_id"].'/'.$tab[0]["path"]);
+				unlink('data/'.$tab_docs[0]["agence_id"].'/'.$tab_docs[0]["path"]);
 			}
 			else
 			{
@@ -867,18 +900,10 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del')
 		
 	}
 	else
-	{		
-		$tab_docs = $req1->db_use_query("SELECT ".TAB_DOCS.".*,
-		  ".TAB_ENTREPRISE.".raison_sociale,
-		  ".TAB_DOCS_TYPE.".libelle AS l_type
-		FROM ".TAB_DOCS." 
-		  LEFT JOIN ".TAB_ENTREPRISE." ON ".TAB_ENTREPRISE.".id = ".TAB_DOCS.".entreprise_id
-		  LEFT JOIN ".TAB_DOCS_TYPE." ON ".TAB_DOCS_TYPE.".id = ".TAB_DOCS.".type_id
-		WHERE ".TAB_DOCS.".id='".$_GET['id']."'");
-
+	{
 		$template->assign_block_vars('form', array(
 			'TITLE' => $lang["adm_docs_del_title"],
-			'ACTION' => 'index.php?page=adm_docs.php&amp;action=del&amp;id='.$_GET['id'],
+			'ACTION' => 'index.php?page=adm_docs.php&action=del&id='.$id.'&agence_id=' . $agence_id_current,
 		));
 
 		// Type

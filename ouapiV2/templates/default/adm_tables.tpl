@@ -1,5 +1,5 @@
 <!-- BEGIN select -->
-	<div class="cat_title">{select.TITLE}</div>
+	<div class="cat_title">{select.TITLE} <span style="float:right;position:relative;top:-12px;"><input type="button" value="Retour" onclick="javascript:goBackAndRefresh()"></span></div>
 	<div class="textbox">
 	<!-- BEGIN records -->
 		<table class="table">
@@ -73,7 +73,6 @@
 		</tr>
 		</table>
 	<!-- END post_result -->
-	
 	
 	</div>
 <!-- END select -->
@@ -157,9 +156,9 @@
 
 <!-- BEGIN form_post -->
 	<br/><p class="contenu" id="{form_post.ID}">{form_post.OK}<br/><br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>&nbsp;
+	<a href="javascript:goBackAndRefresh();">{form_post.CLOSE}</a>&nbsp;
 	<!-- BEGIN back -->
-		<a href="{form_post.back.BACK_PAGE}">{form_post.back.BACK}</a>
+		<a href="javascript:window.history.go(-1);">{form_post.back.BACK}</a>
 	<!-- END back -->
 	</p><br/>
 <!-- END form_post -->

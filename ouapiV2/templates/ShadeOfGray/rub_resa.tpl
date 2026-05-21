@@ -5,7 +5,7 @@
 *																																                                *
 **********************************************************************************************-->
 <!-- BEGIN r_resa -->
-	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=resa&amp;type=excel&special=weekly_calendar" target="_blank">	
+	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=resa&amp;type=excel&special=weekly_calendar">	
 	<!-- BEGIN display -->
 	<p class="toolbox"><img src="{r_resa.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_resa.display.LINK}" target="_blank">{r_resa.display.TEXT}</a></p>
 	<!-- END display -->		
@@ -50,7 +50,7 @@
 				<!-- END next -->
 				<td class="row1">
 				<!-- BEGIN tools -->
-					<a href="{r_resa.tab_resa.group.list.tools.LINK}" target="_blank"><img src="{r_resa.tab_resa.group.list.tools.IMAGE}" border="0" title="{r_resa.tab_resa.group.list.tools.TITLE}" 	alt="" /></a> 
+					<a href="{r_resa.tab_resa.group.list.tools.LINK}"><img src="{r_resa.tab_resa.group.list.tools.IMAGE}" border="0" title="{r_resa.tab_resa.group.list.tools.TITLE}" 	 alt="" /></a>
 				<!-- END tools -->
 				</td>
 			</tr>

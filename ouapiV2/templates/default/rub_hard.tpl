@@ -15,11 +15,11 @@
 	
 	<!-- BEGIN add -->
 	<p class="toolbox">
-	<img src="{r_hard.add.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_hard.add.LINK}" target="_blank">{r_hard.add.TEXT}</a></p>
+	<img src="{r_hard.add.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_hard.add.LINK}">{r_hard.add.TEXT}</a></p>
 	<!-- END add -->
 
 	<!-- BEGIN display -->
-	<p class="toolbox"><img src="{r_hard.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_hard.display.LINK}" target="_blank">{r_hard.display.TEXT}</a></p>
+	<p class="toolbox"><img src="{r_hard.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_hard.display.LINK}">{r_hard.display.TEXT}</a></p>
 	<!-- END display -->		
 
 	<!-- BEGIN rebus -->
@@ -28,7 +28,7 @@
 
 	<!-- BEGIN tab_hard -->
 		<!-- BEGIN export -->
-		<form method="post" name="formexport" action="index.php?page=export.php&amp;export=mat&amp;type=excel" target="_blank" style="margin:0px;">
+		<form method="post" name="formexport" action="index.php?page=export.php&amp;export=mat&amp;type=excel" style="margin:0px;">
 		<input type="hidden" name="nom" value="{r_hard.tab_hard.export.NOM}" /><input type="hidden" name="export_data" value="{r_hard.tab_hard.export.DATA}" />
 		<p class="toolbox">	
 		<img src="{r_hard.tab_hard.export.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
@@ -66,7 +66,7 @@
 				
 				<td class="{r_hard.tab_hard.group.list.CLASS}">
 				<!-- BEGIN tools --> 
-					<a href="{r_hard.tab_hard.group.list.tools.LINK}" target="_blank"><img src="{r_hard.tab_hard.group.list.tools.IMAGE}" border="0" title="{r_hard.tab_hard.group.list.tools.TITLE}" alt ="" /></a> 
+					<a href="{r_hard.tab_hard.group.list.tools.LINK}"><img src="{r_hard.tab_hard.group.list.tools.IMAGE}" border="0" title="{r_hard.tab_hard.group.list.tools.TITLE}" alt "" /></a> 
 				<!-- END tools --> 
 				&nbsp;</td>
 			</tr>

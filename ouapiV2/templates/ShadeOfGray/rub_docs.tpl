@@ -5,7 +5,7 @@
 *																																                                *
 **********************************************************************************************-->
 <!-- BEGIN r_docs -->
-	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=docs&amp;type=excel" target="_blank">	
+	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=docs&amp;type=excel">	
 		<!-- BEGIN add -->
 		<p class="toolbox">
 			<img src="{r_docs.add.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
@@ -58,7 +58,7 @@
 				<!-- END cols -->								
 				<td class="{r_docs.tab_docs.group.list.CLASS}">
 					<!-- BEGIN tools --> 
-						<a href="{r_docs.tab_docs.group.list.tools.LINK}" target="_blank">
+								<a href="{r_docs.tab_docs.group.list.tools.LINK}">
 						<img src="{r_docs.tab_docs.group.list.tools.IMAGE}" border="0" title="{r_docs.tab_docs.group.list.tools.TITLE}" alt="" /></a> 
 					<!-- END tools --> 
 					&nbsp;

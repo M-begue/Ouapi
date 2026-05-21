@@ -6,11 +6,11 @@
 **********************************************************************************************-->
 <!-- BEGIN r_ocs -->
 	<!-- BEGIN conf -->
-	<p class="toolbox"><img src="{r_ocs.conf.IMAGE}" border="0" alt="" />&nbsp;<a href="{r_ocs.conf.LINK}" target="_blank">{r_ocs.conf.TEXT}</a></p>
+	<p class="toolbox"><img src="{r_ocs.conf.IMAGE}" border="0" alt="" />&nbsp;<a href="{r_ocs.conf.LINK}">{r_ocs.conf.TEXT}</a></p>
 	<!-- END conf -->
 
 	<!-- BEGIN display -->
-	<p class="toolbox"><img src="{r_ocs.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_ocs.display.LINK}" target="_blank">{r_ocs.display.TEXT}</a></p>
+	<p class="toolbox"><img src="{r_ocs.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_ocs.display.LINK}">{r_ocs.display.TEXT}</a></p>
 	<!-- END display -->		
 
 	<!-- BEGIN aff_hidden -->
@@ -45,7 +45,7 @@
 				</td>
 				<td class="row1">
 				<!-- BEGIN tools -->
-						<a href="{r_ocs.main.list_hard.tools.LINK}" target="_blank"><img src="{r_ocs.main.list_hard.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_ocs.main.list_hard.tools.TITLE}" alt="" /></a>
+							<a href="{r_ocs.main.list_hard.tools.LINK}"><img src="{r_ocs.main.list_hard.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_ocs.main.list_hard.tools.TITLE}" alt="" /></a>
 				<!-- END tools -->
 				</td>
 			</tr>
@@ -63,7 +63,7 @@
 				</td>
 				<td class="row1">
 				<!-- BEGIN tools -->
-						<a href="{r_ocs.main.list_periph.tools.LINK}" target="_blank"><img src="{r_ocs.main.list_periph.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_ocs.main.list_periph.tools.TITLE}" alt="" /></a>
+							<a href="{r_ocs.main.list_periph.tools.LINK}"><img src="{r_ocs.main.list_periph.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_ocs.main.list_periph.tools.TITLE}" alt="" /></a>
 				<!-- END tools -->
 				</td>
 			</tr>
@@ -81,7 +81,7 @@
 				</td>
 				<td class="{r_ocs.main.list_soft.CLASS}">
 				<!-- BEGIN tools -->
-				<a href="{r_ocs.main.list_soft.tools.LINK}" target="_blank"><img src="{r_ocs.main.list_soft.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_ocs.main.list_soft.tools.TITLE}" alt="" /></a>
+						<a href="{r_ocs.main.list_soft.tools.LINK}"><img src="{r_ocs.main.list_soft.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_ocs.main.list_soft.tools.TITLE}" alt="" /></a>
 				<!-- END tools -->
 				</td>
 			</tr>

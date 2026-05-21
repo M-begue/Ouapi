@@ -9,21 +9,21 @@
 		<!-- BEGIN addall -->
 		<p class="toolbox">
 			<img src="{r_users.addall.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_users.addall.LINK}" target="_blank">{r_users.addall.TEXT}</a>
+			<a href="{r_users.addall.LINK}">{r_users.addall.TEXT}</a>
 		</p>
 		<!-- END addall -->
 	
 		<!-- BEGIN conf -->
 		<p class="toolbox">
 			<img src="{r_users.conf.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_users.conf.LINK}" target="_blank">{r_users.conf.TEXT}</a>
+			<a href="{r_users.conf.LINK}">{r_users.conf.TEXT}</a>
 		</p>
 		<!-- END conf -->
 	
 		<!-- BEGIN display -->
 		<p class="toolbox">
 			<img src="{r_users.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_users.display.LINK}" target="_blank">{r_users.display.TEXT}</a>
+			<a href="{r_users.display.LINK}">{r_users.display.TEXT}</a>
 		</p>
 		<!-- END display -->		
 		
@@ -72,7 +72,7 @@
 			<td class="row1"><font style="color:{r_users.tab_user.list.STATUS_COLOR}">{r_users.tab_user.list.COL_STATUS}</font></td>
 			<td class="row1">
 				<!-- BEGIN tools -->
-				<a href="{r_users.tab_user.list.tools.LINK}" target="_blank">
+				<a href="{r_users.tab_user.list.tools.LINK}">
 				<img src="{r_users.tab_user.list.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_users.tab_user.list.tools.TITLE}" alt="" /></a>
 				<!-- END tools -->
 				&nbsp;
@@ -85,26 +85,26 @@
 <!-- END r_users -->
 
 <!-- BEGIN r_pc -->
-	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=users&amp;type=excel" target="_blank">
+	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=users&amp;type=excel">
 		
 		<!-- BEGIN addall -->
 		<p class="toolbox" style="margin-left:40px;">
 			<img src="{r_pc.addall.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_pc.addall.LINK}" target="_blank">{r_pc.addall.TEXT}</a>
+			<a href="{r_pc.addall.LINK}">{r_pc.addall.TEXT}</a>
 		</p>
 		<!-- END addall -->
 
 		<!-- BEGIN conf -->
 		<p class="toolbox">
 			<img src="{r_pc.conf.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_pc.conf.LINK}" target="_blank">{r_pc.conf.TEXT}</a>
+			<a href="{r_pc.conf.LINK}">{r_pc.conf.TEXT}</a>
 		</p>
 		<!-- END conf -->
 		
 		<!-- BEGIN display -->
 		<p class="toolbox">
 			<img src="{r_pc.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;
-			<a href="{r_pc.display.LINK}" target="_blank">{r_pc.display.TEXT}</a>
+			<a href="{r_pc.display.LINK}">{r_pc.display.TEXT}</a>
 		</p>
 		<!-- END display -->		
 		
@@ -153,7 +153,7 @@
 			<td class="row1"><font style="color:{r_pc.tab_pc.list.STATUS_COLOR}">{r_pc.tab_pc.list.COL_STATUS}</font></td>
 			<td class="row1">
 				<!-- BEGIN tools -->
-				<a href="{r_pc.tab_pc.list.tools.LINK}" target="_blank">
+				<a href="{r_pc.tab_pc.list.tools.LINK}">
 				<img src="{r_pc.tab_pc.list.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_pc.tab_pc.list.tools.TITLE}" alt="" /></a>
 				<!-- END tools -->
 				&nbsp;

@@ -74,7 +74,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.marque.action.LINK}" target="_blank"><img src="{form.marque.action.IMAGE}" name="imglink_marque" border="0" title="{form.marque.action.LIBELLE}" alt="" /></a>
+			<a href="{form.marque.action.LINK}"><img src="{form.marque.action.IMAGE}" name="imglink_marque" border="0" title="{form.marque.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.marque.valid.IMAGE}" border="0" name="imglink_marque" title="{form.marque.valid.LIBELLE}" onClick="{form.marque.valid.ONCLICK}" alt="" />
@@ -93,7 +93,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.type.action.LINK}" target="_blank"><img src="{form.type.action.IMAGE}" border="0" name="imglink_type" title="{form.type.action.LIBELLE}" alt="" /></a>
+			<a href="{form.type.action.LINK}"><img src="{form.type.action.IMAGE}" border="0" name="imglink_type" title="{form.type.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.type.valid.IMAGE}" border="0" name="imglink_type" title="{form.type.valid.LIBELLE}" onclick="{form.type.valid.ONCLICK}" alt="" />
@@ -114,7 +114,7 @@
 	</select>
   </span>
 		<!-- BEGIN action -->
-			<a href="{form.modele.action.LINK}" id="link_hard_modele" target="_blank"><img src="{form.modele.action.IMAGE}" name="imglink_modele" border="0" title="{form.modele.action.LIBELLE}" alt="" /></a>
+			<a href="{form.modele.action.LINK}" id="link_hard_modele"><img src="{form.modele.action.IMAGE}" name="imglink_modele" border="0" title="{form.modele.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.modele.valid.IMAGE}" border="0" name="imglink_modele" title="{form.modele.valid.LIBELLE}" onClick="{form.modele.valid.ONCLICK}" alt="" />
@@ -274,7 +274,7 @@
 	<br/>
   <p class="contenu" id="mess_retour">{form_post.OK}<br/>
   <br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>
+	<a href="javascript:goToHomeWithRubrique()">{form_post.CLOSE}</a>
   </p><br/>
 <!-- END form_post -->
 

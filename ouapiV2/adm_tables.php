@@ -24,7 +24,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 
 
 /*		AJOUT DE LA FONCTIONNALITE D4IMAGE DANS models of system
-		//Traitement du fichier envoyé (s'il y en a un)
+		//Traitement du fichier envoyï¿½ (s'il y en a un)
 		if(isset($_FILES['doc']) && $_FILES['doc']['name'] != "")
 		{  
 			$extensions_ok = array('JPG','PNG','GIF');
@@ -45,7 +45,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 			}				
 		}*/
 
-		// Si la table est liée a un site
+		// Si la table est liï¿½e a un site
 		if (isset($_POST['site_id']))
 		{
 			if ($_POST["site_id"] == 'all')
@@ -56,7 +56,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 				$requete_verif = "SELECT libelle FROM ".constant(strtoupper('tab_'.$_GET["table"]))." WHERE libelle='$libelle' ORDER BY libelle";
 				$tab_verif = $req1->db_use_query($requete_verif);
 
-				// Si le libelle n'existe pas déjà
+				// Si le libelle n'existe pas dï¿½jï¿½
 				if (count($tab_verif) == 0)
 				{		
 					$i = 0;
@@ -76,7 +76,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 				$requete_verif = "SELECT libelle FROM ".constant(strtoupper('tab_'.$_GET["table"]))." WHERE libelle='$libelle' AND agence_id='".$_POST['site_id']."'";
 				$tab_verif = $req1->db_use_query($requete_verif);
 
-				// Si le libelle n'existe pas déjà
+				// Si le libelle n'existe pas dï¿½jï¿½
 				if (count($tab_verif) == 0)
 				{							
 					$requete = "INSERT INTO ".constant(strtoupper('tab_'.$_GET["table"]))." (agence_id,libelle) VALUES ('".$_POST['site_id']."','".$libelle."')";
@@ -92,10 +92,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 			$requete_verif = "SELECT libelle FROM ".constant(strtoupper('tab_'.$_GET["table"]))." WHERE libelle='$libelle'";
 			$tab_verif = $req1->db_use_query($requete_verif);
 
-			// Si le libelle n'existe pas déjà
+			// Si le libelle n'existe pas dï¿½jï¿½
 			if (count($tab_verif) == 0)
 			{			
-				// Cas particulier de l'ajout de type de matériel
+				// Cas particulier de l'ajout de type de matï¿½riel
 				if(isset($_POST['vnc']) || isset($_POST['http']))
 				{
 					if (isset($_POST['vnc']))
@@ -117,7 +117,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 						$marque_id = $_POST["marque_id"];
 						$requete = "INSERT INTO ".constant(strtoupper('tab_'.$_GET["table"]))." (marque_id,libelle) VALUES ('".$marque_id."','".$libelle."')";						
 					}
-					// Sinon, cas général
+					// Sinon, cas gï¿½nï¿½ral
 					else
 						$requete = "INSERT INTO ".constant(strtoupper('tab_'.$_GET["table"]))." (libelle) VALUES ('".$libelle."')";
 				}	
@@ -130,17 +130,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 		}
 			
 		// Affichage
+		
 		if (count($err) == 0)
 		{
 			$template->assign_block_vars('form_post', array(
-				'OK' => $lang["adm_table_addok"], 					
-				'CLOSE' => $lang["close"],	
+				'OK' => $lang["adm_table_addok"],
+				'CLOSE' => $lang["close"],
 				'ID' => 'mess_retour'
 			));
 			
 			$template->assign_block_vars('form_post.back', array(
-				'BACK_PAGE' => $_SERVER['HTTP_REFERER'],	
-				'BACK' => $lang["gen_back"]	,
+				'BACK' => $lang["gen_back"]
 			));			
 		}
 		else
@@ -153,14 +153,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 			}
 			
 			$template->assign_block_vars('form_post', array(
-				'OK' => $errors, 					
-				'CLOSE' => $lang["close"],	
+				'OK' => $errors,
+				'CLOSE' => $lang["close"],
 				'ID' => 'alert'
 			));
 			
 			$template->assign_block_vars('form_post.back', array(
-				'BACK_PAGE' => $_SERVER['HTTP_REFERER'],	
-				'BACK' => $lang["gen_back"]	,
+				'BACK' => $lang["gen_back"]
 			));			
 		}
 
@@ -197,7 +196,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 			));
 		}
 		
-		// Cas particulier des tables liée à une agence
+		// Cas particulier des tables liï¿½e ï¿½ une agence
 		if (isset($_GET['slct_site']) && MULTISITE == 'Oui')
 		{
 			$template->assign_block_vars('form.multisite', array(
@@ -235,7 +234,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 			));			
 		}
 		
-		// Cas particulier de la table des type de matériel >> Connexions possibles
+		// Cas particulier de la table des type de matï¿½riel >> Connexions possibles
 		if ($_GET["table"] == "hard_type")
 		{
 			$template->assign_block_vars('form.connex', array(
@@ -257,7 +256,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 			}
 		}
 		
-		// Cas particulier des tables modeles liées à une marque
+		// Cas particulier des tables modeles liï¿½es ï¿½ une marque
 		if ($_GET["table"] == "hard_modele" || $_GET["table"] == "periph_modele")
 		{
 			$template->assign_block_vars('form.marque', array(
@@ -308,7 +307,7 @@ else
 		{
 			if (isset($_POST['soumettre']))
 			{
-				$requete = "DELETE ".TAB_EMPL." WHERE ".EM_SITEID."='".$_POST['site_id']."'";
+				$requete = "DELETE FROM ".TAB_EMPL." WHERE ".EM_SITEID."='".$_POST['site_id']."'";
 				$tab = $req1->db_use_query($requete);
 				$requete = "UPDATE ".TAB_DOCS." SET ".DO_SITEID."='".$_POST['site_replace']."' WHERE ".DO_SITEID."='".$_POST['site_id']."'";
 				$tab = $req1->db_use_query($requete);
@@ -351,7 +350,7 @@ else
 						'VALUE' => intval($_GET["id"]),
 					));
 					
-					// Matériels sur le site
+					// Matï¿½riels sur le site
 					$requete = "SELECT * FROM ".TAB_HARD." WHERE ".HA_SITEID."='".$siteid."'";
 					$tab_hard = $req1->db_use_query($requete);
 					
@@ -360,7 +359,7 @@ else
 						'TEXT' => $lang["adm_table_delsite_nbhard"],
 					));
 					
-					// Périphs sur le site
+					// Pï¿½riphs sur le site
 					$requete = "SELECT * FROM ".TAB_PERIPH." WHERE ".PE_SITEID."='".$siteid."'";
 					$tab_periph = $req1->db_use_query($requete);
 					
@@ -387,7 +386,7 @@ else
 						'TEXT' => $lang["adm_table_delsite_nbdocs"],
 					));
 					
-					// Prises réseau sur le site
+					// Prises rï¿½seau sur le site
 					$requete = "SELECT * FROM ".TAB_RESEAU." WHERE ".RE_SITEID."='".$siteid."'";
 					$tab_netw = $req1->db_use_query($requete);
 					
@@ -405,7 +404,7 @@ else
 						'TEXT' => $lang["adm_table_delsite_nbusers"],
 					));
 					
-					// Tout est supprimé, le site peut être supprimé (sauf si site 1)
+					// Tout est supprimï¿½, le site peut ï¿½tre supprimï¿½ (sauf si site 1)
 					if (count($tab_hard)+count($tab_periph)+count($tab_docs)+count($tab_netw)+count($tab_users) == 0 && $siteid != 1)
 					{
 						$template->assign_block_vars('form_prepost.hidden_field', array(	
@@ -414,7 +413,7 @@ else
 						));
 					
 					}
-					// Tout n'est pas supprimé, on propose un site de remplacement
+					// Tout n'est pas supprimï¿½, on propose un site de remplacement
 					elseif (count($tab_hard)+count($tab_periph)+count($tab_docs)+count($tab_netw)+count($tab_users) != 0 && $siteid != 1)
 					{
 						$requete = "SELECT * FROM ".TAB_AGENCES." WHERE ".AG_ID."<>'".$siteid."'";
@@ -453,7 +452,7 @@ else
 			$requete = "DELETE FROM ".constant(strtoupper('tab_'.$_GET["table"]))." WHERE id='".$_GET['id']."'";
 			$tab = $req1->db_use_query($requete);
 
-			$post_result = str_ireplace('L\'élément', strtoupper($tab_element[0]["libelle"]), $lang["adm_table_delok"]);
+			$post_result = str_ireplace('L\'ï¿½lï¿½ment', strtoupper($tab_element[0]["libelle"]), $lang["adm_table_delok"]);
 			$post_class = 'table_success';
 			$post_icon = 'templates/'.DEFAULT_TEMPLATE.'/images/ok.png';
 		}
@@ -468,19 +467,19 @@ else
 		$table = $_POST["table"];
 		$libelle = format_string_db($_POST['libelle']);
 
-		// Si la table est liée a un site
+		// Si la table est liï¿½e a un site
 		if (isset($_POST['site_id']))
 		{
 			$requete_verif = "SELECT libelle FROM ".constant(strtoupper('tab_'.$table))." WHERE libelle='$libelle' AND agence_id='".$_POST['site_id']."' AND id<>'".$_POST["id"]."'";
 			$tab_verif = $req1->db_use_query($requete_verif);
 
-			// Si le libelle n'existe pas déjà
+			// Si le libelle n'existe pas dï¿½jï¿½
 			if (count($tab_verif) == 0)
 			{	
 				$requete = "UPDATE ".constant(strtoupper('tab_'.$table))." SET agence_id='".$_POST['site_id']."', libelle='".$libelle."' WHERE id='".$_POST["id"]."'";
 				$tab = $req1->db_use_query($requete);
 				
-				$post_result = str_ireplace('L\'élément', strtoupper($libelle), $lang["adm_table_editok"]);
+				$post_result = str_ireplace('L\'ï¿½lï¿½ment', strtoupper($libelle), $lang["adm_table_editok"]);
 				$post_class = 'table_success';
 				$post_icon = 'templates/'.DEFAULT_TEMPLATE.'/images/ok.png';
 			}
@@ -493,10 +492,10 @@ else
 			$requete_verif = "SELECT libelle FROM ".constant(strtoupper('tab_'.$table))." WHERE libelle='$libelle' AND id<>'".$_POST["id"]."'";
 			$tab_verif = $req1->db_use_query($requete_verif);
 
-			// Si le libelle n'existe pas déjà
+			// Si le libelle n'existe pas dï¿½jï¿½
 			if (count($tab_verif) == 0)
 			{			
-				// Cas particulier de l'ajout de type de matériel
+				// Cas particulier de l'ajout de type de matï¿½riel
 				if($_POST["table"] == "hard_type")
 				{
 					if (isset($_POST['vnc']))
@@ -516,7 +515,7 @@ else
 					$marque_id = $_POST["marque_id"];
 					$requete = "UPDATE ".constant(strtoupper('tab_'.$table))." SET marque_id='".$marque_id."', libelle='".$libelle."'  WHERE id='".$_POST["id"]."'";						
 				}
-				// Sinon, cas général
+				// Sinon, cas gï¿½nï¿½ral
 				else
 					$requete = "UPDATE ".constant(strtoupper('tab_'.$table))." SET libelle='".$libelle."' WHERE id='".$_POST["id"]."'";
 				
@@ -534,7 +533,7 @@ else
 		// Affichage
 		if (count($err) > 0)
 		{
-			$post_result = str_ireplace('L\'élément', strtoupper($libelle), $lang["adm_table_editerror"]);
+			$post_result = str_ireplace('L\'ï¿½lï¿½ment', strtoupper($libelle), $lang["adm_table_editerror"]);
 			$post_class = 'table_error';
 			$post_icon = 'templates/'.DEFAULT_TEMPLATE.'/images/nok.png';
 			
@@ -563,7 +562,7 @@ else
 	  'TABLE_NAME' => $_GET["table"],
 	));
 
-	// On affiche les en tete de colonne s'il y a au moins 1 résultat
+	// On affiche les en tete de colonne s'il y a au moins 1 rï¿½sultat
 	if (count($tab) > 0)
 	{
 		$template->assign_block_vars('select.records', array(
@@ -571,7 +570,7 @@ else
 		  'L_TOOLS' => $lang["tools"],
 		));
 		  
-		/****************** DEBUT Gestion des colonnes particulières ***********************/
+		/****************** DEBUT Gestion des colonnes particuliï¿½res ***********************/
 		if ($_GET["table"] == "hard_type")
 		{
 			$template->assign_block_vars('select.records.connex', array(
@@ -592,7 +591,7 @@ else
 			  'L_MARQUE' => $lang["adm_table_marque"],
 			));
 		}
-		/******************** FIN Gestion des colonnes particulières ***********************/
+		/******************** FIN Gestion des colonnes particuliï¿½res ***********************/
 		  
 		$i = 0;
 		while ($i < count($tab))
@@ -602,7 +601,7 @@ else
 			  'ID' => $tab[$i]["id"],
 			));
 			
-			/****************** DEBUT Gestion des colonnes particulières ***********************/
+			/****************** DEBUT Gestion des colonnes particuliï¿½res ***********************/
 			if ($_GET["table"] == "hard_type")
 			{
 				$template->assign_block_vars('select.records.list.connex', array());
@@ -689,9 +688,9 @@ else
 					$j++;
 				}						
 			}
-			/****************** FIN Gestion des colonnes particulières ***********************/
+			/****************** FIN Gestion des colonnes particuliï¿½res ***********************/
 
-			/* Outil d'édition */
+			/* Outil d'ï¿½dition */
 			$template->assign_block_vars('select.records.list.tools', array(
 			  'LINK' => $current_page.'&amp;id='.$tab[$i]["id"],
 			  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/save.gif',

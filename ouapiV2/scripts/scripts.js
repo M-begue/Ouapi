@@ -63,7 +63,7 @@
 	}
 	// -->
 	
-	// <!-- Changer element selectionné d'une liste déroulante -->
+	// <!-- Changer element selectionnï¿½ d'une liste dï¿½roulante -->
 	function ChangeListe(champ,valeur)
 	{
 		var idok=0; 

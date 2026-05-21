@@ -5,13 +5,13 @@
 *																																                                *
 **********************************************************************************************-->
 <!-- BEGIN r_users -->
-	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=users&amp;type=excel" target="_blank">
+	<form method="post" name="formexport" action="index.php?page=export.php&amp;export=users&amp;type=excel">
 	<!-- BEGIN add -->
-	<p class="toolbox"><img src="{r_users.add.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_users.add.LINK}" target="_blank">{r_users.add.TEXT}</a></p>
+	<p class="toolbox"><img src="{r_users.add.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_users.add.LINK}">{r_users.add.TEXT}</a></p>
 	<!-- END add -->
 
 	<!-- BEGIN display -->
-	<p class="toolbox"><img src="{r_users.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_users.display.LINK}" target="_blank">{r_users.display.TEXT}</a></p>
+	<p class="toolbox"><img src="{r_users.display.IMAGE}" style="vertical-align:middle" border="0" alt="" />&nbsp;<a href="{r_users.display.LINK}">{r_users.display.TEXT}</a></p>
 	<!-- END display -->		
 	
 	<!-- BEGIN export -->
@@ -62,7 +62,7 @@
 				<!-- END cols -->								
 				<td class="row1">
 				<!-- BEGIN tools -->
-					<a href="{r_users.tab_user.group.list.tools.LINK}" target="_blank"><img src="{r_users.tab_user.group.list.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_users.tab_user.group.list.tools.TITLE}" alt="" /></a>
+					<a href="{r_users.tab_user.group.list.tools.LINK}"><img src="{r_users.tab_user.group.list.tools.IMAGE}" style="vertical-align:middle" border="0" title="{r_users.tab_user.group.list.tools.TITLE}" alt="" /></a>
 				<!-- END tools -->
 				&nbsp;</td>
 			</tr>

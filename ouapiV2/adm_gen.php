@@ -66,7 +66,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del_grp')
 	$tab = $req1->db_use_query($requete);
 	
 	$affichage = '<br/><p class="contenu" id="mess_retour">'.$lang["adm_gen_grpdel_ok"].'<br/><br/>
-	<a href="#" onclick="RefreshAndClose()">'.$lang["close"].'</a></p><br/>';
+	<a href="javascript:goToHomeWithRubrique()">'.$lang["close"].'</a></p><br/>';
 }
 /*************************************/
 /*		    Config G�n�rale          */

@@ -135,7 +135,7 @@
 	<br/>
 	<p class="contenu" id="{form_post.ID}">{form_post.OK}<br/>
 	<br/>
-	<a href="#" onclick="RefreshAndClose()">{form_post.CLOSE}</a>&nbsp;
+	<a href="javascript:goToHomeWithRubrique()">{form_post.CLOSE}</a>&nbsp;
 	<a href="{form_post.BACK_PAGE}">{form_post.BACK}</a>
 	</p><br/>
 <!-- END form_post -->

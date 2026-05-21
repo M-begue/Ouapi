@@ -38,6 +38,8 @@ function get_users_pfield_columns(db_use $db): array
 /****************************/
 if (isset($_GET['action']) && $_GET['action'] == 'add')
 {
+	$agence_id_current = isset($_GET['agence_id']) ? intval($_GET['agence_id']) : (isset($_POST['ut_agence']) ? intval($_POST['ut_agence']) : 0);	
+
 	if (isset($_POST['soumettre']))
 	{
 		$nom = format_string_db($_POST['nom']);
@@ -93,7 +95,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		//Formulaire d'ajout
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_user_title_add"],
-		  'ACTION' => 'index.php?page=adm_utilisateurs.php&amp;action=add',
+		  'ACTION' => 'index.php?page=adm_utilisateurs.php&amp;action=add&agence_id=' . $agence_id_current,
 		  'DISPLAY_OUAPIUSER' => 'display:none',
 		));
 			
@@ -1093,6 +1095,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'sync_ldap')
 // Edition
 elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 {
+	$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
+
+    $tab = $req1->db_use_query("SELECT * FROM ".TAB_USERS." WHERE id='".$user_id."'");
+
+    $agence_id_current = isset($tab[0]["agence_id"]) ? intval($tab[0]["agence_id"]) : (isset($_POST['ut_agence']) ? intval($_POST['ut_agence']) : (isset($_GET['agence_id']) ? intval($_GET['agence_id']) : 0));
+    $redirect_page = urlencode('page=adm_utilisateurs.php&action=Editer&user_id=' . $user_id . '&agence_id=' . $agence_id_current);
+
 	if (isset($_POST['soumettre']))
 	{
 		$user_id = $_GET['user_id'];
@@ -1113,8 +1122,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 		}
 		
 		$requete = "UPDATE ".TAB_USERS." SET nom='$nom',prenom='$prenom',mail='$mail',groupe_id='$groupe_id',
-		agence_id='$agence_id',login='$login',login_win='$login_win',langue='$langue'".$pfields_update." WHERE id='$user_id'";
-		$tab = $req1->db_use_query($requete);
+        agence_id='$agence_id',login='$login',login_win='$login_win',langue='$langue'".$pfields_update." WHERE id='$user_id'";
+        $tab_update = $req1->db_use_query($requete);
 
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_user_editok"], 					
@@ -1124,14 +1133,11 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 	}
 	else
 	{
-
-		$tab = $req1->db_use_query("SELECT * FROM ".TAB_USERS." WHERE id='".$_GET["user_id"]."'");
-	
-		if ($tab[0][US_LNAME] != 'Demo')
+		if (isset($tab[0][US_LNAME]) && $tab[0][US_LNAME] != 'Demo')
 		{
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_user_title_edit"],
-			  'ACTION' => 'index.php?page=adm_utilisateurs.php&amp;action=Editer&amp;user_id='.$_GET['user_id'],
+			  'ACTION' => 'index.php?page=adm_utilisateurs.php&action=Editer&user_id='.$user_id.'&agence_id=' . $agence_id_current,
 			));
 			
 			$template->assign_block_vars('form.name', array(
@@ -1193,7 +1199,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 				$tab_sites[-1] = array('id' => '0', 'libelle' => $lang["admin_site"]);
 				while ($i < count($tab_sites)-1)
 				{
-					if ($tab[0]["agence_id"] == $tab_sites[$i]['id'])
+					if ($agence_id_current == $tab_sites[$i]['id'])
 					{
 						$template->assign_block_vars('form.multisite.list', array(
 						  'ID' => $tab_sites[$i]['id'],
@@ -1290,12 +1296,19 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 // Suppression
 elseif (isset($_GET['action']) && $_GET['action'] == 'Supprimer')
 {
+	$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
+
+    $tab = $req1->db_use_query("SELECT * FROM ".TAB_USERS." WHERE id='".$user_id."'");
+
+    $agence_id_current = isset($tab[0]["agence_id"]) ? intval($tab[0]["agence_id"]) : (isset($_POST['ut_agence']) ? intval($_POST['ut_agence']) : (isset($_GET['agence_id']) ? intval($_GET['agence_id']) : 0));
+    $redirect_page = urlencode('page=adm_utilisateurs.php&action=Supprimer&user_id=' . $user_id . '&agence_id=' . $agence_id_current);
+
 	if (isset($_POST['soumettre']))
 	{
-		$requete = "DELETE FROM ".TAB_USERS." WHERE id='".$_GET['user_id']."'";
-		$tab = $req1->db_use_query($requete);
-		$requete = "DELETE FROM ".TAB_RESA." WHERE user_id='".$_GET['user_id']."'";
-		$tab = $req1->db_use_query($requete);
+		$requete = "DELETE FROM ".TAB_USERS." WHERE id='".$user_id."'";
+        $tab_del_user = $req1->db_use_query($requete);
+        $requete = "DELETE FROM ".TAB_RESA." WHERE user_id='".$user_id."'";
+        $tab_del_resa = $req1->db_use_query($requete);
 
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_user_delok"], 					
@@ -1304,16 +1317,13 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Supprimer')
 		));			
 	}
 	else
-	{
-		$tab = $req1->db_use_query("SELECT * FROM ".TAB_USERS." WHERE id='".$_GET["user_id"]."'");
-		
-		if ($tab[0][US_LNAME] != 'Demo')
+	{	
+		if (isset($tab[0][US_LNAME]) && $tab[0][US_LNAME] != 'Demo')
 		{
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_user_title_del"],
-			  'ACTION' => 'index.php?page=adm_utilisateurs.php&action=Supprimer&user_id='.$_GET['user_id'],
+		  		'ACTION' => 'index.php?page=adm_utilisateurs.php&action=Supprimer&user_id=' . $user_id . '&agence_id=' . $agence_id_current,
 			));
-			
 			$template->assign_block_vars('form.name', array(
 			  'TITLE' => $lang["adm_user_name"],
 			  'DISABLED' => 'disabled',
@@ -1347,12 +1357,20 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Supprimer')
 // Changer le mot de passe
 elseif (isset($_GET['action']) && $_GET['action'] == 'change_mdp')
 {
+	
+	$user_id = isset($_GET['user_id']) ? intval($_GET['user_id']) : 0;
+
+    $tab = $req1->db_use_query("SELECT * FROM ".TAB_USERS." WHERE id='".$user_id."'");
+    $agence_id_current = isset($tab[0]["agence_id"]) ? intval($tab[0]["agence_id"]) : (isset($_POST['ut_agence']) ? intval($_POST['ut_agence']) : (isset($_GET['agence_id']) ? intval($_GET['agence_id']) : 0));
+
+    $redirect_page = urlencode('page=adm_utilisateurs.php&action=change_mdp&user_id=' . $user_id . '&agence_id=' . $agence_id_current);
+
 	if (isset($_POST['soumettre']))
 	{
 		if ($_POST['mdp'] != '' && $_POST['mdp'] == $_POST['confirm_mdp'])
 		{
-			$requete = "UPDATE ".TAB_USERS." SET mdp='".password_hash($_POST['mdp'], PASSWORD_BCRYPT)."' WHERE id='".$_GET['user_id']."'";
-			$tab = $req1->db_use_query($requete);
+			$requete = "UPDATE ".TAB_USERS." SET mdp='".password_hash($_POST['mdp'], PASSWORD_BCRYPT)."' WHERE id='".$user_id."'";
+            $tab_update = $req1->db_use_query($requete);
 
 			$template->assign_block_vars('form_post', array(
 				'OK' => $lang["adm_user_changemdpok"], 					
@@ -1378,13 +1396,11 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'change_mdp')
 	}
 	else
 	{
-		$tab = $req1->db_use_query("SELECT * FROM ".TAB_USERS." WHERE id='".$_GET["user_id"]."'");
-
-		if ($tab[0][US_LNAME] != 'Demo')
+		if (isset($tab[0][US_LNAME]) && $tab[0][US_LNAME] != 'Demo')
 		{
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_user_title_mdp"],
-			  'ACTION' => 'index.php?page=adm_utilisateurs.php&action=change_mdp&user_id='.$_GET['user_id'],
+			  'ACTION' => 'index.php?page=adm_utilisateurs.php&action=change_mdp&user_id='.$user_id.'&agence_id=' . $agence_id_current,
 			));
 			
 			$template->assign_block_vars('form.name', array(

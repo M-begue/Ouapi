@@ -36,7 +36,7 @@
 			<!-- BEGIN new -->
 			<div class="warning" style="height:65px;margin-top:10px;"><img src="{r_admin.maj.new.ICON}" alt="" style="float:left;margin-right:20px;" />
 			<font style="font-weight:bold;font-size:16px;">{r_admin.maj.new.TITLE}</font><br/>{r_admin.maj.new.TEXT}<br/>
-			<a href="{r_admin.maj.new.LINK}" target="_blank">{r_admin.maj.new.LINK_TEXT}</a></div>
+			<a href="{r_admin.maj.new.LINK}">{r_admin.maj.new.LINK_TEXT}</a></div>
 			<!-- END new -->	
 			<!-- BEGIN no -->
 				<div style="margin-top:10px;margin-bottom:10px;"><i>{r_admin.maj.no.TITLE}</i></div>
@@ -48,7 +48,7 @@
 		<div class="rightinmain">
 			<div class="cat_title" style="margin-bottom:10px;">{r_admin.stats.TITLE}</div>
 			<div style="float:left;"><img src="{r_admin.stats.ICON}" alt="" style="margin-top:10px;margin-right:20px;" /></div>
-			<form name="stats" action="export.php" target="_blank" method="post">
+			<form name="stats" action="export.php" method="post">
 			<font style="font-weight:bold;">{r_admin.stats.SUBTITLE}</font><br/>
 			
 			
@@ -103,105 +103,105 @@
 		<!-- BEGIN sites -->
 		<tr>
 			<td class="row1">{r_admin.tables.sites.RUB_SITE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=agences&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=agences&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=agences" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=agences">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;</td>
 		</tr>
 		<!-- END sites -->
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_EXT}</td>
-			<td class="row1"><a href="index.php?page=adm_externes.php&amp;action=add" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_externes.php&amp;action=add">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_externes.php&amp;action=edit" target="_blank">
+			<a href="index.php?page=adm_externes.php&amp;action=edit">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_PLACES}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=empl&amp;action=Ajouter&amp;slct_site=1" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=empl&amp;action=Ajouter&amp;slct_site=1">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=empl&amp;slct_site=1" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=empl&amp;slct_site=1">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_HARDTYPE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_type&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_type&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=hard_type" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=hard_type">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_HARDMARQUE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_marque&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=hard_marque" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=hard_marque">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_HARDMODEL}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_modele&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_modele&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=hard_modele" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=hard_modele">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_PERTYPE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=periph_type&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=periph_type&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=periph_type" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=periph_type">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_PERMODEL}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=periph_modele&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=periph_modele&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=periph_modele" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=periph_modele">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_OS}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_os&amp;action=Ajouter" target="_blank">
-			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=hard_os" target="_blank">
+		<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=hard_os&amp;action=Ajouter">
+		<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
+		<a href="index.php?page=adm_tables.php&amp;table=hard_os">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_DOCSTYPE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=docs_type&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=docs_type&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=docs_type" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=docs_type">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_CPU}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=ref_cpu&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=ref_cpu&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=ref_cpu" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=ref_cpu">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_RAMTYPE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=ref_ram_type&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=ref_ram_type&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=ref_ram_type" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=ref_ram_type">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
 		<tr>
 			<td class="row1">{r_admin.tables.RUB_DISQUETYPE}</td>
-			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=ref_disque_type&amp;action=Ajouter" target="_blank">
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=ref_disque_type&amp;action=Ajouter">
 			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
-			<a href="index.php?page=adm_tables.php&amp;table=ref_disque_type" target="_blank">
+			<a href="index.php?page=adm_tables.php&amp;table=ref_disque_type">
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
@@ -213,7 +213,7 @@
 		<div class="rightinmain">
 			<div class="cat_title2">{r_admin.import.TITLE}</div>
 		
-			<form name="form" action="index.php?page=import.php" method="post" enctype="multipart/form-data" target="_blank">
+			<form name="form" action="index.php?page=import.php" method="post" enctype="multipart/form-data">
 			<table class="table">
 			<tr>
 				<td class="titre3">{r_admin.import.L_SETTING}</td>
@@ -262,7 +262,7 @@
 			<!-- BEGIN add -->
 			<div class="rightinmain">
 				<div class="cat_title2">{r_admin.pfield.add.TITLE}</div>
-				<form name="form" action="index.php?page=adm_gen.php&amp;action=addfield" method="post" enctype="multipart/form-data" target="_blank">
+				<form name="form" action="index.php?page=adm_gen.php&amp;action=addfield" method="post" enctype="multipart/form-data">
 				<label>{r_admin.pfield.add.L_TABLE}</label>
 				<select name="table">
 				<!-- BEGIN table -->
@@ -295,7 +295,7 @@
 					<tr>
 						<td class="row1">{r_admin.pfield.del.list.TITLE}</td>
 						<td class="row1">{r_admin.pfield.del.list.TABLE}</td>
-						<td class="row1"><a href="{r_admin.pfield.del.list.LINK}" target="_blank"><img src="{r_admin.pfield.del.list.ICON}" alt="" /></a></td>
+						<td class="row1"><a href="{r_admin.pfield.del.list.LINK}"><img src="{r_admin.pfield.del.list.ICON}" alt="" /></a></td>
 					</tr>
 				<!-- END list -->	
 				<!-- BEGIN nolist -->
@@ -311,7 +311,7 @@
 		<!-- BEGIN param_gen -->
 		<div class="rightinmain">
 			<div class="cat_title2">{r_admin.param_gen.TITLE}</div>
-			<form name="form" action="{r_admin.param_gen.FORM_ACTION}" method="post" target="_blank">
+			<form name="form" action="{r_admin.param_gen.FORM_ACTION}" method="post">
 			<table class="table">
 			<tr>
 				<td class="titre2" colspan="2">{r_admin.param_gen.DEFAULT_USERPARAM_TITLE}</td>
@@ -402,7 +402,7 @@
 		<div class="rightinmain">
 			<div class="cat_title2">{r_admin.rights.TITLE_CREATE}</div><br/>
 
-			<form name="form_grpadd" action="{r_admin.rights.ADDFORM_ACTION}" method="post" target="_blank">
+			<form name="form_grpadd" action="{r_admin.rights.ADDFORM_ACTION}" method="post">
 			<div class="cat_menu">{r_admin.rights.ADD_LABEL}
 			<input type="text" name="grp_name" class="non_form" style="margin-left:50px;width:200px;">
 			<input type="submit" name="" value="{r_admin.rights.GRPADD_BUTTON}" class="non_form" style="margin-left:10px;" />
@@ -428,7 +428,7 @@
 			<!-- BEGIN grp -->
 				<div style="padding:10px;margin-bottom:20px;border-top:1px solid #DDDDDD;"><b>{r_admin.rights.grp.TEXT_EDIT}</b>
 				<table class="table">
-				<form name="form" action="{r_admin.rights.grp.FORM_ACTION}" method="post" target="_blank">
+				<form name="form" action="{r_admin.rights.grp.FORM_ACTION}" method="post">
 				<!-- BEGIN category -->		
 				<tr>
 					<td width="20%">{r_admin.rights.grp.category.CAT_NAME}</td>
@@ -446,7 +446,7 @@
 			
 			<!-- BEGIN del_grp -->
 				<div style="padding:10px;margin-bottom:20px;border-top:1px solid #DDDDDD;"><b>{r_admin.rights.del_grp.TEXT_DEL}</b><br/>
-				 <form name="form_del" action="{r_admin.rights.del_grp.FORM_ACTION}" method="post" target="_blank">
+				 <form name="form_del" action="{r_admin.rights.del_grp.FORM_ACTION}" method="post">
 				{r_admin.rights.del_grp.TEXT_NEWGRP}<select name="grp_new" class="non_form" style="margin-left:50px;width:200px;">
 				<!-- BEGIN list -->
 					<option value="{r_admin.rights.del_grp.list.ID}">{r_admin.rights.del_grp.list.NAME}</option><br/>
@@ -462,14 +462,14 @@
 			<!-- BEGIN check -->
 			<div class="warning" style="height:65px;margin-top:0;"><img src="{r_admin.maj_ouapi.check.ICON}" alt="" style="float:left;margin-right:20px;" />
 			<font style="font-weight:bold;font-size:16px;">{r_admin.maj_ouapi.check.TITLE}</font><br/>{r_admin.maj_ouapi.check.TEXT}<br/>
-			<a href="{r_admin.maj_ouapi.check.LINK}" target="_blank">{r_admin.maj_ouapi.check.LINK_TEXT}</a></div>
+			<a href="{r_admin.maj_ouapi.check.LINK}">{r_admin.maj_ouapi.check.LINK_TEXT}</a></div>
 			<!-- END check -->	
 		<!-- END maj_ouapi -->
 		
 		<!-- BEGIN param_ldap -->
 		<div class="rightinmain">
 			<div class="cat_title2">{r_admin.param_ldap.TITLE}</div>
-			<form name="form" action="index.php?page=adm_gen.php&amp;action=param_ldap" method="post" target="_blank">
+			<form name="form" action="index.php?page=adm_gen.php&amp;action=param_ldap" method="post">
 			<table class="table">
 			<!-- BEGIN subcat -->
 			<tr>
@@ -515,7 +515,7 @@
 			<div class="contenu" id="alert" style="margin:2px;margin-top:10px;margin-bottom:10px;">{r_admin.param_ocs.error.TEXT}</div>
 			<!-- END error -->
 			
-			<form name="form" action="index.php?page=adm_gen.php&amp;action=param_ocs" method="post" target="_blank">
+			<form name="form" action="index.php?page=adm_gen.php&amp;action=param_ocs" method="post">
 			<table class="table">
 			<tr>
 				<td class="titre3" width="40%">{r_admin.param_ocs.L_SETTING}</td>
@@ -584,7 +584,7 @@
 					<td class="row1" style="padding:5px;">{r_admin.param_plugin.list_new.COMP}</td>
 					<td class="row1" style="padding:5px;">
 					<!-- BEGIN tools -->
-					<a href="{r_admin.param_plugin.list_new.tools.LINK}" target="_blank"><img src="{r_admin.param_plugin.list_new.tools.IMAGE}" border="0" title="{r_admin.param_plugin.list_new.tools.TITLE}"></a> 
+					<a href="{r_admin.param_plugin.list_new.tools.LINK}"><img src="{r_admin.param_plugin.list_new.tools.IMAGE}" border="0" title="{r_admin.param_plugin.list_new.tools.TITLE}"></a> 
 					<!-- END tools -->
 					</td>
 				</tr>
@@ -615,7 +615,7 @@
 					<td class="row1" style="padding:5px;">{r_admin.param_plugin.list_update.COMP}</td>
 					<td class="row1" style="padding:5px;">
 					<!-- BEGIN tools -->
-					<a href="{r_admin.param_plugin.list_update.tools.LINK}" target="_blank"><img src="{r_admin.param_plugin.list_update.tools.IMAGE}" border="0" title="{r_admin.param_plugin.list_update.tools.TITLE}"></a> 
+					<a href="{r_admin.param_plugin.list_update.tools.LINK}"><img src="{r_admin.param_plugin.list_update.tools.IMAGE}" border="0" title="{r_admin.param_plugin.list_update.tools.TITLE}"></a> 
 					<!-- END tools -->
 					</td>
 				</tr>
@@ -644,7 +644,7 @@
 					<td class="row1" style="padding:5px;">{r_admin.param_plugin.list_inst.PATH}</td>
 					<td class="row1" style="padding:5px;">
 					<!-- BEGIN tools -->
-					<a href="{r_admin.param_plugin.list_inst.tools.LINK}" target="_blank"><img src="{r_admin.param_plugin.list_inst.tools.IMAGE}" border="0" title="{r_admin.param_plugin.list_inst.tools.TITLE}"></a> 
+					<a href="{r_admin.param_plugin.list_inst.tools.LINK}"><img src="{r_admin.param_plugin.list_inst.tools.IMAGE}" border="0" title="{r_admin.param_plugin.list_inst.tools.TITLE}"></a> 
 					<!-- END tools -->
 					</td>
 				</tr>

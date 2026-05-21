@@ -15,8 +15,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_POST['soumettr
 {
 	$err = array();
 	$agence_id = $_POST['agence_id'];
-	$user_id = $_POST['user_id'];
-		
+	$user_id = $_POST['user_id'];	
+	// Déterminer le type de matériel
+	if (isset($_POST['hard_id'])) {
+		$sscat = 'hard';
+	} elseif (isset($_POST['periph_id'])) {
+		$sscat = 'periph';
+	}
+	
+	// Construire la redirection
+	$redirect_page = 'index.php?page=accueil.php&agence_id='.$agence_id.'&rubrique=resa&sscat='.$sscat;		
 	$date_deb = date('Y-m-d', mktime($_POST['heure_deb'],$_POST['min_deb'],0,substr($_POST['date_deb'],3,2),substr($_POST['date_deb'],0,2),substr($_POST['date_deb'],6,4)));
 	$date_fin = date('Y-m-d', mktime($_POST['heure_fin'],$_POST['min_fin'],0,substr($_POST['date_fin'],3,2),substr($_POST['date_fin'],0,2),substr($_POST['date_fin'],6,4)));
 	
@@ -54,7 +62,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_POST['soumettr
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["reserv_addok"], 					
 			'CLOSE' => $lang["close"],	
-			'BACK_PAGE' => $_SERVER['HTTP_REFERER'],	
+			'BACK_PAGE' => $redirect_page,	
 			'BACK' => $lang["return"],
 			'ID' => 'mess_retour'
 		));
@@ -63,16 +71,16 @@ if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_POST['soumettr
 	{
 		$errors = $lang["reserv_addnok"].'<br/><br/>';
 		
-		while(list($key, $val) = each($err))
-		{ 
-			$aff_key = $key+1;
-			$errors .= $aff_key.') '.$val.'<br/>';
-		}
+		$aff_key = 1;
+        foreach ($err as $val) {
+            $errors .= $aff_key.') '.$val.'<br/>';
+            $aff_key++;
+        }
 			
 		$template->assign_block_vars('form_post', array(
 			'OK' => $errors, 					
 			'CLOSE' => $lang["close"],	
-			'BACK_PAGE' => $_SERVER['HTTP_REFERER'],	
+			'BACK_PAGE' => $redirect_page,	
 			'BACK' => $lang["return"]	,
 			'ID' => 'alert'
 		));
@@ -83,11 +91,15 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Supprimer')
 {
 	$requete = "DELETE FROM ".TAB_RESA." WHERE id='".$_GET["id"]."'";
 	$tab = $req1->db_use_query($requete);
+	
+	$agence_id = $_GET['agence_id'];
+	$sscat = (isset($_GET['sscat']) && $_GET['sscat'] == 'periph') ? 'periph' : 'hard';
+	$redirect_page = 'index.php?page=accueil.php&agence_id='.$agence_id.'&rubrique=resa&sscat='.$sscat;
 
 	$template->assign_block_vars('form_post', array(
 		'OK' => $lang["reserv_delok"], 					
 		'CLOSE' => $lang["close"],	
-		'BACK_PAGE' => $_SERVER['HTTP_REFERER'],
+		'BACK_PAGE' => $redirect_page,
 		'BACK' => $lang["return"]	,
 		'ID' => 'mess_retour'
 	));
@@ -96,16 +108,19 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Supprimer')
 elseif (isset($_GET['action']) && $_GET['action'] == 'Gerer')
 {
 	if (isset($_GET["hard_id"]))
-	{
-		$cat["table"] = "TAB_HARD";
-		$cat["type"] = "hard";
-		
-	}
-	elseif(isset($_GET["periph_id"]))
-	{
-		$cat["table"] = "TAB_PERIPH";
-		$cat["type"] = "periph";	
-	}
+    {
+        $cat["table"] = "TAB_HARD";
+        $cat["type"] = "hard";
+        $sscat = "hard"; 
+        $item_id = intval($_GET["hard_id"]);
+    }
+    elseif (isset($_GET["periph_id"]))
+    {
+        $cat["table"] = "TAB_PERIPH";
+        $cat["type"] = "periph";    
+        $sscat = "periph";
+        $item_id = intval($_GET["periph_id"]);
+    }
 
 	// MATERIEL
 	$tab = $req1->db_use_query("SELECT ".constant($cat["table"]).".*,
@@ -119,7 +134,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Gerer')
 	// Formulaire d'ajout
 	$template->assign_block_vars('form', array(
 		'TITLE' => $lang["reserv_add"],
-		'ACTION' => 'index.php?page=reservations.php&action=add',
+		'ACTION' => 'index.php?page=reservations.php&action=add&sscat='.$cat["type"].'&agence_id='.$_GET['agence_id'],
 		'L_HARD' => $lang["reserv_hard"],
 		'L_USER' => $lang["reserv_user"],
 		'L_OBJ' => $lang["reserv_object"],
@@ -253,24 +268,10 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Gerer')
 	// Historique des r�servations
 	if (preg_match('`;'.RGHT_RESA_EDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 	{
-		if (isset($_GET["hard_id"]))
-		{
-			$requete = "SELECT ".TAB_RESA.".*,
-			  ".TAB_USERS.".nom AS U_nom,
-			  ".TAB_USERS.".prenom AS U_prenom
-			FROM ".TAB_RESA." 
-			  LEFT JOIN ".TAB_USERS." ON ".TAB_USERS.".id = ".TAB_RESA.".user_id
-			WHERE hard_id='".$_GET["hard_id"]."' ORDER BY date_deb DESC";
-		}
-		elseif(isset($_GET["periph_id"]))
-		{
-			$requete = "SELECT ".TAB_RESA.".*,
-			  ".TAB_USERS.".nom AS U_nom,
-			  ".TAB_USERS.".prenom AS U_prenom
-			FROM ".TAB_RESA." 
-			  LEFT JOIN ".TAB_USERS." ON ".TAB_USERS.".id = ".TAB_RESA.".user_id
-			WHERE periph_id='".$_GET["periph_id"]."' ORDER BY date_deb DESC";
-		}
+		$requete = "SELECT ".TAB_RESA.".*, ".TAB_USERS.".nom AS U_nom, ".TAB_USERS.".prenom AS U_prenom
+                    FROM ".TAB_RESA." 
+                    LEFT JOIN ".TAB_USERS." ON ".TAB_USERS.".id = ".TAB_RESA.".user_id
+                    WHERE ".$sscat."_id='".$item_id."' ORDER BY date_deb DESC";
 		
 		$tab_resa = $req1->db_use_query($requete);			
 
@@ -299,7 +300,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Gerer')
 				if ((preg_match('`;'.RGHT_RESA_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10) && $tab_resa[$i]["date_fin"] >= time())
 				{
 						$template->assign_block_vars('form.histo.list.tools', array(
-							'LINK' => 'index.php?page=reservations.php&id='.$tab_resa[$i]["id"].'&action=Supprimer',
+							'LINK' => 'index.php?page=reservations.php&id='.$tab_resa[$i]["id"].'&action=Supprimer&sscat='.$sscat.'&agence_id='.$_GET['agence_id'],
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/delete.gif',
 							'TITLE' => $lang["delete"]
 						));
