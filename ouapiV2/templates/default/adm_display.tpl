@@ -87,7 +87,7 @@
 	
 	<div style="clear:both;margin-bottom:20px;"></div>		
 
-	<center><input type="button" value="{BUTTON}" onclick="saveData(this.form)" class="non_form"/></center>
+	<center><input type="button" value="{BUTTON}" onclick="saveData(this.form)" class="non_form"/>&nbsp;&nbsp;<input type="button" value="Retour" onclick="javascript:closeToHome('{AGENCE_ID}', '{RUBRIQUE}')" class="non_form"/></center>
 
 	</form>
 <!-- END cols -->

@@ -5,6 +5,18 @@
 *																																                                *
 **********************************************************************************************-->
 <!-- BEGIN r_search -->	
+	<!-- BEGIN filter_section -->
+	<div style="margin-bottom: 15px; padding: 10px; background-color: #f5f5f5; border-radius: 4px;">
+		<label for="search_filter" style="margin-right: 10px;"><strong>Filtrer par:</strong></label>
+		<select id="search_filter" name="search_filter" onchange="location.href=updateUrlParameter(window.location.href, 'search_filter', this.value);" style="padding: 5px;">
+			<option value="">-- Tous les champs --</option>
+			<!-- BEGIN filter_field -->
+			<option value="{r_search.filter_section.filter_field.VALUE}" {r_search.filter_section.filter_field.SELECTED}>{r_search.filter_section.filter_field.LABEL}</option>
+			<!-- END filter_field -->
+		</select>
+	</div>
+	<!-- END filter_section -->
+
 	<!-- BEGIN header -->
 	<div class="search_title1">
 		<img src="{r_search.header.TABLE_IMAGE}" style="width:20px;vertical-align:middle" alt="" />&nbsp;{r_search.header.TABLE_NAME}
@@ -37,3 +49,17 @@
 	<!-- END no_match -->
 	<!-- END header -->
 <!-- END r_search -->
+
+<script>
+// Fonction pour mettre à jour les paramètres d'URL
+function updateUrlParameter(url, param, value) {
+	// Créer un objet URL si le navigateur le supporte
+	var urlObj = new URL(url, window.location.href);
+	if (value === '') {
+		urlObj.searchParams.delete(param);
+	} else {
+		urlObj.searchParams.set(param, value);
+	}
+	return urlObj.toString();
+}
+</script>

@@ -40,11 +40,17 @@
 	}
 	
 	function goBackAndRefresh() {
-    	// 1. On stocke un flag dans le sessionStorage pour dire à la page de destination de se rafraîchir
     	sessionStorage.setItem('forceRefresh', 'true');
-    
-    	// 2. On retourne 2 pages en arrière
     	window.history.go(-2);
+	}
+	
+	// Fonction pour fermer et retourner à l'accueil avec agence_id et rubrique
+	function closeToHome(agence_id, rubrique) {
+		if (rubrique) {
+			window.location.href = 'index.php?page=accueil.php&agence_id=' + agence_id + '&rubrique=' + rubrique;
+		} else {
+			window.location.href = 'index.php?page=accueil.php&agence_id=' + agence_id;
+		}
 	}
 
 	// Fonction pour retourner à l'accueil avec la bonne rubrique
@@ -89,11 +95,17 @@
         	'adm_utilisateurs.php': 'users',
         	'adm_reseau.php': 'netw',
         	'reservations.php': 'resa',
+        	'user_tasks.php': 'resa',
         	'adm_docs.php': 'docs',
         	'adm_ocs.php': 'ocs'
     	};
     
     	var rubrique = pageToRubrique[page] || '';
+    	
+    	// DEBUG: Vérifier les valeurs
+    	console.log('Page détectée:', page);
+    	console.log('Rubrique mappée:', rubrique);
+    	console.log('AgenceId:', agenceId);
     	
     	var returnUrl = 'index.php?page=accueil.php';
     
@@ -107,6 +119,8 @@
 		if (sscat) {
         	returnUrl += '&sscat=' + sscat;
     	}
+    	
+    	console.log('URL de redirection:', returnUrl);
     
     	window.location.href = returnUrl;
 	}

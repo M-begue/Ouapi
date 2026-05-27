@@ -677,7 +677,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_hard.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -1050,7 +1050,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			}
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_periph.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -1307,7 +1307,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_soft.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -1537,7 +1537,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_users.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -1774,7 +1774,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 					// Bouton de gestion de l'affichage
 					$template->assign_block_vars('r_users.display', array(
-						'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=user',
+						'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=user'.'&amp;agence_id='.$_GET["agence_id"],
 						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 						'TEXT' => $lang["gen_admindisplay"]
 					));
@@ -1995,7 +1995,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 					// Bouton de gestion de l'affichage
 					$template->assign_block_vars('r_pc.display', array(
-						'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=hard',
+						'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=hard'.'&amp;agence_id='.$_GET["agence_id"],
 						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 						'TEXT' => $lang["gen_admindisplay"]
 					));
@@ -2278,7 +2278,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_netw.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -2588,7 +2588,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 				// Bouton de gestion de l'affichage
 				$template->assign_block_vars('r_resa.display', array(
-					'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=hard',
+					'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=hard'.'&amp;agence_id='.$_GET["agence_id"],
 					'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 					'TEXT' => $lang["gen_admindisplay"]
 				));
@@ -2864,7 +2864,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					));
 				}
 				$template->assign_block_vars('r_resa.display', array(
-					'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=periph',
+					'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat=periph'.'&amp;agence_id='.$_GET["agence_id"],
 					'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 					'TEXT' => $lang["gen_admindisplay"]
 				));
@@ -3106,7 +3106,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			}
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_docs.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -4097,7 +4097,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 			// Bouton de gestion de l'affichage
 			$template->assign_block_vars('r_ocs.display', array(
-				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat='.$_GET["sscat"],
+				'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rubrique"].'&amp;subcat='.$_GET["sscat"].'&amp;agence_id='.$_GET["agence_id"],
 				'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/display.gif',
 				'TEXT' => $lang["gen_admindisplay"]
 			));
@@ -4119,9 +4119,22 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 		/*********************************************/
 		elseif ($_GET["rubrique"] == "search")
 		{
+			// Vérifier les keywords : d'abord POST, sinon session
+			$search_keywords = '';
 			if (isset($_POST["keywords"]))
 			{
-				$keywords = $words = preg_split("/[\s,]*\\\"([^\\\"]+)\\\"[\s,]*|" . "[\s,]*'([^']+)'[\s,]*|" . "[\s,]+/",format_text_db($_POST["keywords"]), 0, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+				$search_keywords = $_POST["keywords"];
+				// Stocker en session pour les filtres subsequents
+				$_SESSION["search_keywords"] = $search_keywords;
+			}
+			elseif (isset($_SESSION["search_keywords"]))
+			{
+				$search_keywords = $_SESSION["search_keywords"];
+			}
+
+			if ($search_keywords !== '')
+			{
+				$keywords = $words = preg_split("/[\s,]*\\\"([^\\\"]+)\\\"[\s,]*|" . "[\s,]*'([^']+)'[\s,]*|" . "[\s,]+/",format_text_db($search_keywords), 0, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 
 				// Init des tables de recherche
 				$search_tables = $alias_tables = $main_col = $search_cols = array();
@@ -4133,7 +4146,10 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					array_push($main_col, TAB_HARD.'.'.HA_NAME); // Colonne principale des résultats (Sert pour le titre)
 					array_push($search_cols, array("num_serie" => NULL, "marque_id" => array(TAB_HARD_MARQUE,"libelle"), "modele_id" => array(TAB_HARD_MODELE,"libelle"),
 					  "type_id" => array(TAB_HARD_TYPE,"libelle"), "nom" => NULL, "user_id" => array(TAB_USERS,"nom","prenom"),
-					  "emplacement_id" => array(TAB_EMPL,"libelle"), "ip" => NULL, "suivi_rebus" => NULL, "commentaire" => NULL));
+					  "emplacement_id" => array(TAB_EMPL,"libelle"), "ip" => NULL, "suivi_rebus" => NULL, "commentaire" => NULL,
+					  "cpu_id" => array(TAB_REF_CPU,"libelle"), "ram_type_id" => array(TAB_REF_RAM_TYPE,"libelle"),
+					  "disque_type_id" => array(TAB_REF_DISQUE_TYPE,"libelle"), "ram_capacite" => NULL, "disque_capacite" => NULL,
+					  "os_id" => array(TAB_HARD_OS,"libelle")));
 
 					// Colonnes perso
 					$pfieldColumns = get_table_pfield_columns(TAB_HARD);
@@ -4216,11 +4232,43 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					}
 				}
 
+				// Champs de filtrage communs à tous les équipements
+				$common_filter_fields = array(
+					'nom' => $lang["s_nom"] ?? 'Nom',
+					'type_id' => $lang["s_type"] ?? 'Type',
+					'marque_id' => $lang["s_marque"] ?? 'Marque',
+					'modele_id' => $lang["s_modele"] ?? 'Modèle',
+					'num_serie' => $lang["s_num_serie"] ?? 'N° de série',
+					'emplacement_id' => $lang["s_lieu"] ?? 'Lieu',
+					'commentaire' => $lang["s_commentaire"] ?? 'Commentaire',
+					'cpu_id' => $lang["s_cpu"] ?? 'CPU',
+					'ram_type_id' => $lang["s_ram_type"] ?? 'Type de RAM',
+					'disque_type_id' => $lang["s_disque_type"] ?? 'Type de disque',
+					'ram_capacite' => $lang["s_ram_capacite"] ?? 'Capacité RAM',
+					'disque_capacite' => $lang["s_disque_capacite"] ?? 'Capacité disque',
+					'os_id' => $lang["s_os"] ?? 'Système d\'exploitation',
+					'pfield_garantie' => 'Garantie',
+					'pfield_utilisateurprinc' => 'Utilisateur principal'
+				);
+
 				$template->assign_block_vars('r_search', array(
 					'AGENCE_ID' => intval($_GET["agence_id"]),
 					'LANG_SEARCH' => $lang["gen_search"],
-					'KEYWORDS' => htmlspecialchars($_POST["keywords"])
+					'KEYWORDS' => htmlspecialchars($search_keywords)
 				));
+
+				// Affichage du filtre par champ
+				$template->assign_block_vars('r_search.filter_section', array());
+				
+				$filter_field = $_GET["search_filter"] ?? '';
+				foreach ($common_filter_fields as $field_key => $field_label) {
+					$selected = ($filter_field === $field_key) ? 'selected' : '';
+					$template->assign_block_vars('r_search.filter_section.filter_field', array(
+						'VALUE' => $field_key,
+						'LABEL' => $field_label,
+						'SELECTED' => $selected
+					));
+				}
 
 				$i = 0;
 				while ($i < count($search_tables))
@@ -4252,13 +4300,21 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 							else
 							{
 								$sel = str_replace("{Table}",$col_value[0].".",str_replace($col_value[0].',',"",implode(",{Table}",$col_value)));
+							
+								// Créer des alias explicites pour éviter les collisions
+								$alias_parts = array();
+								for ($k = 1; $k < count($col_value); $k++) {
+									$alias_name = $col_value[0].'_'.$col_value[$k];
+									$alias_parts[] = $col_value[0].".".$col_value[$k]." AS ".$alias_name;
+								}
+								$sel_with_alias = implode(", ", $alias_parts);
 
-								$select_clause .= $sel.", ";
+								$select_clause .= $sel_with_alias.", ";
 								$join_clause .= " LEFT JOIN ".$col_value[0]." ON ".$search_tables[$i].".".$key."=".$col_value[0].".id";
 
 								foreach ($keywords as $num => $word) {
 									for ($k = 1; $k < count($col_value); $k++) {
-                    					$where_clause .= " OR ".$col_value[0].".".$col_value[$k]." LIKE '%".addslashes($word)."%'";
+										$where_clause .= " OR ".$col_value[0].".".$col_value[$k]." LIKE '%".addslashes($word)."%'";
 									}
 								}
 							}
@@ -4274,6 +4330,59 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 						if (count($tab) > 0)
 						{
+							// Appliquer le filtrage par champ si un filtre est sélectionné
+							$search_filter = $_GET["search_filter"] ?? '';
+							$filtered_tab = array();
+							
+							if ($search_filter !== '')
+							{
+								// Mapper les champs de filtrage pour accéder aux données correctes
+								$filter_mapping = array(
+									'nom' => array('hard'=>'1.nom', 'periph'=>'1.nom', 'soft'=>'1.name', 'docs'=>'1.reference', 'netw'=>'1.plug_number', 'users'=>'1.nom'),
+									'type_id' => array('hard'=>'1.ouapi_ha_type_libelle', 'periph'=>'1.ouapi_pe_type_libelle'),
+									'marque_id' => array('hard'=>'1.ouapi_ha_marque_libelle', 'periph'=>'1.ouapi_pe_marque_libelle', 'soft'=>'1.ouapi_so_marque_libelle'),
+									'modele_id' => array('hard'=>'1.ouapi_ha_modele_libelle', 'periph'=>'1.ouapi_pe_modele_libelle'),
+									'num_serie' => array('hard'=>'1.num_serie', 'periph'=>'1.num_serie'),
+									'os_id' => array('hard'=>'1.ouapi_ha_os_libelle'),
+									'emplacement_id' => array('hard'=>'1.ouapi_emplacement_libelle'),
+									'commentaire' => array('hard'=>'1.commentaire', 'periph'=>'1.commentaire', 'soft'=>'1.commentaire', 'docs'=>'1.commentaire'),
+									'pfield_garantie' => array('hard'=>'1.pfield_garantie', 'periph'=>'1.pfield_garantie'),
+									'pfield_utilisateurprinc' => array('hard'=>'1.pfield_utilisateurprinc', 'periph'=>'1.pfield_utilisateurprinc', 'users'=>'1.pfield_utilisateurprinc'),
+									'cpu_id' => array('hard'=>'1.ouapi_ref_cpu_libelle'),
+									'ram_type_id' => array('hard'=>'1.ouapi_ref_ram_type_libelle'),
+									'disque_type_id' => array('hard'=>'1.ouapi_ref_disque_type_libelle'),
+									'ram_capacite' => array('hard'=>'1.ram_capacite'),
+									'disque_capacite' => array('hard'=>'1.disque_capacite'),								
+								);
+								
+								$filter_key = $filter_mapping[$search_filter][$alias_tables[$i]] ?? null;
+								
+								if ($filter_key !== null)
+								{
+
+									$search_word = $_GET["word"] ?? (reset($keywords) ?: '');
+
+									foreach ($tab as $row)
+									{
+										
+										if (isset($row[$filter_key]) && $row[$filter_key] != '') {
+											if ($search_word !== '') {
+                        						if (stripos($row[$filter_key], $search_word) !== false) {
+                            						$filtered_tab[] = $row;
+                       							}
+                    						} else {
+                        						// S'il n'y a pas de mot-clé précis, on garde la ligne du moment que le champ n'est pas vide
+                        						$filtered_tab[] = $row;
+                    						}
+										}
+									}
+									$tab = $filtered_tab;
+								}
+								else {
+									$tab = array(); // Si le filtre ne correspond à aucune colonne, ne rien afficher
+								}
+							}
+
 							$j = 0;
 							while($j < count($tab))
 							{
@@ -4289,15 +4398,46 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 											$val = ext_str_ireplace($word,'<font color=#00b300><b>$1</b></font>',$val);
 										}
 
-
+										// Créer un label lisible à partir du nom du champ
+										$label = null;
+										
+										// D'abord, chercher si c'est un label connu dans les traductions
 										if (isset($lang["s_".$key])) {
-											$label = $lang["s_".$cleanKey] ?? $cleanKey;
-											$text .= '<font color=#999>'.$lang["s_".$key].':&nbsp;'.'</font>';
+											$label = $lang["s_".$key];
+										} elseif (isset($lang["s_".$cleanKey])) {
+											$label = $lang["s_".$cleanKey];
+										} else {
+											if (preg_match('/^ouapi_/', $cleanKey)) {
+												$field_name = $cleanKey;
+												// Enlever "ouapi_" du début
+												$field_name = preg_replace('/^ouapi_/', '', $field_name);
+												// Enlever un code de 2 lettres suivi d'un underscore (ha_, pe_, so_, etc)
+												$field_name = preg_replace('/^[a-z]{2}_/', '', $field_name);
+												// Enlever "_libelle" de la fin
+												$field_name = preg_replace('/_libelle$/', '', $field_name);
+												
+												// Essayer d'abord dans les traductions
+												$label = $lang["s_".$field_name."_id"] ?? $lang["s_".$field_name] ?? null;
+												// Si pas trouvé, formater le nom du champ
+												if (!$label) {
+													$label = ucwords(str_replace('_', ' ', $field_name));
+												}
+											}
+											// Gérer les champs perso 
+											elseif (preg_match('/^pfield_(.+)$/', $cleanKey, $matches)) {
+												$field_name = $matches[1];
+												// Convertir snake_case à Title Case
+												$label = ucwords(str_replace('_', ' ', $field_name));
+											}
 										}
-										else {
-											$text .= '<font color=#999>'.$key.':&nbsp;'.'</font>';
-											$text .= $val.', ';
+										
+										// Si toujours pas de label, créer un nom lisible à partir du cleanKey
+										if (!$label) {
+											$label = ucwords(str_replace('_', ' ', $cleanKey));
 										}
+										
+										$text .= '<font color=#999>'.$label.':&nbsp;'.'</font>';
+										$text .= $val.', ';
 									}
 								}
 
@@ -4306,8 +4446,14 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 								$row_agence_id = $row[$search_tables[$i].".agence_id"] ?? $row["1.agence_id"] ?? $row["agence_id"] ?? 0;
 								$row_agence_libelle = $row["agence_libelle"] ?? $row["1.agence_libelle"] ?? $row["agence_libelle"] ?? '';
 
+								// Extraire le nom de la colonne principale du titre
+								$title_value = '';
+								$main_col_name = substr(strrchr($main_col[$i], '.'), 1) ?: $main_col[$i];
+								// Essayer d'abord la clé qualifiée, puis avec le préfixe "1."
+								$title_value = $tab[$j][$main_col[$i]] ?? $tab[$j]["1.".$main_col_name] ?? $tab[$j][$main_col_name] ?? '';
+
 								$template->assign_block_vars('r_search.header.list', array(
-								  'TITLE' => $tab[$j][$main_col[$i]] ?? '',
+								  'TITLE' => $title_value,
 								  'TEXT' => substr($text,0,-2),
 								));
 
@@ -4375,7 +4521,11 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 			}
 			else
-				header('location:'.$_SESSION["page_defaut"]);
+			{
+				// Redirection JavaScript car le template a déjà rendu du contenu
+				echo '<script type="text/javascript">window.location.href = "'.$_SESSION["page_defaut"].'";</script>';
+				exit();
+			}
 		}
 	}
 	/***********************************/
@@ -5129,6 +5279,52 @@ elseif ($_GET["rubrique"] == "admin")
 		{
 			$template->assign_block_vars('r_admin.pfield.del.nolist', array(
 				'TEXT' => $lang["admin_delfield_nolist"],
+			));
+
+		}
+
+		// EDITION
+		$tables = array(TAB_HARD,TAB_PERIPH,TAB_SOFT,TAB_DOCS,TAB_USERS,TAB_RESEAU);
+
+		$template->assign_block_vars('r_admin.pfield.edit', array(
+			'TITLE' => $lang["admin_editfield_title"],
+			'L_NAME' => $lang["admin_editfield_fieldname"],
+			'L_TABLE' => $lang["admin_editfield_table"],
+			'L_TOOLS' => $lang["tools"],
+		));
+
+		$i = 0;
+		$nb_champs = 0;
+
+		while ($i < count($tables))
+		{
+			$pfieldColumns = get_table_pfield_columns($tables[$i]);
+
+			foreach ($pfieldColumns as $fieldName) {
+				if (isset($lang["s_".$tables[$i].".".$fieldName])) {
+            		$displayTitle = $lang["s_".$tables[$i].".".$fieldName];
+        		} 
+        		else {
+            		$cleanName = str_replace('pfield_', '', $fieldName);
+            		$cleanName = str_replace('_', ' ', $cleanName);
+            		$displayTitle = ucfirst($cleanName);
+        		}
+				$template->assign_block_vars('r_admin.pfield.edit.list', array(
+				  'TITLE' => $displayTitle,
+				  'TABLE' => $lang["s_".$tables[$i]],
+				  'LINK' => 'index.php?page=adm_gen.php&amp;action=editer&amp;fieldname='.$fieldName.'&amp;table='.$tables[$i],
+				  'ICON' => 'templates/'.DEFAULT_TEMPLATE.'/images/edit.gif',
+				));
+				$nb_champs++;
+			}
+
+			$i++;
+		}
+
+		if ($nb_champs == 0)
+		{
+			$template->assign_block_vars('r_admin.pfield.edit.nolist', array(
+				'TEXT' => $lang["admin_editfield_nolist"],
 			));
 
 		}

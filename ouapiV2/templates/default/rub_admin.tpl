@@ -305,7 +305,31 @@
 				<!-- END nolist -->
 				</table>
 			</div>
-			<!-- END del -->			
+			<!-- END del -->
+			<!-- BEGIN edit -->
+			<div class="rightinmain">
+				<div class="cat_title2">{r_admin.pfield.edit.TITLE}</div>
+				<table class="table">
+				<tr>
+					<td class="titre3">{r_admin.pfield.edit.L_NAME}</td>
+					<td class="titre3">{r_admin.pfield.edit.L_TABLE}</td>
+					<td class="titre3">{r_admin.pfield.edit.L_TOOLS}</td>
+				</tr>
+				<!-- BEGIN list -->
+					<tr>
+						<td class="row1">{r_admin.pfield.edit.list.TITLE}</td>
+						<td class="row1">{r_admin.pfield.edit.list.TABLE}</td>
+						<td class="row1"><a href="{r_admin.pfield.edit.list.LINK}"><img src="{r_admin.pfield.edit.list.ICON}" alt="" /></a></td>
+					</tr>
+				<!-- END list -->	
+				<!-- BEGIN nolist -->
+					<tr>
+						<td class="no_record" colspan="3">{r_admin.pfield.edit.nolist.TEXT}</td>
+					</tr>
+				<!-- END nolist -->
+				</table>
+			</div>
+			<!-- END edit -->			
 		<!-- END pfield -->
 		
 		<!-- BEGIN param_gen -->

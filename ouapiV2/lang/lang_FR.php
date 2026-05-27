@@ -484,6 +484,13 @@ $lang["admin_delfield_fieldname"] = 'Nom du champ';
 $lang["admin_delfield_table"] = 'Table contenant le champ';
 $lang["admin_delfield_nolist"] = 'Aucun champ personnalisé défini.';
 
+$lang["admin_editfield_title"] = 'Éditer un champ personnalisé';
+$lang["admin_editfield_fieldname"] = 'Nom du champ';
+$lang["admin_editfield_table"] = 'Table';
+$lang["admin_editfield_fieldtype"] = 'Type de champ';
+$lang["admin_editfield_fieldlabel"] = 'Libellé du champ';
+$lang["admin_editfield_nolist"] = 'Aucun champ personnalisé défini.';
+
 $lang["admin_plugin_title"] = 'Gestion des plugins';
 $lang["admin_config_plugin"] = 'Configuration générale';
 $lang["admin_plugin_plgname"] = 'Nom et description';
@@ -842,6 +849,7 @@ $lang["adm_gen_config_title"] = 'Configuration générale';
 $lang["adm_gen_param_majok"] = 'La mise à jour a bien été effectuée.';
 $lang["adm_gen_addfieldok"] = 'Le champ a été correctement ajouté.';
 $lang["adm_gen_delfieldok"] = 'Le champ a été correctement supprimé.';
+$lang["adm_gen_editfieldok"] = 'Le champ a été correctement modifié.';
 $lang["adm_gen_errorempty"] = 'Le champ ajouté doit porter un nom valide.';
 $lang["adm_gen_param_majwarn"] = 'La mise à jour a bien été effectuée mais a retourné l(es) erreur(s) suivante(s):';
 $lang["adm_gen_default_userparam_title"] = 'Paramètres utilisateurs par défaut';

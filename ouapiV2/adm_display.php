@@ -344,6 +344,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 	$template->assign_vars( array(
 	  'TITLE' => $lang["adm_display_title"],
 	  'BUTTON' => $lang["adm_display_buttonsave"],
+	  'AGENCE_ID' => isset($_GET['agence_id']) ? $_GET['agence_id'] : '',
+	  'RUBRIQUE' => $_GET['rub'],
 	));
 
 	// On cherche le nombre de r�sultats (sous categories)

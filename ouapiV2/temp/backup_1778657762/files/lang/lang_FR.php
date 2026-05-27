@@ -479,7 +479,7 @@ $lang["admin_addfield_table"] = 'Table';
 $lang["admin_addfield_fieldname"] = 'Nom du champ';
 $lang["admin_addfield_fieldtype"] = 'Type de champ';
 
-$lang["admin_delfield_title"] = 'Supprimer un champ personnalisé';
+$lang["admin_delfield_title"] = 'Supprimer ou éditer un champ personnalisé';
 $lang["admin_delfield_fieldname"] = 'Nom du champ';
 $lang["admin_delfield_table"] = 'Table contenant le champ';
 $lang["admin_delfield_nolist"] = 'Aucun champ personnalisé défini.';

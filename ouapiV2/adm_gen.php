@@ -421,6 +421,141 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'delfield')
 
 	
 }
+/***************************************************/
+/*		   Éditer un champ personnalisé            */
+/***************************************************/
+elseif (isset($_GET['action']) && $_GET['action'] == 'editer' && isset($_POST['soumettre']))
+{
+	$table = $_GET["table"];
+	$fieldname = $_GET["fieldname"];
+	$newfieldlabel = format_string_db($_POST["fieldlabel"]);
+	$newfieldtype = trim($_POST["fieldtype"] ?? '');
+	
+	$error = '';
+
+	if (trim($newfieldlabel) != '')
+	{
+		// Récupérer le type actuel du champ
+		$requete = "SHOW COLUMNS FROM ".$table." LIKE '".$fieldname."'";
+		$tab_columns = $req1->db_use_query($requete);
+		$currentfieldtype = '';
+		if (count($tab_columns) > 0)
+		{
+			$currentfieldtype = $tab_columns[0]['Type'];
+		}
+		
+		// Si le type a changé, mettre à jour la structure de la table
+		if ($newfieldtype && $newfieldtype !== $currentfieldtype)
+		{
+			$requete = "ALTER TABLE ".$table." MODIFY COLUMN ".$fieldname." ".$newfieldtype."";
+			$tab_alter = $req1->db_use_query($requete);
+			
+			if ($req1->connection->error)
+			{
+				if (isset($lang["error_mysql_cnx_".$req1->connection->errno]))
+					$error .= $lang["error_mysql_cnx_".$req1->connection->errno];
+				else
+					$error .= $req1->connection->error;
+			}
+		}
+		
+		// Mettre à jour le label/description du champ dans la configuration
+		if ($error == '')
+		{
+			$requete = "UPDATE ".TAB_CONFIG." SET valeur='".$newfieldlabel."' WHERE libelle='".$table.".".$fieldname."'";
+			$tab_update = $req1->db_use_query($requete);
+			
+			//Traitement des erreurs
+			if ($req1->connection->error)
+			{
+				if (isset($lang["error_mysql_cnx_".$req1->connection->errno]))
+					$error .= $lang["error_mysql_cnx_".$req1->connection->errno];
+				else
+					$error .= $req1->connection->error;
+			}
+		}
+		
+		if ($error == '')
+		{
+			$template->assign_block_vars('form_post', array(
+				'OK' => $lang["adm_gen_editfieldok"], 					
+				'CLOSE' => $lang["close"],	
+				'ID' => 'mess_retour'
+			));	
+		}
+		else
+		{
+			$template->assign_block_vars('form_post', array(
+				'OK' => $lang["error_mysql_cnx_title"].'<br/>'.$error, 					
+				'CLOSE' => $lang["close"],	
+				'ID' => 'alert'
+			));
+		}
+	}
+	else
+	{
+		$template->assign_block_vars('form_post', array(
+			'OK' => $lang["adm_gen_editfield_error_empty"] ?? $lang["adm_gen_errorempty"], 					
+			'CLOSE' => $lang["close"],	
+			'ID' => 'alert'
+		));
+	}
+}
+elseif (isset($_GET['action']) && $_GET['action'] == 'editer')
+{
+    // Affichage du formulaire d'édition
+    $table = $_GET["table"];
+    $fieldname = $_GET["fieldname"];
+    
+    // Récupérer les informations du champ depuis la configuration
+    $requete = "SELECT * FROM ".TAB_CONFIG." WHERE libelle='".$table.".".$fieldname."'";
+    $tab_config = $req1->db_use_query($requete);
+    
+    $fieldlabel = '';
+    if (count($tab_config) > 0)
+    {
+        $fieldlabel = $tab_config[0][CO_VALUE];
+    }
+    
+    $requete = "SELECT DATA_TYPE, COLUMN_TYPE 
+                FROM INFORMATION_SCHEMA.COLUMNS 
+                WHERE TABLE_NAME = '".$table."' 
+                AND COLUMN_NAME = '".$fieldname."'";
+    $tab_columns = $req1->db_use_query($requete);
+    
+    $fieldtype = '';
+    if (count($tab_columns) > 0)
+    {
+        // On récupère le type complet (ex: varchar(255) ou int(11))
+        // On force la conversion des clés en minuscules pour parer au comportement de db_use_query
+        $row = array_change_key_case($tab_columns[0], CASE_LOWER);
+        $fieldtype = $row['column_type'] ?? $row['data_type'] ?? '';
+    }
+    
+    $fieldtype_lower = strtolower($fieldtype);
+    
+    $is_varchar = (stripos($fieldtype_lower, 'varchar') !== false) ? 'selected="selected"' : '';
+    $is_int     = (stripos($fieldtype_lower, 'int') !== false)     ? 'selected="selected"' : '';
+    $is_float   = (stripos($fieldtype_lower, 'float') !== false || stripos($fieldtype_lower, 'decimal') !== false) ? 'selected="selected"' : '';
+    
+    // Afficher le formulaire d'édition
+    $template->assign_block_vars('form', array(
+        'L_TITLE' => $lang["admin_editfield_title"],
+        'ACTION' => 'index.php?page=adm_gen.php&amp;action=editer&amp;table='.$table.'&amp;fieldname='.$fieldname,
+        'FIELDNAME_TITLE' => $lang["admin_editfield_fieldname"],
+        'FIELDNAME_VALUE' => $fieldname,
+        'TABLE_TITLE' => $lang["admin_editfield_table"],
+        'TABLE_VALUE' => $lang["s_".$table] ?? $table,
+        'FIELDTYPE_TITLE' => $lang["admin_editfield_fieldtype"],
+        'FIELDTYPE_VALUE' => $fieldtype,
+        'FIELDTYPE_VALUE_VARCHAR' => $is_varchar,
+        'FIELDTYPE_VALUE_INT' => $is_int,
+        'FIELDTYPE_VALUE_FLOAT' => $is_float,
+        'FIELDLABEL_TITLE' => $lang["admin_editfield_fieldlabel"] ?? $lang["admin_addfield_title"],
+        'FIELDLABEL_VALUE' => $fieldlabel,
+        'BUTTON_TITLE' => $lang["gen_send"],
+    ));
+}
 
 echo $affichage;
 

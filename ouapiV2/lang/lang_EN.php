@@ -481,6 +481,13 @@ $lang["admin_delfield_fieldname"] = 'Name';
 $lang["admin_delfield_table"] = 'Table containing the field';
 $lang["admin_delfield_nolist"] = 'No defined custom field.';
 
+$lang["admin_editfield_title"] = 'Edit custom field';
+$lang["admin_editfield_fieldname"] = 'Name';
+$lang["admin_editfield_table"] = 'Table';
+$lang["admin_editfield_fieldtype"] = 'Type of field';
+$lang["admin_editfield_fieldlabel"] = 'Field label';
+$lang["admin_editfield_nolist"] = 'No defined custom field.';
+
 $lang["admin_plugin_title"] = 'Manage plugins';
 $lang["admin_config_plugin"] = 'Settings';
 $lang["admin_plugin_plgname"] = 'Name and description';
@@ -839,6 +846,7 @@ $lang["adm_gen_config_title"] = 'General settings';
 $lang["adm_gen_param_majok"] = 'Update done.';
 $lang["adm_gen_addfieldok"] = 'The field has been added.';
 $lang["adm_gen_delfieldok"] = 'The field has been deleted.';
+$lang["adm_gen_editfieldok"] = 'The field has been modified.';
 $lang["adm_gen_errorempty"] = 'A valid name is needed for the field.';
 $lang["adm_gen_param_majwarn"] = 'Update done with the following error(s):';
 $lang["adm_gen_default_userparam_title"] = 'Default user settings';

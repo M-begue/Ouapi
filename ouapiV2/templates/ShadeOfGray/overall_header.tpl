@@ -52,17 +52,26 @@
     	// 2. On retourne 2 pages en arrière
     	window.history.go(-2);
 	}
+	
+	// Fonction pour fermer et retourner à l'accueil avec agence_id et rubrique
+	function closeToHome(agence_id, rubrique) {
+		if (rubrique) {
+			window.location.href = 'index.php?page=accueil.php&agence_id=' + agence_id + '&rubrique=' + rubrique;
+		} else {
+			window.location.href = 'index.php?page=accueil.php&agence_id=' + agence_id;
+		}
+	}
 
 	// Fonction pour retourner à l'accueil avec la bonne rubrique
 	function goToHomeWithRubrique() {
     	var url = window.location.href;
     
-    	// 1. Récupérer la page actuelle
+    	// Récupérer la page actuelle
  		var pageMatcher = /[?&]page=([^&]*)/;
     	var match = url.match(pageMatcher);
     	var page = match ? match[1] : '';
     
-    	// 2. Récupérer agence_id depuis l'URL
+    	// Récupérer agence_id depuis l'URL
     	var agenceMatcher = /[?&]agence_id=([^&]*)/;
     	var matchAgence = url.match(agenceMatcher);
     	var agenceId = matchAgence ? matchAgence[1] : '';
@@ -82,6 +91,10 @@
             	agenceId = inputAgence.value;
         	}
     	}
+
+		var sscatMatcher = /[?&]sscat=([^&]*)/;
+    	var matchSscat = url.match(sscatMatcher);
+    	var sscat = matchSscat ? matchSscat[1] : '';
     
     	// Mapping des pages vers les rubriques
     	var pageToRubrique = {
@@ -91,11 +104,17 @@
         	'adm_utilisateurs.php': 'users',
         	'adm_reseau.php': 'netw',
         	'reservations.php': 'resa',
+        	'user_tasks.php': 'resa',
         	'adm_docs.php': 'docs',
         	'adm_ocs.php': 'ocs'
     	};
     
     	var rubrique = pageToRubrique[page] || '';
+    	
+    	// DEBUG: Vérifier les valeurs
+    	console.log('Page détectée:', page);
+    	console.log('Rubrique mappée:', rubrique);
+    	console.log('AgenceId:', agenceId);
     	
     	var returnUrl = 'index.php?page=accueil.php';
     
@@ -105,6 +124,12 @@
     	if (rubrique) {
         	returnUrl += '&rubrique=' + rubrique;
     	}
+
+		if (sscat) {
+        	returnUrl += '&sscat=' + sscat;
+    	}
+    	
+    	console.log('URL de redirection:', returnUrl);
     
     	window.location.href = returnUrl;
 	}
