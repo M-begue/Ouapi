@@ -227,8 +227,8 @@ if (isset($_POST['action'])) {
 				// Limiter le nombre de sauvegardes à 10
 				cleanOldBackups($backup_dir, $backup_prefix, 10);
 				
-				// Rediriger avec le paramètre de succès
-				header("Location: index.php?page=adm_backup.php&created=1");
+				// Rediriger avec le paramètre de succès (utiliser JavaScript pour éviter l'erreur headers_sent)
+				echo '<script>window.location.href = "index.php?page=adm_backup.php&created=1";</script>';
 				exit();
 			} else {
 				throw new Exception($lang["backup_zip_error"] ?? 'Erreur lors de la création de l\'archive ZIP');
