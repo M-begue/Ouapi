@@ -44,24 +44,35 @@
 	
 	<!-- BEGIN tab_netw -->
 	<table class="table">	
-	<tr>
-		<!-- BEGIN cols -->
-			<td class="titre3"><a href="{r_netw.tab_netw.cols.PAGE_TRI}">{r_netw.tab_netw.cols.TITLE}</a></td>				
-		<!-- END cols -->		
-		<td class="titre3">{r_netw.tab_netw.LANG_TOOLS}</td>
-	</tr>
-		<!-- BEGIN list -->
-		<tr class="{r_netw.tab_netw.list.CLASS_ROW}" id="{r_netw.tab_netw.list.ANCHOR}">
+	<!-- BEGIN group -->
+		<!-- BEGIN head -->
+		<tr>
+			<td colspan="{r_netw.tab_netw.NBCOLS}" class="titre2">{r_netw.tab_netw.group.head.TITLE}</td>
+		</tr>	
+		<!-- END head -->
+		
+		<!-- BEGIN head2 -->
+		<tr>
 			<!-- BEGIN cols -->
-				<td  class="row1">{r_netw.tab_netw.list.cols.TITLE}</td>				
+				<td class="titre3"><a href="{r_netw.tab_netw.group.head2.cols.PAGE_TRI}">{r_netw.tab_netw.group.head2.cols.TITLE}</a></td>				
+			<!-- END cols -->		
+			<td class="titre3">{r_netw.tab_netw.group.LANG_TOOLS}</td>
+		</tr>
+		<!-- END head2 -->
+		
+		<!-- BEGIN list -->
+		<tr class="{r_netw.tab_netw.group.list.CLASS_ROW}" id="{r_netw.tab_netw.group.list.ANCHOR}">
+			<!-- BEGIN cols -->
+				<td  class="row1">{r_netw.tab_netw.group.list.cols.TITLE}</td>				
 			<!-- END cols -->								
 			<td class="row1">
 			<!-- BEGIN tools --> 
-						<a href="{r_netw.tab_netw.list.tools.LINK}"><img src="{r_netw.tab_netw.list.tools.IMAGE}" border="0" title="{r_netw.tab_netw.list.tools.TITLE}" alt="" /></a>
+						<a href="{r_netw.tab_netw.group.list.tools.LINK}"><img src="{r_netw.tab_netw.group.list.tools.IMAGE}" border="0" title="{r_netw.tab_netw.group.list.tools.TITLE}" alt="" /></a>
 			<!-- END tools --> 
 			</td>
 		</tr>
 		<!-- END list -->
+	<!-- END group -->
 	</table>
 	<!-- END tab_netw -->
 

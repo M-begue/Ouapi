@@ -58,6 +58,10 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 		$requete = "SELECT * FROM ".TAB_USERS_PS." WHERE user_id='0' AND category='".$_GET["rubrique"]."'";
 		$tab_subcats = $req1->db_use_query($requete);
 
+		// Initialisation par défaut
+		$cols_display = array();
+		$cols_groupcol = '';
+		$cols_sortcol = '';
 
 		// 1 seul résultat = pas de sous catégorie
 		if (count($tab_subcats) == 1)
@@ -85,7 +89,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 
 		}
 		// Plusieurs résultats = sous catégories
-		else
+		else if (count($tab_subcats) > 1)
 		{
 			$i = 0;
 			while($i < count($tab_subcats))
@@ -2037,6 +2041,16 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			// Init de la rubrique
 			$template->assign_block_vars('r_netw', array());
 
+			// Gérer le cas où $cols_display est un array associatif (sous-catégories)
+			if (is_array($cols_display) && count($cols_display) > 0 && !isset($cols_display[0])) {
+				// C'est un array associatif, on prend la première sous-catégorie
+				$first_key = array_key_first($cols_display);
+				$cols_display = $cols_display[$first_key];
+				if (is_array($cols_groupcol)) {
+					$cols_groupcol = $cols_groupcol[$first_key];
+				}
+			}
+
 			if (PARAM_HELP == 1)
 			{
 				$template->assign_block_vars('r_netw.help', array(
@@ -2125,12 +2139,24 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				}
 				$i++;
 			}
-
+			
 			if (strpos($cols_groupcol, 'alias_switchname.nom') !== false) {
     			$cols_groupcol = str_replace('alias_switchname.nom', 'switch_name', $cols_groupcol);
 			}
+			if (strpos($cols_groupcol, 'ouapi_emplacement.libelle') !== false) {
+    			$cols_groupcol = str_replace('ouapi_emplacement.libelle', 'location_name', $cols_groupcol);
+			}
+			if (strpos($cols_groupcol, 'ouapi_hardware.nom') !== false) {
+    			$cols_groupcol = str_replace('ouapi_hardware.nom', 'hardware_name', $cols_groupcol);
+			}
 			if (strpos($tri, 'alias_switchname.nom') !== false) {
     			$tri = str_replace('alias_switchname.nom', 'switch_name', $tri);
+			}
+			if (strpos($tri, 'ouapi_emplacement.libelle') !== false) {
+    			$tri = str_replace('ouapi_emplacement.libelle', 'location_name', $tri);
+			}
+			if (strpos($tri, 'ouapi_hardware.nom') !== false) {
+    			$tri = str_replace('ouapi_hardware.nom', 'hardware_name', $tri);
 			}
 
 			(trim($cols_groupcol) != '') ? ($sql_groupcol = $cols_groupcol.',') : ($sql_groupcol = '');
@@ -2175,46 +2201,132 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				// Init du tableau de données
 				$export_data = array();
 
+				// Fonction de mapping pour convertir les noms de colonnes en base aux clés réelles
+				$map_col_name = function($col_brute) {
+					$col_nettoyee = substr(strrchr($col_brute, "."), 1) ?: $col_brute;
+					$col_nettoyee = trim($col_nettoyee);
+					
+					// Mapping des colonnes avec alias
+					$mapping = array(
+						'nom' => function($col_brute) {
+							if (strpos($col_brute, 'alias_switchname') !== false) {
+								return 'switch_name';
+							} else {
+								return 'hardware_name';
+							}
+						},
+						'libelle' => 'location_name',
+						'POE_materiel' => 'POE_materiel',
+						'Brancher_POE_materiel' => 'Brancher_POE_materiel',
+						'POE_reseau' => 'POE_reseau',
+						'Brancher_POE_reseau' => 'Brancher_POE_reseau',
+						'type_reseau_materiel_id' => 'type_reseau_materiel_libelle',
+						'type_reseau_equipement_id' => 'type_reseau_equipement_libelle',
+					);
+					
+					// Si on a un mapping, l'utiliser
+					if (isset($mapping[$col_nettoyee])) {
+						if (is_callable($mapping[$col_nettoyee])) {
+							return $mapping[$col_nettoyee]($col_brute);
+						}
+						return $mapping[$col_nettoyee];
+					}
+					
+					// Sinon, utiliser le nom nettoyé
+					return $col_nettoyee;
+				};
+
 				$template->assign_block_vars('r_netw.tab_netw', array(
 					'PAGE_TRI' => $page_tri,
 					'NBCOLS' => count($cols_display)+1,
 					'LANG_TOOLS' => $lang["tools"],
 				));
 
-				/********* EN TETES **********/
-				$j = 0;
-				while ($j < count($cols_display))
-				{
-					// 1. Chercher d'abord dans les langues
-					if (isset($lang["s_".$cols_display[$j]])) {
-						$display_col_name = $lang["s_".$cols_display[$j]];
-					}
-					// 2. Sinon, on nettoie le nom brut après le point
-					else {
-						$display_col_name = substr(strrchr($cols_display[$j], "."), 1) ?: $cols_display[$j];
-						// Remplace underscores par espaces et capitalize
-						$display_col_name = str_replace('_', ' ', $display_col_name);
-						$display_col_name = ucfirst($display_col_name);
-					}
-
-					$export_data[0][$j+1] = $display_col_name;
-
-					$template->assign_block_vars('r_netw.tab_netw.cols', array(
-						'PAGE_TRI' => $page_tri.'&amp;tri='.$cols_display[$j],
-						'TITLE' => $export_data[0][$j+1],
-					));
-
-					$j++;
-				}
-
 				while ($k < count($tab_prises))
 				{
+					// 1. On prépare la clé de comparaison (nettoyée)
+					$group_key_raw = substr(strrchr($cols_groupcol, "."), 1) ?: $cols_groupcol;
+					$group_key_raw = str_replace('1.', '', $group_key_raw);
+
+					// 2. On détermine la valeur actuelle et la valeur précédente pour détecter le changement
+					$valeur_actuelle = $tab_prises[$k][$group_key_raw] ?? '';
+					$valeur_precedente = ($k > 0) ? ($tab_prises[$k-1][$group_key_raw] ?? '') : null;
+
+					// 3. Si c'est le premier passage ou si la valeur a changé, on affiche l'en-tête de groupe
+					if ($k == 0 || (trim($cols_groupcol) != '' && $valeur_actuelle != $valeur_precedente))
+					{
+						$template->assign_block_vars('r_netw.tab_netw.group', array(
+							'LANG_TOOLS' => $lang["tools"]
+						));
+
+						if (trim($cols_groupcol) != '')
+						{
+							// On cherche le mot clé dans la colonne de groupage pour choisir le bon libellé
+							if (strpos($cols_groupcol, 'switch_name') !== false) {
+								$display_title = txt_to_na($tab_prises[$k]['switch_name'] ?? '');
+							} elseif (strpos($cols_groupcol, 'hardware_name') !== false) {
+								$display_title = txt_to_na($tab_prises[$k]['hardware_name'] ?? '');
+							} elseif (strpos($cols_groupcol, 'location_name') !== false || strpos($cols_groupcol, 'emplacement') !== false) {
+								$display_title = txt_to_na($tab_prises[$k]['location_name'] ?? '');
+							} elseif (strpos($cols_groupcol, 'type_reseau') !== false) {
+								if (strpos($cols_groupcol, 'materiel') !== false) {
+									$display_title = txt_to_na($tab_prises[$k]['type_reseau_materiel_libelle'] ?? '');
+								} else {
+									$display_title = txt_to_na($tab_prises[$k]['type_reseau_equipement_libelle'] ?? '');
+								}
+							} else {
+								// Pour les autres champs
+								$group_key_clean = substr(strrchr($cols_groupcol, "."), 1) ?: $cols_groupcol;
+								$group_key_clean = str_replace('1.', '', $group_key_clean);
+								$display_title = txt_to_na($tab_prises[$k][$group_key_clean] ?? '');
+							}
+
+							$template->assign_block_vars('r_netw.tab_netw.group.head', array(
+								'TITLE' => $display_title,
+							));
+						}
+
+						// Ajouter les en-têtes des colonnes après le groupement par colonne
+						$template->assign_block_vars('r_netw.tab_netw.group.head2', array());
+						
+						$j = 0;
+						while ($j < count($cols_display))
+						{
+							$col_brute = $cols_display[$j];
+							$col_mapped = $map_col_name($col_brute);
+							
+							// 1. Chercher d'abord dans les langues avec le nom mappé
+							if (isset($lang["s_".$col_mapped])) {
+								$display_col_name = $lang["s_".$col_mapped];
+							}
+							elseif (isset($lang["s_".$col_brute])) {
+								$display_col_name = $lang["s_".$col_brute];
+							}
+							// 2. Sinon, on nettoie le nom brut après le point
+							else {
+								$display_col_name = substr(strrchr($col_brute, "."), 1) ?: $col_brute;
+								// Remplace underscores par espaces et capitalize
+								$display_col_name = str_replace('_', ' ', $display_col_name);
+								$display_col_name = ucfirst($display_col_name);
+							}
+
+							$export_data[0][$j+1] = $display_col_name;
+
+							$template->assign_block_vars('r_netw.tab_netw.group.head2.cols', array(
+								'PAGE_TRI' => $page_tri.'&amp;tri='.$cols_display[$j],
+								'TITLE' => $export_data[0][$j+1],
+							));
+
+							$j++;
+						}
+					}
+
 					if (isset($_GET["highlight_id"]) && $_GET["highlight_id"] == ($tab_prises[$k]['id'] ?? ''))
 						$class_row = 'highlight';
 					else
 						$class_row = 'liste';
 
-					$template->assign_block_vars('r_netw.tab_netw.list', array(
+					$template->assign_block_vars('r_netw.tab_netw.group.list', array(
 						'CLASS_ROW' => $class_row,
 						'ANCHOR' => 'anchor'.($tab_prises[$k]['id'] ?? ''),
 					));
@@ -2223,55 +2335,22 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					while ($j < count($cols_display))
 					{
     					$col_brute = $cols_display[$j];
-    
-    					if (strpos($col_brute, '.') !== false) {
-        					$col_nettoyee = substr(strrchr($col_brute, "."), 1);
-    					} else {
-        					$col_nettoyee = $col_brute;
+    					$col_mapped = $map_col_name($col_brute);
+    					
+    					// Récupérer la valeur brute en utilisant le nom mappé
+    					$valeur_brute = $tab_prises[$k][$col_mapped] ?? '';
+    					
+    					// Traiter les booléens (POE, Brancher_POE)
+    					if (in_array($col_mapped, ['POE_materiel', 'Brancher_POE_materiel', 'POE_reseau', 'Brancher_POE_reseau'])) {
+        					$valeur_brute = $valeur_brute ? 'Oui' : 'Non';
     					}
-    					$col_nettoyee = trim($col_nettoyee);
-
-
-    					if (strpos($col_brute, 'emplacement') !== false || $col_nettoyee === 'location_name' || $col_nettoyee === 'emplacement_id') {
-        					$valeur_brute = $tab_prises[$k]['location_name'] ?? '';
-    					}
-    
-    					elseif ($col_nettoyee === 'type_reseau_materiel_id' || $col_nettoyee === 'type_reseau_materiel_libelle') {
-        					$valeur_brute = txt_to_na($tab_prises[$k]['type_reseau_materiel_libelle'] ?? '');
-    					} 
-    					elseif ($col_nettoyee === 'type_reseau_equipement_id' || $col_nettoyee === 'type_reseau_equipement_libelle') {
-        					$valeur_brute = txt_to_na($tab_prises[$k]['type_reseau_equipement_libelle'] ?? '');
-    					} 
-
-    					elseif ($col_nettoyee === 'equipement_id' || $col_nettoyee === 'switch_name') {
-        					$valeur_brute = txt_to_na($tab_prises[$k]['switch_name'] ?? '');
-    					} 
-    					elseif ($col_nettoyee === 'hardware_id' || $col_nettoyee === 'hardware_name') {
-        					$valeur_brute = $tab_prises[$k]['hardware_name'] ?? '';
-    					} 
-    					elseif ($col_nettoyee === 'Brancher_POE_materiel') {
-        					$valeur_brute = ($tab_prises[$k]['Brancher_POE_materiel'] ?? 0) ? 'Oui' : 'Non';
-    					} elseif ($col_nettoyee === 'POE_materiel') {
-        					$valeur_brute = ($tab_prises[$k]['POE_materiel'] ?? 0) ? 'Oui' : 'Non';
-    					} elseif ($col_nettoyee === 'Brancher_POE_reseau') {
-     						$valeur_brute = ($tab_prises[$k]['Brancher_POE_reseau'] ?? 0) ? 'Oui' : 'Non';
-    					} elseif ($col_nettoyee === 'POE_reseau') {
-        					$valeur_brute = ($tab_prises[$k]['POE_reseau'] ?? 0) ? 'Oui' : 'Non';
-    					} 
-    					else {
-        					if ($col_nettoyee === 'nom') {
-         						if (strpos($col_brute, 'alias_switchname') !== false) {
-                					$valeur_brute = txt_to_na($tab_prises[$k]['switch_name'] ?? '');
-            					} else {
-                					$valeur_brute = $tab_prises[$k]['hardware_name'] ?? '';
-            					}
-        					} else {
-            					$valeur_brute = $tab_prises[$k][$col_nettoyee] ?? '';
-							}
+    					// Ajouter txt_to_na pour certaines colonnes
+    					elseif (in_array($col_mapped, ['switch_name', 'type_reseau_materiel_libelle', 'type_reseau_equipement_libelle'])) {
+        					$valeur_brute = txt_to_na($valeur_brute);
     					}
 
     					$export_data[$k+1][$j+1] = col_displaying($col_brute, $valeur_brute);
-    					$template->assign_block_vars('r_netw.tab_netw.list.cols', array(
+    					$template->assign_block_vars('r_netw.tab_netw.group.list.cols', array(
         					'TITLE' => $export_data[$k+1][$j+1],
     					));
 
@@ -2279,24 +2358,23 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					}
 
 					// Affichage de la fiche
-					$template->assign_block_vars('r_netw.tab_netw.list.tools', array(
-						'LINK' => 'index.php?page=visu_fiche.php&amp;type=netw&amp;id='.($tab_prises[$k]['id'] ?? '').'&amp;agence_id='.intval(intval($_GET["agence_id"])).'&amp;action=visu',
-						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/fiche.gif',
-						'TITLE' => $lang["see"]
-					));
+				$template->assign_block_vars('r_netw.tab_netw.group.list.tools', array(
+					'LINK' => 'index.php?page=visu_fiche.php&amp;type=netw&amp;id='.($tab_prises[$k]['id'] ?? '').'&amp;agence_id='.intval(intval($_GET["agence_id"])).'&amp;action=visu',
+					'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/fiche.gif',
+					'TITLE' => $lang["see"]
+				));
 
-					if (preg_match('`;'.RGHT_NETW_EDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
-					{
-						$template->assign_block_vars('r_netw.tab_netw.list.tools', array(
-							'LINK' => 'index.php?page=adm_reseau.php&amp;action=Editer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;id='.($tab_prises[$k]['id'] ?? ''),
-							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/edit.gif',
-							'TITLE' => $lang["edit"]
-						));
-					}
-					if (preg_match('`;'.RGHT_NETW_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
-					{
-						$template->assign_block_vars('r_netw.tab_netw.list.tools', array(
-							'LINK' => 'index.php?page=adm_reseau.php&amp;action=Supprimer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;id='.($tab_prises[$k]['id'] ?? ''),
+				if (preg_match('`;'.RGHT_NETW_EDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
+				{
+					$template->assign_block_vars('r_netw.tab_netw.group.list.tools', array(
+						'LINK' => 'index.php?page=adm_reseau.php&amp;action=Editer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;id='.($tab_prises[$k]['id'] ?? ''),
+						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/edit.gif',
+						'TITLE' => $lang["edit"]
+					));
+				}
+				if (preg_match('`;'.RGHT_NETW_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
+				{
+					$template->assign_block_vars('r_netw.tab_netw.group.list.tools', array(
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/delete.gif',
 							'TITLE' => $lang["delete"]
 						));
