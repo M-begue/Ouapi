@@ -81,7 +81,7 @@
 			<td class="{r_my.list_hard.CLASS}">{r_my.list_hard.COL_OS}</td>
 			<td class="{r_my.list_hard.CLASS}">{r_my.list_hard.COL_SERIAL}</td>
 			<!-- BEGIN tools -->
-			<td class="{r_my.list_hard.CLASS}"><a href="{r_my.list_hard.tools.LINK}" target="_blank"><img src="{r_my.list_hard.tools.IMAGE}" border="0" title="{r_my.list_hard.tools.TITLE}" alt="" /></a>&nbsp;</td>
+			<td class="{r_my.list_hard.CLASS}"><a href="{r_my.list_hard.tools.LINK}"><img src="{r_my.list_hard.tools.IMAGE}" border="0" title="{r_my.list_hard.tools.TITLE}" alt="" /></a>&nbsp;</td>
 			<!-- END tools -->
 		</tr>	
 		<!-- END list_hard -->
@@ -116,7 +116,7 @@
 		<td class="{r_my.list_periph.CLASS}">{r_my.list_periph.COL_MODEL}</td>
 		<td class="{r_my.list_periph.CLASS}">{r_my.list_periph.COL_SERIAL}</td>
 		<!-- BEGIN tools -->
-		<td class="{r_my.list_periph.CLASS}"><a href="{r_my.list_periph.tools.LINK}" target="_blank"><img src="{r_my.list_periph.tools.IMAGE}" border="0" title="{r_my.list_periph.tools.TITLE}" alt="" /></a>&nbsp;</td>
+		<td class="{r_my.list_periph.CLASS}"><a href="{r_my.list_periph.tools.LINK}"><img src="{r_my.list_periph.tools.IMAGE}" border="0" title="{r_my.list_periph.tools.TITLE}" alt="" /></a>&nbsp;</td>
 		<!-- END tools -->
 	</tr>
 	<!-- END list_periph -->

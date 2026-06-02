@@ -308,12 +308,22 @@ if (is_file("config/connect.php"))
 		if ((preg_match('`;'.RGHT_SEARCH.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10) && isset($_GET["agence_id"]))
 		{
 			if (isset($_POST["keywords"]))
+			{
 				$search_text = format_string_input($_POST["keywords"]);
+				// Stocker en session pour les filtres subsequents
+				$_SESSION["search_keywords"] = $search_text;
+			}
+			elseif (isset($_SESSION["search_keywords"]))
+			{
+				$search_text = $_SESSION["search_keywords"];
+			}
 			else
+			{
 				$search_text = '';
+			}
 						
 			$template->assign_block_vars('head.search', array(
-				'AGENCE_ID' => $_GET["agence_id"],
+				'AGENCE_ID' => 0,
 				'LANG_SEARCH' => $lang["gen_search"],
 				'IMG_SEARCH' => 'templates/'.DEFAULT_TEMPLATE.'/images/search_icon.png',
 				'TEXT' => $search_text,

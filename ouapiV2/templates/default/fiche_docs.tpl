@@ -61,7 +61,7 @@
 				<td class="{doc_links.list.CLASS}">{doc_links.list.NAME}</td>
 				<td class="{doc_links.list.CLASS}">
 				<!-- BEGIN tools -->	
-					<a href="{doc_links.list.tools.LINK}" target="_blank"><img src="{doc_links.list.tools.IMAGE}" border="0" title="{doc_links.list.tools.TITLE}" alt="" /></a>&nbsp;
+					<a href="{doc_links.list.tools.LINK}"><img src="{doc_links.list.tools.IMAGE}" border="0" title="{doc_links.list.tools.TITLE}" alt="" /></a>&nbsp;
 				<!-- END tools -->		
 				</td>
 			</tr>		
@@ -78,7 +78,7 @@
 		<tr>
 			<td align="right" class="row">	
 			<!-- BEGIN tools -->
-				[ <img src="{doc_links.elmts.tools.IMAGE}" border="0" alt="" /> <a href="{doc_links.elmts.tools.LINK}" target="_blank">{doc_links.elmts.tools.TITLE}</a> ]		
+				[ <img src="{doc_links.elmts.tools.IMAGE}" border="0" alt="" /> <a href="{doc_links.elmts.tools.LINK}">{doc_links.elmts.tools.TITLE}</a> ]		
 			<!-- END tools -->
 			</td>
 		</tr>
@@ -115,4 +115,7 @@
 		</table>
 		<!-- END download -->
 	</div>
+</div>
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'docs')">{RETURN}</button>
 </div>

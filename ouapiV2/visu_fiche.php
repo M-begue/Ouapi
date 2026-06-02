@@ -171,6 +171,14 @@ if (isset($_GET['type']) && $_GET['type'] == 'hard')
 		  'BOOKABLE' => bin_to_yn($tab[0]["reservable"] ?? 0),
 		  'CREATIONDATE' => txt_to_na(format_date_to_aff($tab[0]["creation_date"] ?? '')),
 		  'COMMENT' => txt_to_na($tab[0]["commentaire"]),
+		  'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+          'RETURN' => $lang["gen_back"] ?? 'Retour',
+		));
+
+		// Assigner au niveau racine du template
+		$template->assign_vars(array(
+			'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+			'RETURN' => $lang["gen_back"] ?? 'Retour',
 		));
 
 		// Colonnes perso
@@ -884,12 +892,14 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'periph')
 	".TAB_AGENCES.".".AG_LIBELLE." AS libelle_site,
 	".TAB_PERIPH_MARQUE.".".PE_MA_LIBELLE." AS libelle_marque,
 	".TAB_PERIPH_MODELE.".".PE_MO_LIBELLE." AS libelle_modele,
-	".TAB_HARD.".".HA_NAME." AS nom_hard
+	".TAB_HARD.".".HA_NAME." AS nom_hard,
+	".TAB_EMPL.".".EM_LIBELLE." AS empl_libelle
 	FROM ".TAB_PERIPH." 
 	  LEFT JOIN ".TAB_AGENCES." ON ".TAB_AGENCES.".".AG_ID." = ".TAB_PERIPH.".".PE_SITEID."
 	  LEFT JOIN ".TAB_HARD." ON ".TAB_HARD.".".HA_ID." = ".TAB_PERIPH.".".PE_HARDID."
 	  LEFT JOIN ".TAB_PERIPH_MARQUE." ON ".TAB_PERIPH_MARQUE.".".PE_MA_ID." = ".TAB_PERIPH.".".PE_MARQUEID."
 	  LEFT JOIN ".TAB_PERIPH_MODELE." ON ".TAB_PERIPH_MODELE.".".PE_MO_ID." = ".TAB_PERIPH.".".PE_MODELEID."
+	  LEFT JOIN ".TAB_EMPL." ON ".TAB_EMPL.".".EM_ID." = ".TAB_PERIPH.".".PE_LOCATIONID."
 	WHERE ".TAB_PERIPH.".".PE_ID."='".intval($_GET["id"])."'";
 	$tab = $req1->db_use_query($requete);
 
@@ -948,6 +958,7 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'periph')
 		  'L_DATE' => $lang["f_periph_date"],
 		  'L_HARDLINK' => $lang["f_periph_hardlink"],
 		  'L_COMMENT' => $lang["comment"],
+		  'L_EMPLACEMENT' => $lang["s_ouapi_peripherique.emplacement_id"],
 		  'PLACE' => txt_to_na($tab[0]["libelle_site"]),
 		  'MARQUE' => txt_to_na($tab[0]["libelle_marque"]),
 		  'NAME' => txt_to_na($tab[0]["nom"]),
@@ -957,9 +968,16 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'periph')
 		  'DATE' => txt_to_na(format_date_to_aff($tab[0]["creation_date"] ?? '')),
 		  'HARDLINK' => txt_to_na($tab[0]["nom_hard"]),
 		  'COMMENT' => txt_to_na(nl2br($tab[0]["commentaire"])),
+		  'EMPLACEMENT' => txt_to_na($tab[0]["empl_libelle"] ?? ''),
+		  'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+          'RETURN' => $lang["gen_back"] ?? 'Retour',
 		));
 
-		
+		$template->assign_vars(array(
+			'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+			'RETURN' => $lang["gen_back"] ?? 'Retour',
+		));
+
 		// Colonnes perso
 		$pfieldColumns = get_table_pfield_columns(TAB_PERIPH);
 
@@ -1200,6 +1218,8 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'soft')
 		  'SOFT_VNUM' => txt_to_na($tab[0]["dern_version_num"]),
 		  'SOFT_VDATE' => txt_to_na(format_date_to_aff($tab[0]["dern_version_date"])),
 		  'SOFT_COMMENT' => txt_to_na(nl2br($tab[0]["commentaire"])),
+		  'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+          'RETURN' => $lang["gen_back"] ?? 'Retour',
 		));
 		
 		// Colonnes perso
@@ -1615,6 +1635,8 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'docs')
 			'DATE_ARCHIVE' => txt_to_na(format_date_to_aff($tab[0]["date_archive"] ?? '')),
 			'L_COMMENT' => $lang["f_docs_comment"],
 			'COMMENT' => txt_to_na($tab[0]["commentaire"]),
+			'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+            'RETURN' => $lang["gen_back"] ?? 'Retour',
 		));
 
 		// Colonnes perso
@@ -1814,24 +1836,29 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'netw')
     $requete = "SELECT ".TAB_RESEAU.".*,
       ".TAB_EMPL.".".EM_LIBELLE.",
       ".TAB_HARD.".".HA_NAME.",
-      tab_networkhard.".HA_NAME." AS netwname
+      ".TAB_HARD.".".HA_LOCATIONID." AS hardware_location_id,
+      empl_hardware.".EM_LIBELLE." AS hardware_location,
+      tab_networkhard.".HA_NAME." AS netwname,
+	  tr_mat.libelle AS type_reseau_materiel_libelle,
+      tr_eq.libelle AS type_reseau_equipement_libelle
       FROM ".TAB_RESEAU." 
         LEFT JOIN ".TAB_EMPL." ON ".TAB_EMPL.".".EM_ID." = ".TAB_RESEAU.".".RE_LOCATIONID."
         LEFT JOIN ".TAB_HARD." ON ".TAB_HARD.".".HA_ID." = ".TAB_RESEAU.".".RE_HARDWAREID."
-        LEFT JOIN ".TAB_HARD." tab_networkhard ON tab_networkhard.".HA_ID." = ".TAB_RESEAU.".".RE_NETWORKHARDID."
+        LEFT JOIN ".TAB_EMPL." empl_hardware ON empl_hardware.".EM_ID." = ".TAB_HARD.".".HA_LOCATIONID."
+        LEFT JOIN ouapi_peripherique tab_networkhard ON tab_networkhard.id = ".TAB_RESEAU.".".RE_NETWORKHARDID."
+		LEFT JOIN ouapi_type_reseau tr_mat ON tr_mat.id = ".TAB_RESEAU.".type_reseau_materiel_id
+        LEFT JOIN ouapi_type_reseau tr_eq ON tr_eq.id = ".TAB_RESEAU.".type_reseau_equipement_id
       WHERE ".TAB_RESEAU.".id='".intval($_GET["id"])."'";
     $tab = $req1->db_use_query($requete, 1);
 
-    // Nettoyage des clés (enlève les "1." ou les préfixes de table selon le moteur SQL)
     $cleaned_tab = [];
     foreach ($tab as $i => $ligne) {
         foreach ($ligne as $cle => $valeur) {
-            // On nettoie le '1.' mais on garde à l'esprit que les alias comme 'netwname' restent tels quels
             $cle_nettoyee = str_replace('1.', '', $cle);
             $cleaned_tab[$i][$cle_nettoyee] = $valeur;
         }
     }
-    $tab = $cleaned_tab;
+    $tab = $cleaned_tab;	
     
     // On récupère les noms de colonnes simples sans les noms de table
     $col_num_prise = RE_PLUGNUMBER; 
@@ -1842,7 +1869,7 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'netw')
     $template->assign_block_vars('infos', array(
       'NAME' => txt_to_na($tab[0][$col_num_prise] ?? ''),
       'ICON' => 'templates/'.DEFAULT_TEMPLATE.'/images/sign_info.png',
-      'LOCATION' => $lang["f_netw_plugnumber"].': '.txt_to_na($tab[0][$col_libelle] ?? ''),
+      'LOCATION' => $lang["f_netw_location"].': '.txt_to_na($tab[0][$col_libelle] ?? ''),
     )); 
 
     $template->assign_block_vars('button', array(
@@ -1859,14 +1886,30 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'netw')
         'L_TITLE' => $lang["f_netw_title"],
         'L_PLUGNB' => $lang["f_netw_plugnumber"],
         'PLUGNB' => txt_to_na($tab[0][$col_num_prise] ?? ''),
-        'L_LOCATION' => $lang["f_netw_location"] ?? 'Emplacement', // Vérifie la clé de langue
+        'L_LOCATION' => $lang["f_netw_location"] ?? 'Emplacement du matériel réseau',
         'LOCATION' => txt_to_na($tab[0][$col_libelle] ?? ''),
         'L_HARDNAME' => $lang["f_netw_hardname"],
         'HARDNAME' => txt_to_na($tab[0][$col_ha_name] ?? ''),
         'L_NETWHARDNAME' => $lang["f_netw_netwhardname"],
-        'NETWHARDNAME' => txt_to_na($tab[0]["netwname"] ?? ''), // Utilisation de l'alias direct
+        'NETWHARDNAME' => txt_to_na($tab[0]["netwname"] ?? ''),
         'L_PORT' => $lang["f_netw_port"],
         'PORT' => txt_to_na($tab[0][$col_port_id] ?? ''),
+        'L_HARDWARE_LOCATION' => $lang["f_netw_hardware_location"] ?? 'Emplacement du matériel connecté',
+        'HARDWARE_LOCATION' => txt_to_na($tab[0]["hardware_location"] ?? ''),
+        'L_POE_MATERIEL' => $lang["adm_netw_poe"] ?? 'POE Matériel',
+        'POE_MATERIEL' => (($tab[0]['POE_materiel'] ?? 0) == 1) ? $lang["gen_yes"] : $lang["gen_no"],
+        'L_BRANCHER_POE_MATERIEL' => $lang["adm_netw_brancher_poe"] ?? 'Brancher POE Matériel',
+        'BRANCHER_POE_MATERIEL' => (($tab[0]['Brancher_POE_materiel'] ?? 0) == 1) ? $lang["gen_yes"] : $lang["gen_no"],
+        'L_POE_RESEAU' => $lang["adm_netw_poe_reseau"] ?? 'POE Réseau',
+        'POE_RESEAU' => (($tab[0]['POE_reseau'] ?? 0) == 1) ? $lang["gen_yes"] : $lang["gen_no"],
+        'L_BRANCHER_POE_RESEAU' => $lang["adm_netw_brancher_poe_reseau"] ?? 'Brancher POE Réseau',
+        'BRANCHER_POE_RESEAU' => (($tab[0]['Brancher_POE_reseau'] ?? 0) == 1) ? $lang["gen_yes"] : $lang["gen_no"],
+		'L_TYPE_RESEAU_MATERIEL' => $lang["adm_netw_type_reseau_materiel"] ?? 'Type Réseau Matériel',
+        'TYPE_RESEAU_MATERIEL' => txt_to_na($tab[0]['type_reseau_materiel_libelle'] ?? ''),
+        'L_TYPE_RESEAU_EQUIPEMENT' => $lang["adm_netw_type_reseau_equipement"] ?? 'Type Réseau Équipement',
+        'TYPE_RESEAU_EQUIPEMENT' => txt_to_na($tab[0]['type_reseau_equipement_libelle'] ?? ''),
+		'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+        'RETURN' => $lang["gen_back"] ?? 'Retour',
     ));
 
     // Colonnes perso
@@ -1938,6 +1981,8 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'users')
 	  'USER_GROUP' => txt_to_na($tab[0]["groupe"]),
 	  'USER_OUAPILOGIN' => txt_to_na($tab[0]["login"]),
 	  'USER_WINLOGIN' => txt_to_na($tab[0]["login_win"]),
+	  'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
+      'RETURN' => $lang["gen_back"] ?? 'Retour',
 	));
 
 	

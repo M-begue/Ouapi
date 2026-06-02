@@ -59,7 +59,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 			$requete = "SELECT * FROM ".TAB_SOFT." WHERE id='".$s_id."'";
 			$tab_soft = $req1->db_use_query($requete);
 			
-			if (count($tab_soft > 0))
+			if (count($tab_soft) > 0)
 				$version = $tab_soft[0]["dern_version_num"];
 			else
 				$version = 0;			
@@ -73,7 +73,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["return_update_ok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+		  	'RETURN' => $lang["gen_back"],
 		));			
 		
 		$template->assign_block_vars('form_post.back', array(
@@ -206,6 +208,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 		{
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_soft_title"],
+			  'AGENCE_ID' => $_GET["agence_id"],
+		  	  'RETURN' => $lang["gen_back"],
 			));
 
 			$requete_hard = "SELECT * FROM ".TAB_HARD." WHERE id='".$_GET["h_id"]."'";
@@ -233,7 +237,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 						));				
 					}
 					
-					if (num_to_empty($tab_soft2[$i]["dern_version_num"]) != '')
+					if (num_to_empty((int)$tab_soft2[$i]["dern_version_num"]) != '')
 						$version = ' - '.$lang["gen_version"].': '.$tab_soft2[$i]["dern_version_num"];
 					else
 						$version = '';
@@ -287,7 +291,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'reset')
 	$template->assign_block_vars('form_post', array(
 		'OK' => $lang["adm_soft_resetreturn"], 					
 		'CLOSE' => $lang["close"],	
-		'ID' => 'mess_retour'
+		'ID' => 'mess_retour',
+		'AGENCE_ID' => $_GET["agence_id"],
+		'RETURN' => $lang["gen_back"],
 	));			
 }
 
@@ -324,7 +330,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_soft_addok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+		  	'RETURN' => $lang["gen_back"],
 		));			
 	}
 	else
@@ -338,6 +346,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_add"],
 		  'ACTION' => 'index.php?page=adm_logiciels.php&action=Ajouter&agence_id=' . intval($_GET['agence_id']),
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		// Nom
@@ -710,7 +720,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'suppr')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_soft_delok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+		  	'RETURN' => $lang["gen_back"],
 		));			
 	}
 	else
@@ -721,6 +733,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'suppr')
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_del"],
 		  'ACTION' => 'index.php?page=adm_logiciels.php&action=suppr&s_id='.$_GET['s_id'].'&amp;agence_id='.$_GET['agence_id'],
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.softname', array(
@@ -768,7 +782,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Edit')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_soft_editok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+		  	'RETURN' => $lang["gen_back"],
 		));			
 	}
 	else
@@ -782,6 +798,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Edit')
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_title_edit"],
 		  'ACTION' => 'index.php?page=adm_logiciels.php&amp;action=Edit&amp;id='.$_GET['s_id'].'&amp;agence_id='.$_GET['agence_id'],
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		// Editeur du logiciel
@@ -892,7 +910,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'maj')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_soft_majok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+		  	'RETURN' => $lang["gen_back"],
 		));			
 	}
 	else
@@ -915,6 +935,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'maj')
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_title_maj"],
 		  'ACTION' => 'index.php?page=adm_logiciels.php&action=maj&id='.$_GET['s_id'].'&amp;agence_id='.$_GET['agence_id'],
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 				
 		$template->assign_block_vars('form.vnum', array(
@@ -967,7 +989,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'hide_ocs_alias' )
 	$template->assign_block_vars('form_post', array(
 		'OK' => $lang["adm_soft_aliashide"], 					
 		'CLOSE' => $lang["close"],	
-		'ID' => 'mess_retour'
+		'ID' => 'mess_retour',
 	));					
 }
 // Ajouter un alias OCS
@@ -1204,14 +1226,18 @@ elseif (isset($_GET['config']))
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_soft_confhtok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+		    'RETURN' => $lang["gen_back"],
 		));			
 	}
 	else
 	{
 		$template->assign_block_vars('form', array(
 		  'TITLE' => $lang["adm_soft_typeassoc"],
-		  'ACTION' => 'index.php?page=adm_logiciels.php&config='.$_GET["config"],
+		  'ACTION' => 'index.php?page=adm_logiciels.php&config='.$_GET["config"].'&agence_id='.$_GET["agence_id"],
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$tab = $req1->db_use_query("SELECT * FROM ".TAB_HARD_TYPE." ORDER BY libelle");

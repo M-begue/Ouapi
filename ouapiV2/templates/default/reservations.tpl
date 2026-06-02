@@ -18,7 +18,10 @@
 		<input type="hidden" name="agence_id" value="{form.AGENCE_ID}">
 		<input type="hidden" name="{form.TYPE_NAME}" value="{form.TYPE_ID}">
 
-		<input type="submit" name="soumettre" value="{form.L_ADD}">
+		<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+		<input type="submit" name="soumettre" value="{form.L_ADD}" />
+		<button type="button" onclick="closeToHome({form.AGENCE_ID}, 'resa', '{form.SSCAT}')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+		</div>
 		</form>
 	</div>
 	
@@ -65,6 +68,9 @@
 	<!-- BEGIN print -->
 		<p class="toolbox" style="margin-left:40px;"><img src="{view.print.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
 		<a href="{view.print.LINK}">{view.print.TEXT}</a></p>
+		<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+		<button type="button" onclick="closeToHome({view.AGENCE_ID}, 'resa', '{view.SSCAT}')">{view.RETURN}</button>
+		</div>
 	<!-- END add -->
 
 	<div class="textbox" style="margin-top:40px;">{view.CAL}</div>

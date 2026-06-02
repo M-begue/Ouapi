@@ -30,16 +30,34 @@
 			<td class="row1" width="30%">{LOCATION}</td>
 		</tr>
 		<tr>
+			<td class="titre3" width="20%">{L_HARDWARE_LOCATION}</td>
+			<td class="row1" width="30%">{HARDWARE_LOCATION}</td>
 			<td class="titre3" width="20%">{L_NETWHARDNAME}</td>
 			<td class="row1" width="30%">{NETWHARDNAME}</td>
-			<td class="titre3" width="20%">{L_HARDNAME}</td>
-			<td class="row1" width="30%">{HARDNAME}</td>
 		</tr>
 		<tr>
+			<td class="titre3" width="20%">{L_HARDNAME}</td>
+			<td class="row1" width="30%">{HARDNAME}</td>
 			<td class="titre3" width="20%">{L_PORT}</td>
 			<td class="row1" width="30%">{PORT}</td>
-			<td width="20%">&nbsp;</td>
-			<td >&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="titre3" width="20%">{L_POE_MATERIEL}</td>
+			<td class="row1" width="30%">{POE_MATERIEL}</td>
+			<td class="titre3" width="20%">{L_BRANCHER_POE_MATERIEL}</td>
+			<td class="row1" width="30%">{BRANCHER_POE_MATERIEL}</td>
+		</tr>
+		<tr>
+			<td class="titre3" width="20%">{L_POE_RESEAU}</td>
+			<td class="row1" width="30%">{POE_RESEAU}</td>
+			<td class="titre3" width="20%">{L_BRANCHER_POE_RESEAU}</td>
+			<td class="row1" width="30%">{BRANCHER_POE_RESEAU}</td>
+		</tr>
+		<tr>
+			<td class="titre3" width="20%">{L_TYPE_RESEAU_MATERIEL}</td>
+			<td class="row1" width="30%">{TYPE_RESEAU_MATERIEL}</td>
+			<td class="titre3" width="20%">{L_TYPE_RESEAU_EQUIPEMENT}</td>
+			<td class="row1" width="30%">{TYPE_RESEAU_EQUIPEMENT}</td>
 		</tr>
 		<!-- BEGIN line -->
 		<tr>
@@ -79,7 +97,8 @@
 		<tr>
 			<td align="right" class="row">	
 			<!-- BEGIN tools -->
-				[ <img src="{doc_links.elmts.tools.IMAGE}" border="0" alt="" /> <a href="{doc_links.elmts.tools.LINK}" target="_blank">{doc_links.elmts.tools.TITLE}</a> ]		
+				[ <img src="{doc_links.elmts.tools.IMAGE}" border="0" alt="" /> 
+				<a href="{doc_links.elmts.tools.LINK}" target="_blank">{doc_links.elmts.tools.TITLE}</a> ]		
 			<!-- END tools -->
 			</td>
 		</tr>
@@ -92,11 +111,13 @@
 			<td class="titre2">{doc_links.document.L_TITLE}</td>
 		</tr>
 		<tr>
-			<td class="row1"><div align="center">
+			<td class="row1">
+			<div align="center">
 				<object data="{doc_links.document.PATH}" type="application/{document.EXT}" width="{doc_links.document.WIDTH}" height="{doc_links.document.HEIGHT}">
 				  <param name="filename" value="{doc_links.document.PATH}" />  
 				</object>
-			</div></td>
+			</div>
+			</td>
 		</tr>
 		</table>
 		<!-- END document -->
@@ -114,4 +135,8 @@
 		<!-- END download -->
 	</div>
 	<!-- END doc_links -->
+</div>
+
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'netw')">{RETURN}</button>
 </div>

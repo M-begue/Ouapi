@@ -109,7 +109,7 @@
 		<!-- END list -->
 		</select>
 		<!-- BEGIN action -->
-			<a href="{form.linkhard.action.LINK}" target="_blank"><img src="{form.linkhard.action.IMAGE}" name="imglink_linkhard" border="0" title="{form.linkhard.action.LIBELLE}" alt="" /></a>
+			<a href="{form.linkhard.action.LINK}"><img src="{form.linkhard.action.IMAGE}" name="imglink_linkhard" border="0" title="{form.linkhard.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.linkhard.valid.IMAGE}" border="0" name="imglink_linkhard" title="{form.linkhard.valid.LIBELLE}" onClick="{form.linkhard.valid.ONCLICK}" alt="" />
@@ -119,6 +119,14 @@
 		<!-- END ocs -->	
 	<br/>
 	<!-- END linkhard -->
+
+	<!-- BEGIN emplacement -->
+	<label>{form.emplacement.TITLE}</label><select name="emplacement">
+		<!-- BEGIN list -->
+			<option value="{form.emplacement.list.ID}" {form.emplacement.list.SELECTED}>{form.emplacement.list.LIBELLE}</option>
+		<!-- END list -->
+	</select><br/>
+	<!-- END emplacement -->
 
 	<!-- BEGIN reservable -->
 	<label>{form.reservable.TITLE}</label>
@@ -171,7 +179,10 @@
 	<!-- END pfield_text -->
 	
 	<!-- BEGIN button -->	
-	<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+	<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+		<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+		<button type="button" onclick="closeToHome({form.AGENCE_ID}, 'periph')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+	</div>
 	<!-- END button -->
 	
 	</form>
@@ -230,3 +241,21 @@
 	<!-- END back -->
 	</p><br/>
 <!-- END form_post -->
+
+<!-- BEGIN form_link_post -->
+	<br/><p class="contenu" id="{form_link_post.ID}">{form_link_post.OK}<br/><br/>
+	<a href="javascript:goBackAndRefresh()">{form_link_post.CLOSE}</a>&nbsp;
+	<!-- BEGIN back -->
+		<a href="{form_link_post.back.BACK_PAGE}">{form_link_post.back.BACK}</a>
+	<!-- END back -->
+	</p><br/>
+<!-- END form_link_post -->
+
+<!-- BEGIN form_unlink_post -->
+	<br/><p class="contenu" id="{form_unlink_post.ID}">{form_unlink_post.OK}<br/><br/>
+	<a href="javascript:goBackOneTimeAndRefresh()">{form_unlink_post.CLOSE}</a>&nbsp;
+	<!-- BEGIN back -->
+		<a href="{form_unlink_post.back.BACK_PAGE}">{form_unlink_post.back.BACK}</a>
+	<!-- END back -->
+	</p><br/>
+<!-- END form_unlink_post -->

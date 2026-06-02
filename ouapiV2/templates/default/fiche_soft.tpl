@@ -61,7 +61,7 @@
 				<td class="{docs.tab.CLASS}" width="15%">{docs.tab.COMMENT}</td>
 				<td class="{docs.tab.CLASS}" align="right" width="10%">
 				<!-- BEGIN tools -->	
-					<a href="{docs.tab.tools.LINK}" target="_blank"><img src="{docs.tab.tools.IMAGE}" border="0" title="{docs.tab.tools.TITLE}" alt="" /></a>&nbsp;
+					<a href="{docs.tab.tools.LINK}"><img src="{docs.tab.tools.IMAGE}" border="0" title="{docs.tab.tools.TITLE}" alt="" /></a>&nbsp;
 				<!-- END tools -->		
 				</td>
 			</tr>
@@ -77,7 +77,7 @@
 	<tr>
 		<td align="right" class="row">	
 		<!-- BEGIN adddoc -->
-				[ <img src="{docs.adddoc.IMAGE}" border="0" alt="" /> <a href="{docs.adddoc.LINK}" target="_blank">{docs.adddoc.TITLE}</a> ]	
+				[ <img src="{docs.adddoc.IMAGE}" border="0" alt="" /> <a href="{docs.adddoc.LINK}">{docs.adddoc.TITLE}</a> ]	
 		<!-- END adddoc -->
 		</td>
 	</tr>
@@ -104,4 +104,7 @@
 	</div>
 	<!-- END s_alias -->
 
+</div>
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'soft')">{RETURN}</button>
 </div>

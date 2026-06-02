@@ -137,7 +137,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 			$template->assign_block_vars('form_post', array(
 				'OK' => $lang["adm_docs_addok"], 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'mess_retour'
+				'ID' => 'mess_retour',
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));
 		}
 		else
@@ -152,12 +154,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 			$template->assign_block_vars('form_post', array(
 				'OK' => $errors, 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'alert'
+				'ID' => 'alert',
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));			
 			
 			$template->assign_block_vars('form_post.back', array(
 				'BACK_PAGE' => $_SERVER['HTTP_REFERER'],	
-				'BACK' => $lang["return"]	,
+				'BACK' => $lang["return"],
 			));			
 		}
 	}
@@ -166,6 +170,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		$template->assign_block_vars('form', array(
 			'TITLE' => $lang["adm_docs_add_title"],
 			'ACTION' => 'index.php?page=adm_docs.php&amp;action=add&agence_id=' . $agence_id_current,
+			'AGENCE_ID' => $agence_id_current,
+			'RETURN' => $lang["gen_back"],
 		));
 
 		// Type
@@ -390,7 +396,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 			$template->assign_block_vars('form_post', array(
 				'OK' => $lang["adm_docs_editok"], 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'mess_retour'
+				'ID' => 'mess_retour',
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));
 		}
 		else
@@ -405,7 +413,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 			$template->assign_block_vars('form_post', array(
 				'OK' => $errors, 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'alert'
+				'ID' => 'alert',
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));			
 			
 			$template->assign_block_vars('form_post.back', array(
@@ -424,6 +434,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 		$template->assign_block_vars('form', array(
 			'TITLE' => $lang["adm_docs_edit_title"],
 			'ACTION' => 'index.php?page=adm_docs.php&amp;action=edit&id='.$tab_doc[0][DO_ID].'&amp;agence_id='.$_GET['agence_id'],
+			'AGENCE_ID' => $_GET['agence_id'],
+			'RETURN' => $lang["gen_back"],
 		));
 
 		// Type
@@ -626,7 +638,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'add_elmt')
 		
 		$tab = $req1->db_use_query("INSERT INTO ".TAB_LIAISON_DOCS." (doc_id,".$add_type.")	VALUES ('".$doc_id."','".$elmt_id."')");
 		
-		$template->assign_block_vars('form_post', array(
+		$template->assign_block_vars('form_link_post', array(
 			'OK' => $lang["adm_docs_addelmtok"], 					
 			'CLOSE' => $lang["close"],	
 			'ID' => 'mess_retour'
@@ -830,7 +842,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del_elmt')
 	
 	$tab = $req1->db_use_query("DELETE FROM ".TAB_LIAISON_DOCS." WHERE doc_id='".$doc_id."' AND ".$del_type." = '".$elmt_id."'");
 	
-	$template->assign_block_vars('form_post', array(
+	$template->assign_block_vars('form_unlink_post', array(
 		'OK' => $lang["adm_docs_delelmtok"], 					
 		'CLOSE' => $lang["close"],	
 		'ID' => 'mess_retour'
@@ -882,7 +894,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del')
 			$template->assign_block_vars('form_post', array(
 				'OK' => $lang["adm_docs_delok"].'<br/><br/>'.$warn_mess, 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'warning'
+				'ID' => 'warning',
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));			
 			
 		}
@@ -891,7 +905,9 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del')
 			$template->assign_block_vars('form_post', array(
 				'OK' => $lang["adm_docs_delok"], 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'mess_retour'
+				'ID' => 'mess_retour',
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));		
 		}
 		
@@ -904,6 +920,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del')
 		$template->assign_block_vars('form', array(
 			'TITLE' => $lang["adm_docs_del_title"],
 			'ACTION' => 'index.php?page=adm_docs.php&action=del&id='.$id.'&agence_id=' . $agence_id_current,
+			'AGENCE_ID' => $agence_id_current,
+			'RETURN' => $lang["gen_back"],
 		));
 
 		// Type

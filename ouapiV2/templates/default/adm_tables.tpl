@@ -1,5 +1,5 @@
 <!-- BEGIN select -->
-	<div class="cat_title">{select.TITLE} <span style="float:right;position:relative;top:-12px;"><input type="button" value="Retour" onclick="javascript:goBackAndRefresh()"></span></div>
+	<div class="cat_title">{select.TITLE} <span style="float:right;position:relative;top:-12px;"><input type="button" value="Retour" onclick="javascript:closeToHome('', 'admin', '', '{select.ACTION_NAME}')"></span></div>
 	<div class="textbox">
 	<!-- BEGIN records -->
 		<table class="table">
@@ -117,7 +117,10 @@
 		<!-- END connex -->
 		
 		<!-- BEGIN button -->	
-		<input type="submit" name="soumettre" value="{form.button.TITLE}">
+		<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+		<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+		<button type="button" onclick="closeToHome('', 'admin', '', '{form.ACTION_NAME}')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+		</div>
 		<!-- END button -->
 		
 		</form>

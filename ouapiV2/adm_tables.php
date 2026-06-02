@@ -176,6 +176,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'Ajouter')
 		  'TITLE' => $lang["adm_add_title"],
 		  'ACTION' => 'index.php?page=adm_tables.php&table='.$_GET["table"].'&action=Ajouter',
 		  'ONSUBMIT' => 'return verifErrors()',
+		  'ACTION_NAME' => 'tables',
+		  'RETURN' => $lang["gen_back"],
 		));
 			
 		if ($valeur != '')
@@ -560,6 +562,7 @@ else
 	  'ACTION' => $current_page,
 	  'ONSUBMIT' => 'return verifErrors()',
 	  'TABLE_NAME' => $_GET["table"],
+	  'ACTION_NAME' => 'tables', 
 	));
 
 	// On affiche les en tete de colonne s'il y a au moins 1 r�sultat

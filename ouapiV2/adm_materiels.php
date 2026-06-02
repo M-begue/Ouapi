@@ -183,6 +183,8 @@ else
 		  'L_TITLE' => $lang["adm_hard_title_add"],
 		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=Ajouter&agence_id=' . intval($_GET['agence_id']),
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.hardname', array(
@@ -566,6 +568,8 @@ else
 		  'L_TITLE' => $lang["adm_hard_title_edit"],
 		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=editer&amp;h_id='.$_GET['h_id'].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.hardname', array(
@@ -1062,6 +1066,8 @@ else
 		  'L_TITLE' => $lang["adm_hard_title_copy"],
 		  'ACTION' => 'index.php?page=adm_materiels.php&amp;action=Ajouter&agence_id=' . intval($_GET['agence_id']),
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.hardname', array(
@@ -3827,6 +3833,8 @@ else
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_rebus"],
 		  'ACTION' => 'index.php?page=adm_materiels.php&action=rebus&h_id='.$_GET['h_id'].'&agence_id='.$agence_id,
+		  'AGENCE_ID' => $agence_id,
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.hardname', array(
@@ -3862,6 +3870,8 @@ else
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_hard_title_del"],
 		  'ACTION' => 'index.php?page=adm_materiels.php&action=supprimer&h_id='.$_GET['h_id'].'&agence_id='.$_GET['agence_id'],
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.hardname', array(

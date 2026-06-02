@@ -152,6 +152,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Gerer')
 		'SELECT_ENDHOUR' => form_genselect('heure_fin','class="non_form"',array(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23),
 		array('00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'),18),
 		'SELECT_ENDMIN' => form_genselect('min_fin','class="non_form"',array(0,15,30,45),array('00','15','30','45'),0),
+		'RETURN' => $lang["gen_back"],
+		'SSCAT' => $sscat,
 		
 	));
 		
@@ -317,12 +319,14 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'view')
 	{
 		$cat["table"] = "TAB_HARD";
 		$cat["type"] = "hard";
+		$sscat = "hard";
 		
 	}
 	elseif(isset($_GET["periph_id"]))
 	{
 		$cat["table"] = "TAB_PERIPH";
-		$cat["type"] = "periph";	
+		$cat["type"] = "periph";
+		$sscat = "periph";	
 	}
 
 
@@ -354,14 +358,20 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'view')
 	{
 		$template->assign_block_vars('view', array(
 		  'L_TITLE' => $lang["reserv_cal"],
-		  'CAL' => $cal->aff_calendrier_week($_GET["week"],$_GET["annee"],$mat_id,$mat_type)
+		  'CAL' => $cal->aff_calendrier_week($_GET["week"],$_GET["annee"],$mat_id,$mat_type),
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
+		  'SSCAT' => $sscat
 		));	
 	}
 	else
 	{
 		$template->assign_block_vars('view', array(
 		  'L_TITLE' => $lang["reserv_cal"],
-		  'CAL' => $cal->aff_calendrier($_GET["mois"],$_GET["annee"],$mat_id,$mat_type)
+		  'CAL' => $cal->aff_calendrier($_GET["mois"],$_GET["annee"],$mat_id,$mat_type),
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
+		  'SSCAT' => $sscat
 		));	
 	}
 	

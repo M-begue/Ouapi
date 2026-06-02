@@ -628,6 +628,7 @@ $lang["adm_periph_title_addelmt"] = 'Lier un périphérique';
 $lang["adm_periph_title_syncocs"] = 'Synchroniser un périphérique avec OCS';
 $lang["adm_periph_periph"] = 'Périphérique';
 $lang["adm_periph_name"] = 'Nom';
+$lang["s_ouapi_peripherique.emplacement_id"] = "Emplacement";
 $lang["adm_periph_title_del"] = 'Supprimer un périphérique';
 $lang["adm_periph_noperiph"] = 'Aucun périphérique existant ne peut être lié à ce matériel';
 $lang["adm_periph_creationdate"] = 'Mise en service';
@@ -783,7 +784,8 @@ $lang["fiche_serial"] = 'Numéro(s) de licence(s)';
 	
 	// Reseau
 	$lang["f_netw_title"] = 'Détail de la prise';
-	$lang["f_netw_plugnumber"] = 'Emplacement';
+	$lang["f_netw_location"] = 'Emplacement du matériel réseau';
+	$lang["f_netw_plugnumber"] = 'Numéro de la prise';
 	$lang["f_netw_hardname"] = 'Matériel connecté';
 	$lang["f_netw_netwhardname"] = 'Equipement réseau';
 	$lang["f_netw_port"] = 'Port de l\'équipement réseau';
@@ -933,6 +935,12 @@ $lang["adm_netw_place"] = 'Emplacement';
 $lang["adm_netw_hardlink"] = 'Matériel connecté';
 $lang["adm_netw_hardnlink"] = 'Matériel réseau';
 $lang["adm_netw_portnum"] = 'Numéro de port';
+$lang["adm_netw_type_reseau_materiel"] = 'Type Connecteur Matériel';
+$lang["adm_netw_type_reseau_equipement"] = 'Type Connecteur Équipement';
+$lang["adm_netw_poe"] = 'Capacité POE';
+$lang["adm_netw_brancher_poe"] = 'Alimenté via POE';
+$lang["adm_netw_poe_reseau"] = 'Capacité POE';
+$lang["adm_netw_brancher_poe_reseau"] = 'Alimente via POE';
 $lang["adm_netw_addok"] = 'La prise a été ajoutée.';
 $lang["adm_netw_editok"] = 'La prise a été modifiée.';
 $lang["adm_netw_connexok"] = 'La connexion a bien été prise en compte.';
@@ -941,10 +949,17 @@ $lang["adm_netw_confhtok"] = 'La liste des type de matériels réseau a bien ét
 $lang["adm_netw_typeassoc"] = 'Types de matériels réseau';
 $lang["adm_netw_addelmt"] = 'Ajouter à une prise existante libre';
 $lang["adm_netw_prise"] = 'Prise';
+$lang["s_ouapi_reseau.type_reseau_materiel_id"] = 'Type Connecteur Matériel';
+$lang["s_ouapi_reseau.type_reseau_equipement_id"] = 'Type Connecteur Équipement';
 $lang["adm_netw_addporterror"] = 'Le port de l\'équipement spécifié est déjà occupé.';
 $lang["adm_netw_addpriseerror"] = 'La prise spécifiée existe déjà.';
 $lang["adm_netw_adderror"] = 'Opération impossible:';
 $lang["adm_netw_"] = '';
+$lang["gen_name"] = 'Nom';
+$lang["s_ouapi_reseau.POE_materiel"] = "Capacité POE matériel";
+$lang["s_ouapi_reseau.POE_reseau"] = "Capacité POE réseau";
+$lang["s_ouapi_reseau.Brancher_POE_materiel"] = "Alimenté via POE matériel";
+$lang["s_ouapi_reseau.Brancher_POE_reseau"] = "Alimenté via POE réseau";
 
 //
 //adm_utilisateurs.php

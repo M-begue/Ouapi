@@ -30,11 +30,6 @@
 	<div style="width:100%;padding:0;margin-top:35px;">
 	<table style="border:1px solid black;margin-right:auto;" cellspacing="0">
 	<tr>
-		<td style="background-color:#BDBDBD;padding:2px;padding-right:10px;color:white;vertical-align:top;"><font style="font-size:10px"><b>{r_netw.equipmt.NAME}</b><br/>
-		<!-- BEGIN ip -->
-		<a href="http://{r_netw.equipmt.ip.VALUE}">{r_netw.equipmt.ip.VALUE}</a>
-		<!-- END ip -->
-		</font></td>
 		<td align="left" style="background-color:#BDBDBD;vertical-align:top;padding:0px">		
 		<!-- BEGIN list_port -->
 		<img src="{r_netw.equipmt.list_port.IMAGE}" onmouseover="tooltip.show('<center><b>- {r_netw.equipmt.list_port.TITLE} -</b></center>{r_netw.equipmt.list_port.NUM}<br/>{r_netw.equipmt.list_port.NAME}<br/> {r_netw.equipmt.list_port.PLACE}')" onmouseout="tooltip.hide();" alt="" />

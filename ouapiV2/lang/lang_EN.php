@@ -930,6 +930,12 @@ $lang["adm_netw_place"] = 'Place';
 $lang["adm_netw_hardlink"] = 'Linked to';
 $lang["adm_netw_hardnlink"] = 'Network device';
 $lang["adm_netw_portnum"] = 'Slot number';
+$lang["adm_netw_type_reseau_materiel"] = 'Equipment Network Type';
+$lang["adm_netw_type_reseau_equipement"] = 'Device Network Type';
+$lang["adm_netw_poe"] = 'POE';
+$lang["adm_netw_brancher_poe"] = 'Plug POE';
+$lang["adm_netw_poe_reseau"] = 'Network POE';
+$lang["adm_netw_brancher_poe_reseau"] = 'Plug Network POE';
 $lang["adm_netw_addok"] = 'The connection has been added.';
 $lang["adm_netw_editok"] = 'The connection has been modified.';
 $lang["adm_netw_connexok"] = 'Done';
@@ -942,6 +948,8 @@ $lang["adm_netw_addporterror"] = 'The port is busy.';
 $lang["adm_netw_addpriseerror"] = 'This connection name already exists.';
 $lang["adm_netw_adderror"] = 'Not possible:';
 $lang["adm_netw_"] = '';
+$lang["s_ouapi_reseau.type_reseau_materiel_id"] = 'Equipment Network Type';
+$lang["s_ouapi_reseau.type_reseau_equipement_id"] = 'Device Network Type';
 
 //
 //adm_utilisateurs.php

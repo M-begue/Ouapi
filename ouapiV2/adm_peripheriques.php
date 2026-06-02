@@ -43,7 +43,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'unlink_elmt')
 	$requete = "UPDATE ".TAB_PERIPH." SET ".PE_HARDID."='0' WHERE ".PE_ID."='".$_GET['p_id']."'";
 	$tab = $req1->db_use_query($requete);
 
-	$template->assign_block_vars('form_post', array(
+	$template->assign_block_vars('form_unlink_post', array(
 		'OK' => $lang["return_unlink_ok"], 					
 		'CLOSE' => $lang["close"],			
 		'ID' => 'mess_retour',			
@@ -72,9 +72,9 @@ if (isset($_POST['soumettre']))
 		$requete = "UPDATE ".TAB_PERIPH." SET hard_id='".$_GET['h_id']."' WHERE id='".$_POST['periph_id']."'";
 		$tab = $req1->db_use_query($requete);
 
-		$template->assign_block_vars('form_post', array(
+		$template->assign_block_vars('form_link_post', array(
 			'OK' => $lang["return_update_ok"], 					
-			'CLOSE' => $lang["close"],			
+			'CLOSE' => $lang["close"],
 			'ID' => 'mess_retour',			
 		));
 	}
@@ -106,6 +106,7 @@ if (isset($_POST['soumettre']))
 		$marque = $_POST['marque'];
 		$modele = $_POST['modele'];
 		$hard = $_POST['hard'];
+		$emplacement = $_POST['emplacement'];
 		$reservable = $_POST['reservable'];
 		$commentaire = format_text_db($_POST['commentaire']);
 		
@@ -144,8 +145,8 @@ if (isset($_POST['soumettre']))
 				$pfields_values .= ",'" . format_string_db($_POST[$fieldName]) . "'";
 			}
 			
-			$requete = "INSERT INTO ".TAB_PERIPH." (nom,num_serie,type_id,marque_id,modele_id,hard_id,agence_id,reservable,commentaire,suivi_rebus,creation_date,ocs_id,ocs_type".$pfields_names.")
-				VALUES ('".$nom."','".$num_serie."','".$type."','".$marque."','".$modele."','".$hard."','".$agence_id."','".$reservable."','".$commentaire."','','".$date."','".$ocs_id."','".$ocs_type."'".$pfields_values.")";
+			$requete = "INSERT INTO ".TAB_PERIPH." (nom,num_serie,type_id,marque_id,modele_id,hard_id,agence_id,emplacement_id,reservable,commentaire,suivi_rebus,creation_date,ocs_id,ocs_type".$pfields_names.")
+			VALUES ('".$nom."','".$num_serie."','".$type."','".$marque."','".$modele."','".$hard."','".$agence_id."','".$emplacement."','".$reservable."','".$commentaire."','','".$date."','".$ocs_id."','".$ocs_type."'".$pfields_values.")";
 
 			$tab = $req1->db_use_query($requete);
 			
@@ -170,7 +171,7 @@ $pfieldColumns = get_periph_pfield_columns($req1);
 			}
 			
 			$requete = "UPDATE ".TAB_PERIPH." SET nom='$nom',num_serie='$num_serie',type_id='$type',marque_id='$marque',
-			modele_id='$modele',hard_id='$hard',agence_id='$agence_id',reservable='$reservable',commentaire='$commentaire',creation_date='$date'".$pfields_update." WHERE id='$p_id'";
+			modele_id='$modele',hard_id='$hard',agence_id='$agence_id',emplacement_id='$emplacement',reservable='$reservable',commentaire='$commentaire',creation_date='$date'".$pfields_update." WHERE id='$p_id'";
 			$tab = $req1->db_use_query($requete);
 	
 			$template->assign_block_vars('form_post', array(
@@ -194,6 +195,8 @@ else
 		  'L_TITLE' => $lang["adm_periph_title_add"],
 		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=add&agence_id=' . intval($_GET['agence_id']),
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.periphname', array(
@@ -312,6 +315,24 @@ else
 			$template->assign_block_vars('form.linkhard.list', array(
 			  'ID' => $tab[$i]['id'],
 			  'LIBELLE' => $tab[$i]['nom']
+			));
+			$i++;
+		}
+		
+		// Emplacement
+		$tab = $req1->db_use_query("SELECT * FROM ".TAB_EMPL." WHERE agence_id='".$_GET['agence_id']."' ORDER BY libelle");
+
+		$template->assign_block_vars('form.emplacement', array(
+		  'TITLE' => $lang["adm_hard_place"],
+		));
+		
+		$i = -1;
+		$tab[-1] = array('id' => '0', 'libelle' => $lang["gen_select"]);
+		while ($i < count($tab)-1)
+		{
+			$template->assign_block_vars('form.emplacement.list', array(
+			  'ID' => $tab[$i]['id'],
+			  'LIBELLE' => $tab[$i]['libelle']
 			));
 			$i++;
 		}
@@ -883,6 +904,7 @@ else
 		$marque = $main_tab[0]["marque_id"];
 		$modele = $main_tab[0]["modele_id"];
 		$hard = $main_tab[0]["hard_id"];
+		$emplacement = $main_tab[0]["emplacement_id"];
 		$reservable = $main_tab[0]["reservable"];
 		$commentaire = $main_tab[0]["commentaire"];
 
@@ -904,6 +926,8 @@ else
 		  'L_TITLE' => $lang["adm_periph_title_edit"],
 		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=editer&amp;p_id='.$_GET["p_id"].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.periphname', array(
@@ -1073,9 +1097,39 @@ else
 				));
 			}
 			$i++;
+
+			// Emplacement
+		$tab = $req1->db_use_query("SELECT * FROM ".TAB_EMPL." WHERE agence_id='".$_GET['agence_id']."' ORDER BY libelle");
+
+		$template->assign_block_vars('form.emplacement', array(
+	  	'TITLE' => $lang["adm_hard_place"],
+		));
+	
+		$i = -1;
+		$tab[-1] = array('id' => '0', 'libelle' => $lang["gen_select"]);
+		while ($i < count($tab)-1)
+		{
+			if ($tab[$i]["id"] == $emplacement)
+			{
+				$template->assign_block_vars('form.emplacement.list', array(
+			  	'ID' => $tab[$i]['id'],
+			  	'LIBELLE' => $tab[$i]['libelle'],
+			  	'SELECTED' => 'selected'
+				));
+			}
+			else
+			{
+				$template->assign_block_vars('form.emplacement.list', array(
+			  	'ID' => $tab[$i]['id'],
+			  	'LIBELLE' => $tab[$i]['libelle']
+				));
+			}
+			$i++;
 		}
-		
-		// R�servable
+	}
+
+	
+	// R�servable
 		$template->assign_block_vars('form.reservable', array(
 		  'TITLE' => $lang["adm_periph_reserv"],
 		));
@@ -1778,6 +1832,7 @@ else
 		$marque = $main_tab[0]["marque_id"];
 		$modele = $main_tab[0]["modele_id"];
 		$hard = $main_tab[0]["hard_id"];
+		$emplacement = $main_tab[0]["emplacement_id"];
 		$reservable = $main_tab[0]["reservable"];
 		$commentaire = $main_tab[0]["commentaire"];
 
@@ -1799,6 +1854,8 @@ else
 		  'L_TITLE' => $lang["adm_periph_title_copy"],
 		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=add'.'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 
 		$template->assign_block_vars('form.periphname', array(
@@ -1969,6 +2026,35 @@ else
 			}
 			$i++;
 		}
+
+		// Emplacement
+		$tab = $req1->db_use_query("SELECT * FROM ".TAB_EMPL." WHERE agence_id='".$_GET['agence_id']."' ORDER BY libelle");
+
+		$template->assign_block_vars('form.emplacement', array(
+	  	'TITLE' => $lang["adm_hard_place"],
+		));
+	
+		$i = -1;
+		$tab[-1] = array('id' => '0', 'libelle' => $lang["gen_select"]);
+		while ($i < count($tab)-1)
+		{
+			if ($tab[$i]["id"] == $emplacement)
+			{
+				$template->assign_block_vars('form.emplacement.list', array(
+			  	'ID' => $tab[$i]['id'],
+			  	'LIBELLE' => $tab[$i]['libelle'],
+			  	'SELECTED' => 'selected'
+				));
+			}
+			else
+			{
+				$template->assign_block_vars('form.emplacement.list', array(
+			  	'ID' => $tab[$i]['id'],
+			  	'LIBELLE' => $tab[$i]['libelle']
+				));
+			}
+			$i++;
+		}
 		
 		// R�servable
 		$template->assign_block_vars('form.reservable', array(
@@ -2068,6 +2154,8 @@ else
 		$template->assign_block_vars('form', array(
 		  'L_TITLE' => $lang["adm_periph_title_rebus"],
 		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=rebus&amp;p_id='.$_GET['p_id'].'&amp;agence_id='.$agence_id,
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 		
 		$template->assign_block_vars('form.periphname', array(
@@ -2150,6 +2238,8 @@ else
 		  'L_TITLE' => $lang["adm_periph_title_del"],
 		  'ACTION' => 'index.php?page=adm_peripheriques.php&amp;action=supprimer&amp;p_id='.$_GET['p_id'].'&amp;agence_id='.$_GET['agence_id'],
 		  'TEMPLATE_ROOT' => 'templates/'.DEFAULT_TEMPLATE.'/images',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 		
 		$template->assign_block_vars('form.periphname', array(

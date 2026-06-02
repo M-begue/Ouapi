@@ -55,6 +55,10 @@
 		<td class="titre3" width="20%">{periph_details.L_COMMENT}</td>
 		<td class="row1" colspan="3">{periph_details.COMMENT}</td>
 	</tr>
+	<tr>
+		<td class="titre3" width="20%">{periph_details.L_EMPLACEMENT}</td>
+		<td class="row1" colspan="3">{periph_details.EMPLACEMENT}</td>
+	</tr>
 	<!-- BEGIN line -->
 	<tr>
 		<!-- BEGIN info -->
@@ -84,7 +88,7 @@
 			<td class="{docs.tab.CLASS}" width="15%">{docs.tab.COMMENT}</td>
 			<td class="{docs.tab.CLASS}" align="right" width="10%">
 			<!-- BEGIN tools -->	
-				<a href="{docs.tab.tools.LINK}" target="_blank"><img src="{docs.tab.tools.IMAGE}" border="0" title="{docs.tab.tools.TITLE}" alt="" /></a>&nbsp;
+				<a href="{docs.tab.tools.LINK}"><img src="{docs.tab.tools.IMAGE}" border="0" title="{docs.tab.tools.TITLE}" alt="" /></a>&nbsp;
 			<!-- END tools -->		
 			</td>
 		</tr>
@@ -99,7 +103,7 @@
 	<tr>
 		<td align="right" class="row">	
 		<!-- BEGIN adddoc -->
-				[ <img src="{docs.adddoc.IMAGE}" border="0" alt="" /> <a href="{docs.adddoc.LINK}" target="_blank">{docs.adddoc.TITLE}</a> ]		
+				[ <img src="{docs.adddoc.IMAGE}" border="0" alt="" /> <a href="{docs.adddoc.LINK}">{docs.adddoc.TITLE}</a> ]		
 		<!-- END adddoc -->
 			</td>
 	</tr>
@@ -123,4 +127,7 @@
 	</div>
 	<!-- END periph_ocsdetails -->
 
+</div>
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'periph')">{RETURN}</button>
 </div>

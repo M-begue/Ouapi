@@ -37,16 +37,28 @@
 			<td class="row1" width="30%">{LOCATION}</td>
 		</tr>
 		<tr>
+			<td class="titre3" width="20%">{L_HARDWARE_LOCATION}</td>
+			<td class="row1" width="30%">{HARDWARE_LOCATION}</td>
 			<td class="titre3" width="20%">{L_NETWHARDNAME}</td>
 			<td class="row1" width="30%">{NETWHARDNAME}</td>
-			<td class="titre3" width="20%">{L_HARDNAME}</td>
-			<td class="row1" width="30%">{HARDNAME}</td>
 		</tr>
 		<tr>
+			<td class="titre3" width="20%">{L_HARDNAME}</td>
+			<td class="row1" width="30%">{HARDNAME}</td>
 			<td class="titre3" width="20%">{L_PORT}</td>
 			<td class="row1" width="30%">{PORT}</td>
-			<td width="20%">&nbsp;</td>
-			<td >&nbsp;</td>
+		</tr>
+		<tr>
+			<td class="titre3" width="20%">{L_POE_MATERIEL}</td>
+			<td class="row1" width="30%">{POE_MATERIEL}</td>
+			<td class="titre3" width="20%">{L_BRANCHER_POE_MATERIEL}</td>
+			<td class="row1" width="30%">{BRANCHER_POE_MATERIEL}</td>
+		</tr>
+		<tr>
+			<td class="titre3" width="20%">{L_POE_RESEAU}</td>
+			<td class="row1" width="30%">{POE_RESEAU}</td>
+			<td class="titre3" width="20%">{L_BRANCHER_POE_RESEAU}</td>
+			<td class="row1" width="30%">{BRANCHER_POE_RESEAU}</td>
 		</tr>
 		<!-- BEGIN line -->
 		<tr>
@@ -124,4 +136,8 @@
 		<!-- END download -->
 	</div>
 	<!-- END doc_links -->
+</div>
+
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'netw')">{RETURN}</button>
 </div>

@@ -74,7 +74,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_user_addok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'AGENCE_ID' => $_GET["agence_id"],
+			'RETURN' => $lang["gen_back"]
 		));			
 	}
 	else
@@ -97,6 +99,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		  'TITLE' => $lang["adm_user_title_add"],
 		  'ACTION' => 'index.php?page=adm_utilisateurs.php&amp;action=add&agence_id=' . $agence_id_current,
 		  'DISPLAY_OUAPIUSER' => 'display:none',
+		  'AGENCE_ID' => $_GET["agence_id"],
+		  'RETURN' => $lang["gen_back"],
 		));
 			
 		// Nom
@@ -1138,6 +1142,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_user_title_edit"],
 			  'ACTION' => 'index.php?page=adm_utilisateurs.php&action=Editer&user_id='.$user_id.'&agence_id=' . $agence_id_current,
+			  'AGENCE_ID' => $_GET["agence_id"],
+		  	  'RETURN' => $lang["gen_back"],
 			));
 			
 			$template->assign_block_vars('form.name', array(
@@ -1323,6 +1329,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Supprimer')
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_user_title_del"],
 		  		'ACTION' => 'index.php?page=adm_utilisateurs.php&action=Supprimer&user_id=' . $user_id . '&agence_id=' . $agence_id_current,
+				'AGENCE_ID' => $_GET["agence_id"],
+		  		'RETURN' => $lang["gen_back"],
 			));
 			$template->assign_block_vars('form.name', array(
 			  'TITLE' => $lang["adm_user_name"],
@@ -1401,6 +1409,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'change_mdp')
 			$template->assign_block_vars('form', array(
 			  'TITLE' => $lang["adm_user_title_mdp"],
 			  'ACTION' => 'index.php?page=adm_utilisateurs.php&action=change_mdp&user_id='.$user_id.'&agence_id=' . $agence_id_current,
+			  'AGENCE_ID' => $_GET["agence_id"],
+		  	  'RETURN' => $lang["gen_back"],
 			));
 			
 			$template->assign_block_vars('form.name', array(

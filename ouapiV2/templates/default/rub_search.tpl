@@ -1,13 +1,43 @@
-<!-- BEGIN r_search -->	
+<!-- BEGIN r_search -->
+	<!-- Formulaire caché pour l'export -->
+	<!-- BEGIN export -->
+	<form method="post" name="formexport_search" action="index.php?page=export.php&amp;export=search&amp;type=excel" style="margin:0px;">
+	<input type="hidden" name="nom" value="{r_search.export.NOM}" /><input type="hidden" name="export_data" value="{r_search.export.DATA}" />
+	</form>
+	<!-- END export -->
+	
+	<!-- BEGIN rebus -->
+	<p class="toolbox"><img src="{r_search.rebus.IMAGE}" style="vertical-align:middle" border="0" alt="" /><a href="{r_search.rebus.LINK}">{r_search.rebus.TEXT}</a></p>
+	<!-- END rebus -->
+	
+	<!-- BEGIN export -->
+	<p class="toolbox">	
+	<img src="{r_search.export.IMAGE}" style="vertical-align:middle" border="0" alt="" /> 
+	<a href="#" onclick="{r_search.export.LINK}"><u>{r_search.export.TEXT}</u></a></p>
+	<!-- END export -->
+	
 	<!-- BEGIN filter_section -->
-	<div style="margin-bottom: 15px; padding: 10px; background-color: #f5f5f5; border-radius: 4px;">
-		<label for="search_filter" style="margin-right: 10px;"><strong>Filtrer par:</strong></label>
-		<select id="search_filter" name="search_filter" onchange="location.href=updateUrlParameter(window.location.href, 'search_filter', this.value);" style="padding: 5px;">
-			<option value="">-- Tous les champs --</option>
-			<!-- BEGIN filter_field -->
-			<option value="{r_search.filter_section.filter_field.VALUE}" {r_search.filter_section.filter_field.SELECTED}>{r_search.filter_section.filter_field.LABEL}</option>
-			<!-- END filter_field -->
-		</select>
+	<div style="margin-top: 30px; margin-bottom: 15px; padding: 10px; background-color: #f5f5f5; border-radius: 4px;">
+		<div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+			<div style="flex: 1; min-width: 250px;">
+				<label for="search_filter" style="margin-right: 10px;"><strong>Filtrer par champ:</strong></label>
+				<select id="search_filter" name="search_filter" onchange="location.href=updateUrlParameter(window.location.href, 'search_filter', this.value);" style="padding: 5px; width: 100%; max-width: 300px;">
+					<option value="">-- Tous les champs --</option>
+					<!-- BEGIN filter_field -->
+					<option value="{r_search.filter_section.filter_field.VALUE}" {r_search.filter_section.filter_field.SELECTED}>{r_search.filter_section.filter_field.LABEL}</option>
+					<!-- END filter_field -->
+				</select>
+			</div>
+			<div style="flex: 1; min-width: 250px;">
+				<label for="search_site_filter" style="margin-right: 10px;"><strong>Filtrer par Site:</strong></label>
+				<select id="search_site_filter" name="search_site_filter" onchange="location.href=updateUrlParameter(window.location.href, 'search_site_filter', this.value);" style="padding: 5px; width: 100%; max-width: 300px;">
+					<option value="">-- Tous les sites --</option>
+					<!-- BEGIN filter_site -->
+					<option value="{r_search.filter_section.filter_site.VALUE}" {r_search.filter_section.filter_site.SELECTED}>{r_search.filter_section.filter_site.LABEL}</option>
+					<!-- END filter_site -->
+				</select>
+			</div>
+		</div>
 	</div>
 	<!-- END filter_section -->
 	

@@ -70,3 +70,6 @@
 	<!-- END ldap -->
 
 </div>
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'users')">{RETURN}</button>
+</div>

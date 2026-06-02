@@ -104,7 +104,10 @@
 		<!-- END hard_assoc -->
 
 		<!-- BEGIN button -->	
+		<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
 		<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+		<button type="button" onclick="closeToHome({form.AGENCE_ID}, 'soft')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+		</div>
 		<!-- END button -->
 
 		<!-- BEGIN help -->
@@ -159,7 +162,10 @@
 		<!-- END alias_id -->
 
 		<!-- BEGIN button -->	
-		<input type="submit" name="soumettre" value="{form_ocs.button.TITLE}" />
+		<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+			<input type="submit" name="soumettre" value="{form_ocs.button.TITLE}" />
+			<button type="button" onclick="closeToHome({form.AGENCE_ID}, 'soft')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+		</div>
 		<!-- END button -->
 
 		<!-- BEGIN help -->

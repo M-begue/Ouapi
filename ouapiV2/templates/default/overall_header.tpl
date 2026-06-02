@@ -43,14 +43,28 @@
     	sessionStorage.setItem('forceRefresh', 'true');
     	window.history.go(-2);
 	}
+
+	function goBackOneTimeAndRefresh() {
+    	sessionStorage.setItem('forceRefresh', 'true');
+    	window.history.go(-1);
+	}
 	
-	// Fonction pour fermer et retourner à l'accueil avec agence_id et rubrique
-	function closeToHome(agence_id, rubrique) {
-		if (rubrique) {
-			window.location.href = 'index.php?page=accueil.php&agence_id=' + agence_id + '&rubrique=' + rubrique;
-		} else {
-			window.location.href = 'index.php?page=accueil.php&agence_id=' + agence_id;
+	// Fonction pour fermer et retourner à l'accueil avec agence_id, rubrique et sscat
+	function closeToHome(agence_id, rubrique, sscat, action) {
+		var url = 'index.php?page=accueil.php';
+		if (agence_id) {
+			url += '&agence_id=' + agence_id;
 		}
+		if (rubrique) {
+			url += '&rubrique=' + rubrique;
+		}
+		if (sscat) {
+			url += '&sscat=' + sscat;
+		}
+		if (action) {
+			url += '&action=' + action;
+		}
+		window.location.href = url;
 	}
 
 	// Fonction pour retourner à l'accueil avec la bonne rubrique

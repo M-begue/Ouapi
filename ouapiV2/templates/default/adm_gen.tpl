@@ -17,13 +17,15 @@
 	<label>{form.FIELDLABEL_TITLE}</label>
 	<input type="text" name="fieldlabel" value="{form.FIELDLABEL_VALUE}" /><br/>
 	
-	<input type="submit" name="soumettre" value="{form.BUTTON_TITLE}" />
+	<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+		<input type="submit" name="soumettre" value="{form.BUTTON_TITLE}" />
+		<button type="button" onclick="closeToHome('', 'admin', '', '{form.ACTION_NAME}')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
 </form>
 <!-- END form -->
 
 <!-- BEGIN form_post -->
 	<br/><p class="contenu" id="{form_post.ID}">{form_post.OK}<br/><br/>
-	<a href="javascript:goBackAndRefresh()">{form_post.CLOSE}</a>&nbsp;
+	<a href="javascript:closeToHome('', 'admin', '', '{form_post.ACTION_NAME}')">{form_post.CLOSE}</a>&nbsp;
 	<!-- BEGIN back -->
 		<a href="{form_post.back.BACK_PAGE}">{form_post.back.BACK}</a>
 	<!-- END back -->

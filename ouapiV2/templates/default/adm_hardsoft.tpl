@@ -79,4 +79,7 @@
 	<!-- END tab_hard -->
 	</table>
 </div>
+<div style="text-align: center; margin-top: 10px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'soft')">{RETURN}</button>
+</div>
 

@@ -158,6 +158,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 		TAB_PERIPH_TYPE.".".PE_TY_LIBELLE,
 		TAB_PERIPH_MARQUE.".".PE_MA_LIBELLE,
 		TAB_PERIPH_MODELE.".".PE_MO_LIBELLE,
+		TAB_PERIPH.".".PE_LOCATIONID,
 		TAB_PERIPH.".".PE_SERIALNUMBER,
 		TAB_PERIPH.".".PE_COMMENT,
 		TAB_PERIPH.".".PE_CREATIONDATE,
@@ -226,7 +227,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 	  TAB_RESEAU.".".RE_PORTID,
 	  "alias_switchname.".HA_NAME,
 	  TAB_EMPL.".".EM_LIBELLE,
-	  TAB_HARD.".".HA_NAME,
+	  TAB_HARD.".".HA_NAME,	  
+	  TAB_RESEAU.".type_reseau_materiel_id",
+	  TAB_RESEAU.".type_reseau_equipement_id",	  
+	  TAB_RESEAU.".".RE_POE_MATERIEL,
+	  TAB_RESEAU.".".RE_BRANCHER_POE_MATERIEL,
+	  TAB_RESEAU.".".RE_POE_RESEAU,
+	  TAB_RESEAU.".".RE_BRANCHER_POE_RESEAU,
 	);
 
 	// Colonnes perso
@@ -341,12 +348,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 		TAB_OCS_HARD.'.'.COL_OCS_HARD_NAME,
 	);
 
-	$template->assign_vars( array(
-	  'TITLE' => $lang["adm_display_title"],
-	  'BUTTON' => $lang["adm_display_buttonsave"],
-	  'AGENCE_ID' => isset($_GET['agence_id']) ? $_GET['agence_id'] : '',
-	  'RUBRIQUE' => $_GET['rub'],
-	));
 
 	// On cherche le nombre de r�sultats (sous categories)
 	$requete = "SELECT * FROM ".TAB_USERS_PS." WHERE user_id='0' AND category='".$_GET["rub"]."'";
@@ -356,6 +357,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 		$subcat = $_GET["subcat"];
 	else
 		$subcat = $tab_subcats[0][UT_PS_SUBCATEGORY];
+
+	$template->assign_vars( array(
+	  'TITLE' => $lang["adm_display_title"],
+	  'BUTTON' => $lang["adm_display_buttonsave"],
+	  'AGENCE_ID' => isset($_GET['agence_id']) ? $_GET['agence_id'] : '',
+	  'RUBRIQUE' => $_GET['rub'],
+	  'SSCAT' => (isset($subcat) && in_array($subcat, array('hard', 'periph'))) ? $subcat : '',
+	));
 	
 	// Traitement des sous categories
 	if (count($tab_subcats) > 1)
@@ -366,7 +375,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 			if ($subcat == $tab_subcats[$k][UT_PS_SUBCATEGORY])
 			{		
 				$template->assign_block_vars('subcats', array(
-				  'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rub"].'&amp;subcat='.$tab_subcats[$k][UT_PS_SUBCATEGORY],
+				  'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rub"].'&amp;subcat='.$tab_subcats[$k][UT_PS_SUBCATEGORY].'&amp;agence_id=' . (isset($_GET['agence_id']) ? $_GET['agence_id'] : ''),
 				  'STYLE' => 'font-weight:bold;font-size:12px;',
 				  'NAME' => $lang[$tab_subcats[$k][UT_PS_SUBCATEGORY]],
 				));
@@ -374,7 +383,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 			else
 			{		
 				$template->assign_block_vars('subcats', array(
-				  'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rub"].'&amp;subcat='.$tab_subcats[$k][UT_PS_SUBCATEGORY],
+				  'LINK' => 'index.php?page=adm_display.php&amp;action=col_conf&amp;rub='.$_GET["rub"].'&amp;subcat='.$tab_subcats[$k][UT_PS_SUBCATEGORY].'&amp;agence_id=' . (isset($_GET['agence_id']) ? $_GET['agence_id'] : ''),
 				  'NAME' => $lang[$tab_subcats[$k][UT_PS_SUBCATEGORY]],
 				));
 			}
@@ -409,6 +418,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 	  'TITLE_DISPLAY' => $lang["adm_display_displayedcols"],
 	  'TITLE_NOTDISPLAY' => $lang["adm_display_notdisplayedcols"],
 	  'TITLE_PARAM' => $lang["adm_display_groupbytitle"],
+	  'AGENCE_ID' => isset($_GET['agence_id']) ? $_GET['agence_id'] : '',
+	  'RUBRIQUE' => $_GET['rub'],
+	  'SSCAT' => (isset($subcat) && in_array($subcat, array('hard', 'periph'))) ? $subcat : '',
 	));
 
 	// Colonne de groupement
@@ -451,7 +463,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 						$colLabel = ucfirst($cleanName);
 					}
 				} else {
-					$colLabel = $lang["s_" . $colKey];
+					if (isset($lang["s_" . $colKey])) {
+						$colLabel = $lang["s_" . $colKey];
+					} else {
+						// Générer un label pour les champs qui n'ont pas de traduction
+						if (isset($colParts[1])) {
+							$cleanName = str_replace('_', ' ', $colParts[1]);
+							$colLabel = ucfirst($cleanName);
+						} else {
+							$colLabel = $colKey;
+						}
+					}
 				}
 				
 				if ($cols_availables[$_GET["rub"]][$subcat][$i] == $tab[0][UT_PS_DISPLAYGROUPCOL])
@@ -497,7 +519,17 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 					$colLabel = ucfirst($cleanName);
 				}
 			} else {
-				$colLabel = $lang["s_" . $colKey];
+				if (isset($lang["s_" . $colKey])) {
+					$colLabel = $lang["s_" . $colKey];
+				} else {
+					// Générer un label pour les champs qui n'ont pas de traduction
+					if (isset($colParts[1])) {
+						$cleanName = str_replace('_', ' ', $colParts[1]);
+						$colLabel = ucfirst($cleanName);
+					} else {
+						$colLabel = $colKey;
+					}
+				}
 			}
 			
 			if ($cols_availables[$_GET["rub"]][$subcat][$i] == $tab[0][UT_PS_DISPLAYSORTCOL])
@@ -542,7 +574,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 		else
 		{
 			$class = 'dbox';
-			$texte = $lang["s_".$personal_setting[$i]];
+			if (isset($lang["s_".$personal_setting[$i]])) {
+				$texte = $lang["s_".$personal_setting[$i]];
+			} else {
+				// Générer un label pour les champs sans traduction
+				$colParts = explode('.', $personal_setting[$i]);
+				if (isset($colParts[1])) {
+					$cleanName = str_replace('_', ' ', $colParts[1]);
+					$texte = ucfirst($cleanName);
+				} else {
+					$texte = $personal_setting[$i];
+				}
+			}
 		}
 		
 		$template->assign_block_vars('cols.displayed', array(
@@ -584,7 +627,18 @@ if (isset($_GET['action']) && $_GET['action'] == 'col_conf')
 			else
 			{
 				$class = 'dbox';
-				$texte = $lang["s_".$not_d[$i]];
+				if (isset($lang["s_".$not_d[$i]])) {
+					$texte = $lang["s_".$not_d[$i]];
+				} else {
+					// Générer un label pour les champs sans traduction
+					$colParts = explode('.', $not_d[$i]);
+					if (isset($colParts[1])) {
+						$cleanName = str_replace('_', ' ', $colParts[1]);
+						$texte = ucfirst($cleanName);
+					} else {
+						$texte = $not_d[$i];
+					}
+				}
 			}
 				
 			$template->assign_block_vars('cols.not_displayed', array(

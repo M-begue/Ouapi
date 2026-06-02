@@ -133,7 +133,10 @@
 		<!-- END pfield_text -->
 
 		<!-- BEGIN button -->	
+		<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
 		<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+		<button type="button" onclick="closeToHome({form.AGENCE_ID}, 'docs')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+		</div>
 		<!-- END button -->
 		
 		</form>
@@ -148,3 +151,21 @@
 	<!-- END back -->
 	</p><br/>
 <!-- END form_post -->
+
+<!-- BEGIN form_link_post -->
+	<br/><p class="contenu" id="{form_link_post.ID}">{form_link_post.OK}<br/><br/>
+	<a href="javascript:goBackAndRefresh()">{form_link_post.CLOSE}</a>&nbsp;
+	<!-- BEGIN back -->
+		<a href="{form_link_post.back.BACK_PAGE}">{form_link_post.back.BACK}</a>
+	<!-- END back -->
+	</p><br/>
+<!-- END form_link_post -->
+
+<!-- BEGIN form_unlink_post -->
+	<br/><p class="contenu" id="{form_unlink_post.ID}">{form_unlink_post.OK}<br/><br/>
+	<a href="javascript:goBackOneTimeAndRefresh()">{form_unlink_post.CLOSE}</a>&nbsp;
+	<!-- BEGIN back -->
+		<a href="{form_unlink_post.back.BACK_PAGE}">{form_unlink_post.back.BACK}</a>
+	<!-- END back -->
+	</p><br/>
+<!-- END form_unlink_post -->

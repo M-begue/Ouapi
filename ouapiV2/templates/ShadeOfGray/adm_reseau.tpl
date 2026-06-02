@@ -13,6 +13,14 @@
 		<label>{form.numero.TITLE}</label>
 		<input type="text" name="numero" value="{form.numero.VALUE}" id="{form.numero.ID}" onkeyup="{form.numero.KEYUP}" {form.numero.DISABLED} ><br/>
 		<!-- END numero -->
+
+		<!-- BEGIN poe_checkbox_materiel -->
+		<label><input type="checkbox" name="POE_materiel" value="1" {form.equipement_connecte.poe_checkbox_materiel.CHECKED} {form.equipement_connecte.poe_checkbox_materiel.DISABLED} /> {form.equipement_connecte.poe_checkbox_materiel.TITLE}</label><br/>
+		<!-- END poe_checkbox_materiel -->
+
+		<!-- BEGIN brancher_poe_checkbox_materiel -->
+		<label><input type="checkbox" name="Brancher_POE_materiel" value="1" {form.equipement_connecte.brancher_poe_checkbox_materiel.CHECKED} {form.equipement_connecte.brancher_poe_checkbox_materiel.DISABLED} /> {form.equipement_connecte.brancher_poe_checkbox_materiel.TITLE}</label><br/>
+		<!-- END brancher_poe_checkbox_materiel -->
 		
 		<!-- BEGIN hard -->
 		<label>{form.hard.TITLE}</label>
@@ -58,6 +66,14 @@
 		<label>{form.port.TITLE}</label>
 		<input type="text" name="port_id" value="{form.port.VALUE}" onkeyup="{form.port.KEYUP}" {form.port.DISABLED} ><br/>
 		<!-- END port -->
+
+		<!-- BEGIN poe_checkbox_reseau -->
+		<label><input type="checkbox" name="POE_reseau" value="1" {form.equipement_reseau.poe_checkbox_reseau.CHECKED} {form.equipement_reseau.poe_checkbox_reseau.DISABLED} /> {form.equipement_reseau.poe_checkbox_reseau.TITLE}</label><br/>
+		<!-- END poe_checkbox_reseau -->
+
+		<!-- BEGIN brancher_poe_checkbox_reseau -->
+		<label><input type="checkbox" name="Brancher_POE_reseau" value="1" {form.equipement_reseau.brancher_poe_checkbox_reseau.CHECKED} {form.equipement_reseau.brancher_poe_checkbox_reseau.DISABLED} /> {form.equipement_reseau.brancher_poe_checkbox_reseau.TITLE}</label><br/>
+		<!-- END brancher_poe_checkbox_reseau -->
 	
 		<!-- BEGIN hard_assoc -->		
 			<!-- BEGIN list -->
@@ -73,7 +89,7 @@
 		<!-- END pfield_text -->
 
 		<!-- BEGIN button -->	
-		<input type="submit" name="soumettre" value="{form.button.TITLE}" >
+		<input type="submit" name="soumettre" value="{form.button.TITLE}" > <button type="button" onclick="closeToHome({form.AGENCE_ID}, 'netw')">{form.RETURN}</button>
 		<!-- END button -->
 
 		</form>

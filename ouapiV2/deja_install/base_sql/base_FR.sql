@@ -247,6 +247,7 @@ CREATE TABLE `{TAB_PERIPH}` (
   `nom` varchar(255) NOT NULL,
   `hard_id` int(10) NOT NULL default '0',
   `agence_id` int(3) default NULL,
+  `emplacement_id` int(10) NOT NULL default '0',
   `reservable` int(1) NOT NULL default '0',
   `suivi_rebus` text NOT NULL,
   `commentaire` text NOT NULL,
@@ -271,10 +272,22 @@ CREATE TABLE `{TAB_RESEAU}` (
   `num_prise` varchar(255) NOT NULL,
   `emplacement_id` int(10) NOT NULL,
   `hardware_id` int(10) NOT NULL,
+  `type_reseau_materiel_id` int(3) DEFAULT NULL,
   `equipement_id` int(10) NOT NULL,
+  `type_reseau_equipement_id` int(3) DEFAULT NULL,
   `port_id` int(3) NOT NULL,
+  `POE_materiel` BOOLEAN NOT NULL DEFAULT FALSE,
+  `Brancher_POE_materiel` BOOLEAN NOT NULL DEFAULT FALSE,
+  `POE_reseau` BOOLEAN NOT NULL DEFAULT FALSE,
+  `Brancher_POE_reseau` BOOLEAN NOT NULL DEFAULT FALSE,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;[END]
+
+CREATE TABLE `{TAB_TYPE_RESEAU}` (
+  `id` int(3)  AUTO_INCREMENT,
+  `libelle` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;[END]
 
 CREATE TABLE `{TAB_RESA}` (
   `id` int(11) NOT NULL auto_increment,

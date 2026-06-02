@@ -35,7 +35,8 @@ if (isset($_GET['action']) && $_GET['action'] == 'add_grp')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_gen_grpadd_ok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'ACTION_NAME' => 'param_rights',
 		));		
 	}
 	else
@@ -65,8 +66,12 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'del_grp')
 	$requete = "UPDATE ".TAB_USERS." SET groupe_id='".$_POST["grp_new"]."' WHERE groupe_id='".$_GET["grp_id"]."'";
 	$tab = $req1->db_use_query($requete);
 	
-	$affichage = '<br/><p class="contenu" id="mess_retour">'.$lang["adm_gen_grpdel_ok"].'<br/><br/>
-	<a href="javascript:goToHomeWithRubrique()">'.$lang["close"].'</a></p><br/>';
+	$template->assign_block_vars('form_post', array(
+		'OK' => $lang["adm_gen_grpdel_ok"], 					
+		'CLOSE' => $lang["close"],			
+		'ID' => 'mess_retour',
+		'ACTION_NAME' => 'param_rights',
+	));
 }
 /*************************************/
 /*		    Config G�n�rale          */
@@ -173,7 +178,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'param' && isset($_POST['so
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_gen_param_majok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'ACTION_NAME' => 'param_gen',
 		));			
 	}
 	else
@@ -202,7 +208,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'param_rights')
 	$template->assign_block_vars('form_post', array(
 		'OK' => $lang["adm_gen_param_majok"], 					
 		'CLOSE' => $lang["close"],	
-		'ID' => 'mess_retour'
+		'ID' => 'mess_retour',
+		'ACTION_NAME' => 'param_rights',
 	));			
 
 }
@@ -363,7 +370,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'addfield' && isset($_POST[
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_gen_addfieldok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'ACTION_NAME' => 'addfield',
 		));	
 	}
 	else
@@ -407,7 +415,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'delfield')
 		$template->assign_block_vars('form_post', array(
 			'OK' => $lang["adm_gen_delfieldok"], 					
 			'CLOSE' => $lang["close"],	
-			'ID' => 'mess_retour'
+			'ID' => 'mess_retour',
+			'ACTION_NAME' => 'addfield',
 		));	
 	}
 	else
@@ -554,6 +563,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'editer')
         'FIELDLABEL_TITLE' => $lang["admin_editfield_fieldlabel"] ?? $lang["admin_addfield_title"],
         'FIELDLABEL_VALUE' => $fieldlabel,
         'BUTTON_TITLE' => $lang["gen_send"],
+		'RETURN' => $lang["gen_back"],
+		'ACTION_NAME' => 'addfield',
     ));
 }
 

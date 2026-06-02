@@ -101,7 +101,7 @@
 			<td class="{hard_periph.list.CLASS}" width="20%">{hard_periph.list.SERIAL}</td>
 			<td class="{hard_periph.list.CLASS}" align="right" width="10%">
 			<!-- BEGIN tools -->	
-				<a href="{hard_periph.list.tools.LINK}" target="_blank"><img src="{hard_periph.list.tools.IMAGE}" border="0" title="{hard_periph.list.tools.TITLE}" alt="" /></a>&nbsp;
+				<a href="{hard_periph.list.tools.LINK}"><img src="{hard_periph.list.tools.IMAGE}" border="0" title="{hard_periph.list.tools.TITLE}" alt="" /></a>&nbsp;
 			<!-- END tools -->		
 			</td>
 		</tr>
@@ -114,7 +114,7 @@
 	<!-- BEGIN add -->	
 	<tr>
 		<td colspan="4" align="right" class="row">[ <img src="{hard_periph.add.IMG}" border="0" alt="" /> 
-		<a href="{hard_periph.add.LINK}" target="_blank">{hard_periph.add.TEXT}</a> ]			
+		<a href="{hard_periph.add.LINK}">{hard_periph.add.TEXT}</a> ]			
 		</td>
 	</tr>	
 	<!-- END add -->		
@@ -142,7 +142,7 @@
 	<!-- BEGIN add -->	
 	<tr>
 		<td colspan="4" align="right" class="row">[ <img src="{hard_network.add.IMG}" border="0" alt="" /> 
-		<a href="{hard_network.add.LINK}" target="_blank">{hard_network.add.TEXT}</a> ]			
+		<a href="{hard_network.add.LINK}">{hard_network.add.TEXT}</a> ]			
 		</td>
 	</tr>	
 	<!-- END add -->		
@@ -163,7 +163,7 @@
 			<td class="{hard_docs.list.CLASS}" width="38%">{hard_docs.list.L_COMMENT}:&nbsp;{hard_docs.list.COMMENT}</td>
 			<td class="{hard_docs.list.CLASS}" width="8%" align="right">
 			<!-- BEGIN tools -->
-				<a href="{hard_docs.list.tools.LINK}" target="_blank"><img src="{hard_docs.list.tools.IMG}" border="0" title="{hard_docs.list.tools.IMG_TITLE}" alt="" /></a>&nbsp;			
+				<a href="{hard_docs.list.tools.LINK}"><img src="{hard_docs.list.tools.IMG}" border="0" title="{hard_docs.list.tools.IMG_TITLE}" alt="" /></a>&nbsp;			
 			<!-- END tools -->			
 			</td>
 		</tr>
@@ -176,7 +176,7 @@
 		<!-- BEGIN add -->	
 		<tr>
 			<td colspan="6" align="right" class="row">[ <img src="{hard_docs.add.IMG}" border="0" alt="" /> 
-			<a href="{hard_docs.add.LINK}" target="_blank">{hard_docs.add.TEXT}</a> ]			
+			<a href="{hard_docs.add.LINK}">{hard_docs.add.TEXT}</a> ]			
 			</td>
 		</tr>	
 		<!-- END add -->		
@@ -184,6 +184,10 @@
 	</table>
 	</div>
 <!-- END hard_docs -->
+
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+	<button type="button" onclick="closeToHome({AGENCE_ID}, 'hard')">{RETURN}</button>
+</div>
 
 <!-- BEGIN hard_ocsdetails -->
 	<div id="hard_hardocs" style="display:none">
@@ -291,7 +295,7 @@
 				<!-- BEGIN add -->	
 				<tr>
 					<td colspan="3" align="right" class="row">[ <img src="{hard_softocs.manual.add.IMG}" border="0" alt="" /> 
-					<a href="{hard_softocs.manual.add.LINK}" target="_blank">{hard_softocs.manual.add.TEXT}</a> ]			
+					<a href="{hard_softocs.manual.add.LINK}">{hard_softocs.manual.add.TEXT}</a> ]			
 					</td>
 				</tr>	
 				<!-- END add -->		

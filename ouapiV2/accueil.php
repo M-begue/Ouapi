@@ -548,7 +548,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					if (preg_match('`;'.RGHT_HARD_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 					{
 						$template->assign_block_vars('r_hard.tab_hard.group.list.tools', array(
-							'LINK' => 'index.php?page=adm_materiels.php&amp;action=rebus&amp;h_id='.$tab[$i]["hard_id"],
+							'LINK' => 'index.php?page=adm_materiels.php&amp;action=rebus&amp;h_id='.$tab[$i]["hard_id"].'&amp;agence_id='.intval($_GET["agence_id"]),
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/rebus.gif',
 							'TITLE' => $lang["rebus"]
 						));
@@ -723,12 +723,14 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			".TAB_PERIPH_TYPE.".".PE_TY_LIBELLE." AS type_libelle,
 			".TAB_PERIPH_MARQUE.".libelle AS marque_libelle,
 			".TAB_PERIPH_MODELE.".libelle AS modele_libelle,
-			".TAB_HARD.".nom AS hard_nom
+			".TAB_HARD.".nom AS hard_nom,
+			".TAB_EMPL.".".EM_LIBELLE." AS lieu_libelle
 			FROM ".TAB_PERIPH."
 			  LEFT JOIN ".TAB_PERIPH_TYPE." ON ".TAB_PERIPH_TYPE.".id = ".TAB_PERIPH.".type_id
 			  LEFT JOIN ".TAB_PERIPH_MARQUE." ON ".TAB_PERIPH_MARQUE.".id = ".TAB_PERIPH.".marque_id
 			  LEFT JOIN ".TAB_PERIPH_MODELE." ON ".TAB_PERIPH_MODELE.".id = ".TAB_PERIPH.".modele_id
 			  LEFT JOIN ".TAB_HARD." ON ".TAB_HARD.".id = ".TAB_PERIPH.".hard_id
+			  LEFT JOIN ".TAB_EMPL." ON ".TAB_EMPL.".id = ".TAB_PERIPH.".emplacement_id
 			WHERE ".TAB_PERIPH.".agence_id='".intval(intval($_GET["agence_id"]))."'".$suivi_rebus."".$filtre_type_id."
 			ORDER BY ".$sql_groupcol." ".$tri;
 
@@ -854,6 +856,8 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
         						$display_title = $tab[$i]['marque_libelle'] ?? '';
     						} elseif (strpos($cols_groupcol, 'modele') !== false) {
         						$display_title = $tab[$i]['modele_libelle'] ?? '';
+							} elseif (strpos($cols_groupcol, 'lieu') !== false || strpos($cols_groupcol, 'emplacement') !== false) {
+								$display_title = $tab[$i]['lieu_libelle'] ?? '';
     						} else {
         						// Pour les autres champs (Nom, SN...), on nettoie la clé SQL pour lire le tableau
         						$group_key_clean = substr(strrchr($cols_groupcol, "."), 1) ?: $cols_groupcol;
@@ -918,6 +922,8 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
         					$valeur_brute = $tab[$i]['modele_libelle'] ?? '';
     					} elseif (strpos($col_brute, 'peripherique.nom') !== false) {
         					$valeur_brute = $tab[$i]['nom'] ?? '';
+						} elseif (strpos($col_brute, 'emplacement_id') !== false || strpos($col_brute, 'lieu') !== false) {
+                            $valeur_brute = $tab[$i]['lieu_libelle'] ?? '';
     					} elseif (strpos($col_brute, 'hardware.nom') !== false) {
         					$valeur_brute = $tab[$i]['hard_nom'] ?? '';
     					} elseif (strpos($col_brute, 'num_serie') !== false) {
@@ -971,7 +977,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					if (preg_match('`;'.RGHT_PERIPH_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 					{
 						$template->assign_block_vars('r_periph.tab_periph.group.list.tools', array(
-							'LINK' => 'index.php?page=adm_peripheriques.php&amp;action=rebus&amp;p_id='.($tab[$i]['id'] ?? ''),
+							'LINK' => 'index.php?page=adm_peripheriques.php&amp;action=rebus&amp;p_id='.($tab[$i]['id'] ?? '').'&amp;agence_id='.intval(intval($_GET["agence_id"])),
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/rebus.gif',
 							'TITLE' => $lang["rebus"]
 						));
@@ -1285,7 +1291,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			if (preg_match('`;'.RGHT_SOFT_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 			{
 				$template->assign_block_vars('r_soft.hardtype', array(
-					'LINK' => 'index.php?page=adm_logiciels.php&amp;config=assoc',
+					'LINK' => 'index.php?page=adm_logiciels.php&amp;config=assoc&amp;agence_id='.intval($_GET["agence_id"]),
 					'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/conf.gif',
 					'TEXT' => $lang["soft_maj_assoc"]
 				));
@@ -1452,7 +1458,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					if ((preg_match('`;'.RGHT_USERS_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10) && ($tab[$i][US_LNAME] ?? '') != 'Demo')
 					{
 						$template->assign_block_vars('r_users.tab_user.group.list.tools', array(
-							'LINK' => 'index.php?page=adm_utilisateurs.php&amp;user_id='.($tab[$i]["id"] ?? '').'&amp;action=change_mdp',
+							'LINK' => 'index.php?page=adm_utilisateurs.php&amp;user_id='.($tab[$i]["id"] ?? '').'&amp;action=change_mdp&agence_id=' . $_GET["agence_id"],
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/password.gif',
 							'TITLE' => $lang["user_change_mdp"]
 						));
@@ -1460,7 +1466,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					if ((preg_match('`;'.RGHT_USERS_EDIT.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10) && ($tab[$i][US_LNAME] ?? '') != 'Demo')
 					{
 						$template->assign_block_vars('r_users.tab_user.group.list.tools', array(
-							'LINK' => 'index.php?page=adm_utilisateurs.php&amp;user_id='.($tab[$i]["id"] ?? '').'&amp;action=Editer',
+							'LINK' => 'index.php?page=adm_utilisateurs.php&amp;user_id='.($tab[$i]["id"] ?? '').'&amp;action=Editer&amp;agence_id=' . $_GET["agence_id"],
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/edit.gif',
 							'TITLE' => $lang["edit"]
 						));
@@ -1468,7 +1474,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					if ((preg_match('`;'.RGHT_USERS_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10) && ($tab[$i][US_LNAME] ?? '') != 'Demo')
 					{
 						$template->assign_block_vars('r_users.tab_user.group.list.tools', array(
-							'LINK' => 'index.php?page=adm_utilisateurs.php&amp;user_id='.($tab[$i]["id"] ?? '').'&amp;action=Supprimer',
+							'LINK' => 'index.php?page=adm_utilisateurs.php&amp;user_id='.($tab[$i]["id"] ?? '').'&amp;action=Supprimer&amp;agence_id=' . $_GET["agence_id"],
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/delete.gif',
 							'TITLE' => $lang["delete"]
 						));
@@ -2120,19 +2126,36 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				$i++;
 			}
 
+			if (strpos($cols_groupcol, 'alias_switchname.nom') !== false) {
+    			$cols_groupcol = str_replace('alias_switchname.nom', 'switch_name', $cols_groupcol);
+			}
+			if (strpos($tri, 'alias_switchname.nom') !== false) {
+    			$tri = str_replace('alias_switchname.nom', 'switch_name', $tri);
+			}
+
 			(trim($cols_groupcol) != '') ? ($sql_groupcol = $cols_groupcol.',') : ($sql_groupcol = '');
 			// Tableau des prises
 			$k = 0;
 			$requete_prises = "SELECT ".TAB_RESEAU.".*,
 			  ".TAB_PERIPH.".nom AS switch_name,
 			  ".TAB_HARD.".".HA_NAME." AS hardware_name,
-			  ".TAB_EMPL.".".EM_LIBELLE." AS location_name
+			  ".TAB_EMPL.".".EM_LIBELLE." AS location_name,
+			  tr_mat.".TY_RE_LIBELLE." AS type_reseau_materiel_libelle,
+			  tr_eq.".TY_RE_LIBELLE." AS type_reseau_equipement_libelle,
+			  ".TAB_RESEAU.".POE_materiel AS POE_materiel,
+			  ".TAB_RESEAU.".Brancher_POE_materiel AS Brancher_POE_materiel,
+			  ".TAB_RESEAU.".POE_reseau AS POE_reseau,
+			  ".TAB_RESEAU.".Brancher_POE_reseau AS Brancher_POE_reseau
 			FROM ".TAB_RESEAU."
 				LEFT JOIN ".TAB_PERIPH." ON ".TAB_RESEAU.".equipement_id = ".TAB_PERIPH.".id
 			  LEFT JOIN ".TAB_HARD." ON ".TAB_RESEAU.".".RE_HARDWAREID." = ".TAB_HARD.".id
 			  LEFT JOIN ".TAB_EMPL." ON ".TAB_RESEAU.".".RE_LOCATIONID." = ".TAB_EMPL.".id
+			  LEFT JOIN ".TAB_TYPE_RESEAU." tr_mat ON ".TAB_RESEAU.".type_reseau_materiel_id = tr_mat.id
+			  LEFT JOIN ".TAB_TYPE_RESEAU." tr_eq ON ".TAB_RESEAU.".type_reseau_equipement_id = tr_eq.id
 			WHERE ".TAB_RESEAU.".".RE_SITEID."='".intval($_GET["agence_id"])."'
 			ORDER BY ".$sql_groupcol." ".$tri;
+
+
 			$tab_prises_brut = $req1->db_use_query($requete_prises,1);
 
 			$tab_prises = [];
@@ -2162,7 +2185,19 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				$j = 0;
 				while ($j < count($cols_display))
 				{
-					$export_data[0][$j+1] = $lang["s_".$cols_display[$j]] ?? $cols_display[$j];
+					// 1. Chercher d'abord dans les langues
+					if (isset($lang["s_".$cols_display[$j]])) {
+						$display_col_name = $lang["s_".$cols_display[$j]];
+					}
+					// 2. Sinon, on nettoie le nom brut après le point
+					else {
+						$display_col_name = substr(strrchr($cols_display[$j], "."), 1) ?: $cols_display[$j];
+						// Remplace underscores par espaces et capitalize
+						$display_col_name = str_replace('_', ' ', $display_col_name);
+						$display_col_name = ucfirst($display_col_name);
+					}
+
+					$export_data[0][$j+1] = $display_col_name;
 
 					$template->assign_block_vars('r_netw.tab_netw.cols', array(
 						'PAGE_TRI' => $page_tri.'&amp;tri='.$cols_display[$j],
@@ -2187,25 +2222,60 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					$j = 0;
 					while ($j < count($cols_display))
 					{
-						$col_brute = $cols_display[$j];
-						if (strpos($col_brute, 'equipement') !== false || strpos($col_brute, 'alias_switchname') !== false) {
+    					$col_brute = $cols_display[$j];
+    
+    					if (strpos($col_brute, '.') !== false) {
+        					$col_nettoyee = substr(strrchr($col_brute, "."), 1);
+    					} else {
+        					$col_nettoyee = $col_brute;
+    					}
+    					$col_nettoyee = trim($col_nettoyee);
+
+
+    					if (strpos($col_brute, 'emplacement') !== false || $col_nettoyee === 'location_name' || $col_nettoyee === 'emplacement_id') {
+        					$valeur_brute = $tab_prises[$k]['location_name'] ?? '';
+    					}
+    
+    					elseif ($col_nettoyee === 'type_reseau_materiel_id' || $col_nettoyee === 'type_reseau_materiel_libelle') {
+        					$valeur_brute = txt_to_na($tab_prises[$k]['type_reseau_materiel_libelle'] ?? '');
+    					} 
+    					elseif ($col_nettoyee === 'type_reseau_equipement_id' || $col_nettoyee === 'type_reseau_equipement_libelle') {
+        					$valeur_brute = txt_to_na($tab_prises[$k]['type_reseau_equipement_libelle'] ?? '');
+    					} 
+
+    					elseif ($col_nettoyee === 'equipement_id' || $col_nettoyee === 'switch_name') {
         					$valeur_brute = txt_to_na($tab_prises[$k]['switch_name'] ?? '');
-						} elseif (strpos($col_brute, 'hardware.'.HA_NAME) !== false) {
-							$valeur_brute = $tab_prises[$k]['hardware_name'] ?? '';
-						} elseif (strpos($col_brute, 'emplacement.'.EM_LIBELLE) !== false) {
-							$valeur_brute = $tab_prises[$k]['location_name'] ?? '';
-						} else {
-							$col_nettoyee = substr(strrchr($col_brute, "."), 1) ?: $col_brute;
-							$valeur_brute = $tab_prises[$k][$col_nettoyee] ?? '';
-						}
+    					} 
+    					elseif ($col_nettoyee === 'hardware_id' || $col_nettoyee === 'hardware_name') {
+        					$valeur_brute = $tab_prises[$k]['hardware_name'] ?? '';
+    					} 
+    					elseif ($col_nettoyee === 'Brancher_POE_materiel') {
+        					$valeur_brute = ($tab_prises[$k]['Brancher_POE_materiel'] ?? 0) ? 'Oui' : 'Non';
+    					} elseif ($col_nettoyee === 'POE_materiel') {
+        					$valeur_brute = ($tab_prises[$k]['POE_materiel'] ?? 0) ? 'Oui' : 'Non';
+    					} elseif ($col_nettoyee === 'Brancher_POE_reseau') {
+     						$valeur_brute = ($tab_prises[$k]['Brancher_POE_reseau'] ?? 0) ? 'Oui' : 'Non';
+    					} elseif ($col_nettoyee === 'POE_reseau') {
+        					$valeur_brute = ($tab_prises[$k]['POE_reseau'] ?? 0) ? 'Oui' : 'Non';
+    					} 
+    					else {
+        					if ($col_nettoyee === 'nom') {
+         						if (strpos($col_brute, 'alias_switchname') !== false) {
+                					$valeur_brute = txt_to_na($tab_prises[$k]['switch_name'] ?? '');
+            					} else {
+                					$valeur_brute = $tab_prises[$k]['hardware_name'] ?? '';
+            					}
+        					} else {
+            					$valeur_brute = $tab_prises[$k][$col_nettoyee] ?? '';
+							}
+    					}
 
-						$export_data[$k+1][$j+1] = col_displaying($col_brute, $valeur_brute);
+    					$export_data[$k+1][$j+1] = col_displaying($col_brute, $valeur_brute);
+    					$template->assign_block_vars('r_netw.tab_netw.list.cols', array(
+        					'TITLE' => $export_data[$k+1][$j+1],
+    					));
 
-						$template->assign_block_vars('r_netw.tab_netw.list.cols', array(
-							'TITLE' => $export_data[$k+1][$j+1],
-						));
-
-						$j++;
+    					$j++;
 					}
 
 					// Affichage de la fiche
@@ -2270,7 +2340,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			if (preg_match('`;'.RGHT_NETW_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 			{
 				$template->assign_block_vars('r_netw.hardtype', array(
-					'LINK' => 'index.php?page=adm_reseau.php&amp;config=assoc',
+					'LINK' => 'index.php?page=adm_reseau.php&amp;config=assoc&amp;agence_id='.intval($_GET["agence_id"]),
 					'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/conf.gif',
 					'TEXT' => $lang["netw_assoc"]
 				));
@@ -2335,6 +2405,20 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
         				$tab[$i][$cle_nettoyee] = $valeur;
     				}
 				}
+				if (isset($_GET["hard_id"]))
+    			{
+        			$cat["table"] = "TAB_HARD";
+        			$cat["type"] = "hard";
+        			$sscat = "hard"; 
+        			$item_id = intval($_GET["hard_id"]);
+    			}
+    			elseif (isset($_GET["periph_id"]))
+    			{
+        			$cat["table"] = "TAB_PERIPH";
+        			$cat["type"] = "periph";    
+        			$sscat = "periph";
+        			$item_id = intval($_GET["periph_id"]);
+    			}
 
 				// MATERIELS
 				if (count($tab) > 0)
@@ -2558,7 +2642,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 						}
 
 						$template->assign_block_vars('r_resa.tab_resa.group.list.tools', array(
-							'LINK' => 'index.php?page=reservations.php&amp;action=Gerer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;hard_id='.($tab[$i]['id'] ?? '').'&amp;mois='.date('n').'&amp;annee='.date("Y"),
+							'LINK' => 'index.php?page=reservations.php&amp;action=Gerer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;hard_id='.($tab[$i]['id'] ?? '').'&amp;mois='.date('n').'&amp;annee='.date("Y").'&amp;sscat=hard',
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/resa.gif',
 							'TITLE' => $lang["resa_manage"]
 						));
@@ -2570,7 +2654,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 						));
 
 						$template->assign_block_vars('r_resa.tab_resa.group.list.tools', array(
-							'LINK' => 'index.php?page=reservations.php&amp;action=view&amp;full_page=yes&amp;agence_id='.intval($_GET["agence_id"]).'&amp;hard_id='.($tab[$i]['id'] ?? '').'&amp;week='.date('W').'&amp;annee='.date("Y"),
+							'LINK' => 'index.php?page=reservations.php&amp;action=view&amp;full_page=yes&amp;agence_id='.intval($_GET["agence_id"]).'&amp;hard_id='.($tab[$i]['id'] ?? '').'&amp;week='.date('W').'&amp;annee='.date("Y").'&amp;sscat=hard',
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/impr.gif',
 							'TITLE' => $lang["resa_printable"]
 						));
@@ -2836,7 +2920,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 						}
 
 						$template->assign_block_vars('r_resa.tab_resa.group.list.tools', array(
-							'LINK' => 'index.php?page=reservations.php&amp;action=Gerer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;periph_id='.($tab[$i]['id'] ?? '').'&amp;mois='.date('n').'&amp;annee='.date("Y"),
+							'LINK' => 'index.php?page=reservations.php&amp;action=Gerer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;periph_id='.($tab[$i]['id'] ?? '').'&amp;mois='.date('n').'&amp;annee='.date("Y").'&amp;sscat=periph',
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/resa.gif',
 							'TITLE' => $lang["resa_manage"]
 						));
@@ -2848,7 +2932,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 						));
 
 						$template->assign_block_vars('r_resa.tab_resa.group.list.tools', array(
-							'LINK' => 'index.php?page=reservations.php&amp;action=view&amp;full_page=yes&amp;agence_id='.intval($_GET["agence_id"]).'&amp;periph_id='.($tab[$i]['id'] ?? '').'&amp;week='.date('W').'&amp;annee='.date("Y"),
+							'LINK' => 'index.php?page=reservations.php&amp;action=view&amp;full_page=yes&amp;agence_id='.intval($_GET["agence_id"]).'&amp;periph_id='.($tab[$i]['id'] ?? '').'&amp;week='.date('W').'&amp;annee='.date("Y").'&amp;sscat=periph',
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/impr.gif',
 							'TITLE' => $lang["resa_printable"]
 						));
@@ -4270,6 +4354,106 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					));
 				}
 
+				// Bouton d'affichage des rebuts
+				if (isset($_GET["rebus"]) && $_GET["rebus"] == "ok")
+				{
+					$template->assign_block_vars('r_search.rebus', array(
+						'LINK' => str_replace('&amp;rebus=ok','',str_replace("&","&amp;",$_SERVER['REQUEST_URI'])),
+						'TEXT' => $lang["hide_rebus"],
+						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/no_rebus_small.gif'
+					));
+				}
+				else
+				{
+					$template->assign_block_vars('r_search.rebus', array(
+						'LINK' => str_replace("&","&amp;",$_SERVER['REQUEST_URI'].'&rebus=ok'),
+						'TEXT' => $lang["aff_rebus"],
+						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/rebus_small.gif'
+					));
+				}
+
+				// On collecte les sites disponibles
+				$available_sites = array();
+				$temp_i = 0;
+				while ($temp_i < count($search_tables))
+				{
+					if (!defined("RGHT_".strtoupper($alias_tables[$temp_i])) || (preg_match('`;'.constant("RGHT_".strtoupper($alias_tables[$temp_i])).';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10))
+					{
+						$select_clause = '';
+						$join_clause = '';
+						$where_clause = '';
+						foreach ($search_cols[$temp_i] as $key => $col_value)
+						{
+							if ($col_value == '')
+							{
+								foreach ($keywords as $num => $word) {
+									$where_clause .= " OR ".$search_tables[$temp_i].".".$key." LIKE '%".$word."%'";
+								}
+								$select_clause .= $search_tables[$temp_i].".".$key.", ";
+							}
+							else
+							{
+								$sel = str_replace("{Table}",$col_value[0].".",str_replace($col_value[0].',',"",implode(",{Table}",$col_value)));
+								$alias_parts = array();
+								for ($k = 1; $k < count($col_value); $k++) {
+									$alias_name = $col_value[0].'_'.$col_value[$k];
+									$alias_parts[] = $col_value[0].".".$col_value[$k]." AS ".$alias_name;
+								}
+								$sel_with_alias = implode(", ", $alias_parts);
+								$select_clause .= $sel_with_alias.", ";
+								$join_clause .= " LEFT JOIN ".$col_value[0]." ON ".$search_tables[$temp_i].".".$key."=".$col_value[0].".id";
+								foreach ($keywords as $num => $word) {
+									for ($k = 1; $k < count($col_value); $k++) {
+										$where_clause .= " OR ".$col_value[0].".".$col_value[$k]." LIKE '%".addslashes($word)."%'";
+									}
+								}
+							}
+						}
+
+						// Ajouter la condition pour filtrer les rebuts si la table le permet
+						$rebus_condition = '';
+						if ($search_tables[$temp_i] === TAB_HARD || $search_tables[$temp_i] === TAB_PERIPH) {
+							if (!isset($_GET["rebus"]) || $_GET["rebus"] != "ok") {
+								$rebus_condition = " AND ".$search_tables[$temp_i].".suivi_rebus=''";
+							}
+						}
+
+						$requete = "SELECT ".$select_clause."".$search_tables[$temp_i].".id,".$search_tables[$temp_i].".agence_id,".TAB_AGENCES.".libelle as agence_libelle
+						FROM ".$search_tables[$temp_i]."
+						  ".$join_clause."
+						  LEFT JOIN ".TAB_AGENCES." ON ".TAB_AGENCES.".id = ".$search_tables[$temp_i].".agence_id
+						WHERE (".$search_tables[$temp_i].".id='0'".$where_clause.")".$rebus_condition." ORDER BY agence_id";
+
+						$temp_tab = $req1->db_use_query($requete,1);
+						
+						// Collecter les sites uniques
+						foreach ($temp_tab as $row) {
+							$site_id = $row[$search_tables[$temp_i].".agence_id"] ?? $row["1.agence_id"] ?? $row["agence_id"] ?? 0;
+							$site_label = $row["agence_libelle"] ?? $row["1.agence_libelle"] ?? '';
+							if ($site_id && $site_label && !isset($available_sites[$site_id])) {
+								$available_sites[$site_id] = $site_label;
+							}
+						}
+					}
+					$temp_i++;
+				}
+
+				// Affichage du filtre par site
+				$filter_site = $_GET["search_site_filter"] ?? '';
+				asort($available_sites);
+				foreach ($available_sites as $site_id => $site_label) {
+					$selected = ($filter_site === (string)$site_id) ? 'selected' : '';
+					$template->assign_block_vars('r_search.filter_section.filter_site', array(
+						'VALUE' => $site_id,
+						'LABEL' => $site_label,
+						'SELECTED' => $selected
+					));
+				}
+
+				// Initialisation du tableau d'export global
+				$global_export_data = array();
+				$export_row_index = 0;
+
 				$i = 0;
 				while ($i < count($search_tables))
 				{
@@ -4320,11 +4504,19 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 							}
 						}
 
+						// Ajouter la condition pour filtrer les rebuts si la table le permet
+						$rebus_condition = '';
+						if ($search_tables[$i] === TAB_HARD || $search_tables[$i] === TAB_PERIPH) {
+							if (!isset($_GET["rebus"]) || $_GET["rebus"] != "ok") {
+								$rebus_condition = " AND ".$search_tables[$i].".suivi_rebus=''";
+							}
+						}
+
 						$requete = "SELECT ".$select_clause."".$search_tables[$i].".id,".$search_tables[$i].".agence_id,".TAB_AGENCES.".libelle as agence_libelle
 						FROM ".$search_tables[$i]."
 						  ".$join_clause."
 						  LEFT JOIN ".TAB_AGENCES." ON ".TAB_AGENCES.".id = ".$search_tables[$i].".agence_id
-						WHERE (".$search_tables[$i].".id='0'".$where_clause.") ORDER BY agence_id";
+						WHERE (".$search_tables[$i].".id='0'".$where_clause.")".$rebus_condition." ORDER BY agence_id";
 
 						$tab = $req1->db_use_query($requete,1);
 
@@ -4381,6 +4573,21 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 								else {
 									$tab = array(); // Si le filtre ne correspond à aucune colonne, ne rien afficher
 								}
+							}
+
+							// Appliquer le filtrage par site si un filtre est sélectionné
+							$search_site_filter = $_GET["search_site_filter"] ?? '';
+							if ($search_site_filter !== '')
+							{
+								$filtered_tab = array();
+								foreach ($tab as $row)
+								{
+									$row_site_id = $row[$search_tables[$i].".agence_id"] ?? $row["1.agence_id"] ?? $row["agence_id"] ?? 0;
+									if ((string)$row_site_id === (string)$search_site_filter) {
+										$filtered_tab[] = $row;
+									}
+								}
+								$tab = $filtered_tab;
 							}
 
 							$j = 0;
@@ -4457,6 +4664,41 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 								  'TEXT' => substr($text,0,-2),
 								));
 
+								// Initialiser les en-têtes d'export à la première ligne
+								if ($export_row_index == 0) {
+									$global_export_data[0][0] = $lang["s_".$search_tables[$i]] ?? $alias_tables[$i];
+									$col_index = 1;
+									foreach ($tab[$j] as $key => $val) {
+										$cleanKey = (strpos($key, '.') !== false) ? substr($key, strrpos($key, '.') + 1) : $key;
+										if ($val != '' && !preg_match("`\.id`i",$key) && !preg_match("`_id`i",$key)) {
+											$label = null;
+											if (isset($lang["s_".$key])) {
+												$label = $lang["s_".$key];
+											} elseif (isset($lang["s_".$cleanKey])) {
+												$label = $lang["s_".$cleanKey];
+											} else {
+												$label = ucwords(str_replace('_', ' ', $cleanKey));
+											}
+											$global_export_data[0][$col_index] = $label;
+											$col_index++;
+										}
+									}
+								}
+
+								// Ajouter les données à l'export
+								$export_row_index++;
+								$col_index = 1;
+								$global_export_data[$export_row_index][0] = $title_value;
+								foreach ($tab[$j] as $key => $val) {
+									$cleanKey = (strpos($key, '.') !== false) ? substr($key, strrpos($key, '.') + 1) : $key;
+									if ($val != '' && !preg_match("`\.id`i",$key) && !preg_match("`_id`i",$key)) {
+										// Enlever les tags HTML pour l'export
+										$export_val = strip_tags($val);
+										$global_export_data[$export_row_index][$col_index] = $export_val;
+										$col_index++;
+									}
+								}
+
 								if (intval($row_agence_id) == intval($_GET["agence_id"])) 
 								{
     								$template->assign_block_vars('r_search.header.list.site', array(
@@ -4476,7 +4718,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 								  'LINK' => 'index.php?page=visu_fiche.php&amp;type='.$alias_tables[$i].'&amp;id='.intval($current_id).'&amp;agence_id='.intval($row_agence_id).'&amp;action=visu',
 								  'TEXT' => $lang["search_linktofiche"],
 								  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/fiche.gif',
-								  'TARGET' => '_blank',
+								  'TARGET' => '_self',
 								));
 
 								// EDITER
@@ -4495,7 +4737,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 									  'LINK' => $edit_array[$alias_tables[$i]],
 									  'TEXT' => $lang["search_linktoedit"],
 									  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/edit.gif',
-									  'TARGET' => '_blank',
+									  'TARGET' => '_self',
 									));
 								}
 
@@ -4517,6 +4759,19 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 							}
 					}
 					$i++;
+				}
+
+				// Bouton d'export
+				if ($export_row_index > 0)
+				{
+					$serialized_string = base64_encode(serialize($global_export_data));
+					$template->assign_block_vars('r_search.export', array(
+						'NOM' => $lang["gen_search"],
+						'LINK' => 'window.document.formexport_search.submit()',
+						'DATA' => $serialized_string,
+						'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/excel.gif',
+						'TEXT' => $lang["excel_export"]
+					));
 				}
 
 			}
@@ -4698,7 +4953,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				'IMAGE' => "templates/".DEFAULT_TEMPLATE."/images/gallery/m_infos.png",
 				'TEXT' => strtoupper($lang["my_infos"]),
 				'CLASS' => 'my_main_button',
-				'TARGET' => '_blank',
+				'TARGET' => '_self',
 				'HARD_NAME' => txt_to_na(gethostbyaddr($_SERVER["REMOTE_ADDR"])),
 				'IP' => txt_to_na(gethostbyname($_SERVER["REMOTE_ADDR"])),
 				'USER_NAME' => txt_to_na($_SESSION["nom_comp"])
@@ -4712,7 +4967,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 					'IMAGE' => "templates/".DEFAULT_TEMPLATE."/images/gallery/m_password.png",
 					'TEXT' => strtoupper($lang["user_changepass"]),
 					'CLASS' => 'my_password_button',
-					'TARGET' => '_blank',
+					'TARGET' => '_self',
 				));
 			}
 
@@ -4755,7 +5010,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				'TEXT' => '+',
 				'CLASS' => 'my_add_button',
 				'IMAGE' => "templates/".DEFAULT_TEMPLATE."/images/gallery/blank.png",
-				'TARGET' => '_blank',
+				'TARGET' => '_self',
 			));
 
 			// Matériels associé à l'utilisateur

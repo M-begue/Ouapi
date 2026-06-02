@@ -121,6 +121,12 @@ if (isset($_GET['action']) && $_GET['action'] == 'list_version' )
 		if (count($tab_hard) != 0)
 		{
 			$template->assign_block_vars('tab_hard', array());
+
+			// Assigner aussi au niveau racine pour le bouton retour
+			$template->assign_vars(array(
+				'AGENCE_ID' => $_GET["agence_id"],
+				'RETURN' => $lang["gen_back"],
+			));
 			
 			$i = 0;
 			while ($i < count($tab_hard["id"]))

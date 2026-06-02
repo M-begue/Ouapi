@@ -301,7 +301,10 @@
 	<!-- END rebus -->
 	
 	<!-- BEGIN button -->	
-	<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+	<div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
+		<input type="submit" name="soumettre" value="{form.button.TITLE}" />
+		<button type="button" onclick="closeToHome({form.AGENCE_ID}, 'hard')" style="padding:10px 20px; font-size:1.1em;">{form.RETURN}</button>
+	</div>
 	<!-- END button -->
 	
 	</form>
