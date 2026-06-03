@@ -5314,6 +5314,7 @@ elseif ($_GET["rubrique"] == "admin")
 			'RUB_CPU' => $lang["admin_cpu"],
 			'RUB_RAMTYPE' => $lang["admin_ram_type"],
 			'RUB_DISQUETYPE' => $lang["admin_disque_type"],
+			'RUB_TYPE_RESEAU' => $lang["admin_type_reseau"],
 			'IMG_ADD' => 'templates/'.DEFAULT_TEMPLATE.'/images/add_big.gif',
 			'IMG_EDIT' => 'templates/'.DEFAULT_TEMPLATE.'/images/edit.gif',
 		));

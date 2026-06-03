@@ -427,6 +427,7 @@ $lang["admin_hard_type"] = 'Types de matériels';
 $lang["admin_cpu"] = 'Processeurs';
 $lang["admin_ram_type"] = 'Types de RAM';
 $lang["admin_disque_type"] = 'Types de disque';
+$lang["admin_type_reseau"] = 'Types de réseau';
 $lang["admin_hard_marque"] = 'Marques de matériel';
 $lang["admin_hard_model"] = 'Modèles de matériel';
 $lang["admin_per_type"] = 'Types de périphériques';

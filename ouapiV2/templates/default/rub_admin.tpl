@@ -205,6 +205,14 @@
 			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
 			</td>
 		</tr>
+		<tr>
+			<td class="row1">{r_admin.tables.RUB_TYPE_RESEAU}</td>
+			<td class="row1"><a href="index.php?page=adm_tables.php&amp;table=type_reseau&amp;action=Ajouter">
+			<img src="{r_admin.tables.IMG_ADD}" border="0" alt="" title="{r_admin.tables.LANG_ADD}" /></a>&nbsp;
+			<a href="index.php?page=adm_tables.php&amp;table=type_reseau">
+			<img src="{r_admin.tables.IMG_EDIT}" border="0" alt="" title="{r_admin.tables.LANG_EDIT}" /></a>&nbsp;
+			</td>
+		</tr>
 		</table>
 		</div>
 		<!-- END tables -->
