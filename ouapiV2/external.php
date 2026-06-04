@@ -291,7 +291,7 @@ if (isset($_GET['setmachineos']) && !empty($_GET['setmachineos']) && $_SESSION['
  * Handle new hardware insertion
  */
 if (isset($_GET['num_serie']) && !empty($_GET['num_serie']) && $_SESSION['access'] == true) {
-	$req = new db_use();
+	global $connect;
 	
 	// Sanitize all required inputs
 	$required_fields = [
@@ -304,12 +304,20 @@ if (isset($_GET['num_serie']) && !empty($_GET['num_serie']) && $_SESSION['access
 	foreach ($required_fields as $field) {
 		$fields[$field] = htmlspecialchars($_GET[$field] ?? '', ENT_QUOTES, 'UTF-8');
 	}
+
+  if (!empty($fields['creation_date']) && is_numeric($fields['creation_date'])) {
+    // date('Y-m-d', ...) transforme le timestamp (ex: 1780584000) en chaîne "2026-06-04"
+    $fields['creation_date'] = date('Y-m-d', intval($fields['creation_date']));
+  } else {
+    // Si le champ est vide ou mal formé, on met la date du jour par sécurité
+    $fields['creation_date'] = date('Y-m-d');
+  }
 	
 	$query = "INSERT INTO " . DB_PREFIX . "hardware 
 	          (num_serie, marque_id, modele_id, type_id, nom, os_id, agence_id, emplacement_id, ip, suivi_rebus, commentaire, creation_date, pfield_garantie, pfield_utilisateurprinc) 
 	          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	$stmt = $req->connection->prepare($query);
+	$stmt = $connect->connection->prepare($query);
 	
 	if ($stmt) {
 		$stmt->bind_param("ssssssssssssss",
@@ -318,9 +326,23 @@ if (isset($_GET['num_serie']) && !empty($_GET['num_serie']) && $_SESSION['access
 			$fields['ip'], $fields['suivi_rebus'], $fields['commentaire'], $fields['creation_date'],
 			$fields['pfield_garantie'], $fields['pfield_utilisateurprinc']
 		);
-		$stmt->execute();
-		$stmt->close();
-	}
+		if ($stmt->execute()) {
+      $stmt->close();
+      echo "success";
+      exit;
+    } else {
+      // Si l'exécution échoue (ex: contrainte de clé primaire, type de données...)
+      http_response_code(500);
+      echo "Erreur d'exécution SQL : " . $stmt->error;
+      $stmt->close();
+      exit;
+    }
+  } else {
+    // Si la préparation de la requête échoue (ex: nom de colonne SQL mal orthographié)
+    http_response_code(500);
+    echo "Erreur de préparation SQL : " . $connect->connection->error;
+    exit;
+  }
 }
 /////////////////////////////////////////////////////////////////////////////////////////////
 
