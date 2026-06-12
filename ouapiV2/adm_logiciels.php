@@ -10,6 +10,10 @@ declare(strict_types=1);
 *                                                                           *
 ****************************************************************************/
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $req1 = new db_use;
 $affichage = '';
 
@@ -161,9 +165,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 				{
 					$template->assign_block_vars('select.tab_hard.list.status', array(
 					  'VNUM' => $lang["adm_soft_vnuminstalled"].' '.txt_to_na($tab_liaison[0]["version_num"]),
-					  'VDATE' => format_date_to_aff($tab_liaison[0]["version_date_maj"]),
+					  'VDATE' => $tab_liaison[0]["version_date_maj"] ? format_date_to_aff($tab_liaison[0]["version_date_maj"]) : '',
 					  'LASTVNUM' => $lang["adm_soft_lastvnuminouapi"].' '.txt_to_na($tab_soft[0]["dern_version_num"]),
-					  'LASTVDATE' => format_date_to_aff($tab_soft[0]["dern_version_date"]),
+					  'LASTVDATE' => $tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"]) : '',
 					  'STYLE' => 'color:green',
 					));
 				}
@@ -172,9 +176,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 				{
 					$template->assign_block_vars('select.tab_hard.list.status', array(
 					  'VNUM' => $lang["adm_soft_vnuminstalled"].' '.txt_to_na($tab_liaison[0]["version_num"]),
-					  'VDATE' => format_date_to_aff($tab_liaison[0]["version_date_maj"]),
+					  'VDATE' => $tab_liaison[0]["version_date_maj"] ? format_date_to_aff($tab_liaison[0]["version_date_maj"]) : '',
 					  'LASTVNUM' => $lang["adm_soft_lastvnuminouapi"].' '.txt_to_na($tab_soft[0]["dern_version_num"]),
-					  'LASTVDATE' => format_date_to_aff($tab_soft[0]["dern_version_date"]),
+					  'LASTVDATE' => $tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"]) : '',
 					  'STYLE' => 'color:violet',
 					));
 				}
@@ -183,9 +187,9 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 				{
 					$template->assign_block_vars('select.tab_hard.list.status', array(
 					  'VNUM' => $lang["adm_soft_vnuminstalled"].' '.txt_to_na($tab_liaison[0]["version_num"]),
-					  'VDATE' => format_date_to_aff($tab_liaison[0]["version_date_maj"]),
+					  'VDATE' => $tab_liaison[0]["version_date_maj"] ? format_date_to_aff($tab_liaison[0]["version_date_maj"]) : '',
 					  'LASTVNUM' => $lang["adm_soft_lastvnuminouapi"].' '.txt_to_na($tab_soft[0]["dern_version_num"]),
-					  'LASTVDATE' => format_date_to_aff($tab_soft[0]["dern_version_date"]),
+					  'LASTVDATE' => $tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"]) : '',
 					  'STYLE' => 'color:red',
 					));
 				}
@@ -196,7 +200,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'MAJ_hard' )
 					  'VNUM' => '<font color=#D00>'.$lang["adm_soft_noinstall"].'</font>',
 					  'VDATE' => txt_to_na(''),
 					  'LASTVNUM' => $lang["adm_soft_lastvnuminouapi"].' '.txt_to_na($tab_soft[0]["dern_version_num"]),
-					  'LASTVDATE' => format_date_to_aff($tab_soft[0]["dern_version_date"]),
+					  'LASTVDATE' => $tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"]) : '',
 					  'STYLE' => 'color:red',
 					));
 				}			
@@ -929,7 +933,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'maj')
 		  'ICON' => 'templates/'.DEFAULT_TEMPLATE.'/images/sign_info.png',
 		  'MARQUE' => $lang["adm_hardsoft_publisher"].txt_to_na($tab_soft[0]["l_marque"]),
 		  'VERSION' => $lang["adm_hardsoft_vers"].txt_to_na($tab_soft[0]["dern_version_num"])
-		  .$lang["adm_hardsoft_versdate"].txt_to_na(format_date_to_aff($tab_soft[0]["dern_version_date"])),
+		  .$lang["adm_hardsoft_versdate"].txt_to_na($tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"]) : ''),
 		));	
 
 		$template->assign_block_vars('form', array(
@@ -948,7 +952,7 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'maj')
 		
 		$template->assign_block_vars('form.vdate', array(
 		  'TITLE' => $lang["adm_soft_lastvdate"],
-		  'VALUE' => format_date_to_aff($tab_soft[0]["dern_version_date"],"/"),
+		  'VALUE' => $tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"],"/") : '',
 		  'NAME' => 'dern_version_date',
 		  'DISABLED' => 'disabled'
 		));

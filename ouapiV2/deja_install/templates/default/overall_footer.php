@@ -8,7 +8,7 @@
 ****************************************************************************/
 
 $affichage .= '</div>
-<div class="copyright">'.$lang["copyright"].'<br/>
+<div class="copyright">'.$lang["copyright"].'<br/>'.$lang["copyright2"].'<br/>
 <a href="http://www.ouapi.org" style="color:white;font-size:10px;">http://www.ouapi.org</a></div>
 </body>
 </html>';

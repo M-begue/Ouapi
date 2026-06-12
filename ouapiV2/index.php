@@ -608,6 +608,7 @@ if (is_file("config/connect.php"))
 	{
 		$template->assign_block_vars('foot', array(
 			'COPYRIGHT'  => $lang["foot_copy"],
+			'COPYRIGHT2'  => $lang["foot_copy2"],
 			'VERSION'  => $lang["foot_version"].' '.GEN_VERSION,
 			'CONTACT'  => $lang["contacts"],
 			'TIME' => $lang["foot_time"].round($tps,2).'s',

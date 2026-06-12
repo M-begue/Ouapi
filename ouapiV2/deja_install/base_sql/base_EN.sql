@@ -45,7 +45,7 @@ INSERT INTO `{TAB_CONFIG}` (`nom`, `subcategory`, `libelle`, `description`, `val
 ('rght_my', '', '[My Space] Can create public shortcut if enabled', NULL, 'MYSP1', '', 1),
 ('netw_hardtype', '', 'Type of network system', NULL, '6;9;', '', 0),
 ('maj_hardtype', '', 'Type of systems', NULL, '1;2;7;', '', 0),
-('gen_version', '', 'Installed version', NULL, '1.5', '', 1),
+('gen_version', '', 'Installed version', NULL, '2', '', 1),
 ('gen_dateinstall', '', 'Installation date', NULL, UNIX_TIMESTAMP(), '', 1),
 ('gen_datelastmaj', '', 'Date of last update', NULL, UNIX_TIMESTAMP(), '', 1),
 ('gen_statsdate', '', 'Date', NULL, '', '', 1),

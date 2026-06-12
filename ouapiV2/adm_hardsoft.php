@@ -8,6 +8,10 @@
 *                                                                           *
 ****************************************************************************/
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $req1 = new db_use;
 $affichage = '';
 
@@ -81,11 +85,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'list_version' )
 		  'ICON' => 'templates/'.DEFAULT_TEMPLATE.'/images/sign_info.png',
 		  'MARQUE' => $lang["adm_hardsoft_publisher"].txt_to_na($tab_soft[0]["l_marque"]),
 		  'VERSION' => $lang["adm_hardsoft_vers"].txt_to_na($tab_soft[0]["dern_version_num"])
-		  .$lang["adm_hardsoft_versdate"].txt_to_na(format_date_to_aff($tab_soft[0]["dern_version_date"])),
+		  .$lang["adm_hardsoft_versdate"].txt_to_na($tab_soft[0]["dern_version_date"] ? format_date_to_aff($tab_soft[0]["dern_version_date"]) : ''),
 		));	
 		
 		// MAJ / Install des postes
-		$requete = "SELECT ".TAB_HARDSOFT.".*, MAX(version_num) AS lastv FROM ".TAB_HARDSOFT." WHERE software_id='".$s_id."' GROUP BY hardware_id";
+		$requete = "SELECT hardware_id, MAX(version_num) AS lastv, MAX(version_date_maj) AS version_date_maj, MAX(id) AS id, MAX(user_maj_id) AS user_maj_id FROM ".TAB_HARDSOFT." WHERE software_id='".$s_id."' GROUP BY hardware_id";
 		$tab_hardsoft = $req1->db_use_query_inv($requete);
 		$template->assign_vars(array(
 		  'CAT_TITLE' => $lang["soft_hardinstalldetail"]
@@ -283,7 +287,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'list_version' )
 						if ($tab_hardsoft["lastv"][$key] == $tab_soft[0]["dern_version_num"])
 						{
 							$template->assign_block_vars('tab_hard.header.list.status', array(
-							  'TEXT' => '<font color=#0B0>'.$lang["adm_hardsoft_installedversion"].txt_to_na($tab_hardsoft["lastv"][$key]).' ('.txt_to_na(format_date_to_aff($tab_hardsoft["version_date_maj"][$key])).')'.'</font>',
+							  'TEXT' => '<font color=#0B0>'.$lang["adm_hardsoft_installedversion"].txt_to_na($tab_hardsoft["lastv"][$key]).' ('.txt_to_na($tab_hardsoft["version_date_maj"][$key] ? format_date_to_aff($tab_hardsoft["version_date_maj"][$key]) : '').')'.'</font>',
 							  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/i_ouapi.png',
 							));		
 							
@@ -301,7 +305,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'list_version' )
 						elseif ($tab_hardsoft["lastv"][$key] < $tab_soft[0]["dern_version_num"])
 						{
 							$template->assign_block_vars('tab_hard.header.list.status', array(
-							  'TEXT' => '<font color=#FFA500>'.$lang["adm_hardsoft_installedversion"].txt_to_na($tab_hardsoft["lastv"][$key]).' ('.txt_to_na(format_date_to_aff($tab_hardsoft["version_date_maj"][$key])).')'.'</font>',
+							  'TEXT' => '<font color=#FFA500>'.$lang["adm_hardsoft_installedversion"].txt_to_na($tab_hardsoft["lastv"][$key]).' ('.txt_to_na($tab_hardsoft["version_date_maj"][$key] ? format_date_to_aff($tab_hardsoft["version_date_maj"][$key]) : '').')'.'</font>',
 							  'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/i_ouapi.png',
 							));							
 							

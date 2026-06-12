@@ -547,6 +547,7 @@ $lang["accueil_adm"] = 'Bienvenue sur Ouapi';
 // Pied de page
 $lang["contacts"] = 'Contacts';
 $lang["foot_copy"] = 'Copyright &copy; Nicolas BIDET 2007-2013';
+$lang["foot_copy2"] = 'Copyright &copy; Assistance Informatique de la Marche 2026';
 $lang["foot_version"] = 'Version';
 $lang["foot_time"] = 'Page générée en ';
 $lang["foot_database"] = 'Database: ';

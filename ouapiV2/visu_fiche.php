@@ -8,6 +8,10 @@
 *                                                                           *
 ****************************************************************************/
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $template->set_filenames(array(
 	$_GET["type"] => 'fiche_'.$_GET["type"].'.tpl',			
   ));
@@ -625,9 +629,8 @@ if (isset($_GET['type']) && $_GET['type'] == 'hard')
 					else
 						$filtre = '';
 						
-					$requete = "SELECT * 
+					$requete = "SELECT DISTINCT ".COL_OCS_SOFT_NAME." 
 					FROM ".TAB_OCS_SOFT." WHERE ".COL_OCS_SOFT_HARDID."='".$tab_ocs[0]["ID"]."' AND ".COL_OCS_SOFT_NAME."<>''".$filtre." 
-					GROUP BY ".COL_OCS_SOFT_NAME."
 					ORDER BY ".COL_OCS_SOFT_NAME;
 					$tab_ocs = $req1->db_use_query($requete);
 					
@@ -710,7 +713,7 @@ if (isset($_GET['type']) && $_GET['type'] == 'hard')
 			  LEFT JOIN ".TAB_USERS." ON ".TAB_USERS.".id = ".TAB_HARDSOFT.".user_maj_id
 			  LEFT JOIN ".TAB_SOFT." ON ".TAB_SOFT.".id = ".TAB_HARDSOFT.".software_id
 			WHERE hardware_id='".$_GET["id"]."' AND software_id < '9999999' 
-			GROUP BY software_id ORDER BY nom_soft";
+			GROUP BY ".TAB_HARDSOFT.".software_id, ".TAB_HARDSOFT.".user_maj_id, ".TAB_HARDSOFT.".version_num ORDER BY nom_soft";
 			$tab = $req1->db_use_query($requete);
 
 
@@ -741,12 +744,13 @@ if (isset($_GET['type']) && $_GET['type'] == 'hard')
 
 					$template->assign_block_vars('hard_softocs.manual.list', array(
 					  'NAME' => $tab[$i]["nom_soft"],			
-					  'VERSION' => txt_to_na($tab[$i]["dern_version_num"]),	
-					  'DATE' =>	txt_to_na(format_date_to_aff($tab[$i]["dern_version_date"])),
-					  'DATEMAJ' => format_date_to_aff($tab[$i]["version_date_maj"],'/'),
-					  'VERSIONMAJ' => txt_to_na($tab[$i]["version_num"],'/'),
+					  'VERSION' => txt_to_na($tab[$i]["dern_version_num"]),
+					  'DATE' =>	txt_to_na(!empty($tab[$i]["dern_version_date"]) ? format_date_to_aff($tab[$i]["dern_version_date"]) : ''),
+				  	  'DATEMAJ' => !empty($tab[$i]["version_date_maj"]) ? format_date_to_aff($tab[$i]["version_date_maj"],'/') : txt_to_na(''),
+					  'VERSIONMAJ' => txt_to_na($tab[$i]["version_num"], '/'),
 					  'USER' => $user,
 					));	
+				  
 
 					$i++;
 				}
@@ -1216,7 +1220,7 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'soft')
 		  'SOFT_NAME' => txt_to_na($tab[0]["nom"]),
 		  'SOFT_PUBLISHER' => txt_to_na($tab[0]["l_marque"]),
 		  'SOFT_VNUM' => txt_to_na($tab[0]["dern_version_num"]),
-		  'SOFT_VDATE' => txt_to_na(format_date_to_aff($tab[0]["dern_version_date"])),
+		  'SOFT_VDATE' => txt_to_na($tab[0]["dern_version_date"] ? format_date_to_aff($tab[0]["dern_version_date"]) : ''),
 		  'SOFT_COMMENT' => txt_to_na(nl2br($tab[0]["commentaire"])),
 		  'AGENCE_ID' => $tab[0]['agence_id'] ?? '',
           'RETURN' => $lang["gen_back"] ?? 'Retour',
@@ -1470,9 +1474,9 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'hardinstalled_soft')
 				{
 					$aff_site .= '<tr>
 						<td class="row1">'.$tab_soft_ocs["crit_ocs"][$j].'</td>
-						<td class="row1">'.format_date_to_aff($tab_soft_ocs["lastupdate"][$j]).'</td>
+						<td class="row1">'.(!empty($tab_soft_ocs["lastupdate"][$j]) ? format_date_to_aff($tab_soft_ocs["lastupdate"][$j]) : '-').'</td>
 						<td class="row1">'.$lang["ocs_version"].': '.txt_to_na($tab_soft_ocs["version"][$j]).'</td>
-						<td class="row1">'.$lang["fiche_hardsoft_lastv"].' '.txt_to_na($tab_alias["VNUM"][0]).' <i>('.format_date_to_aff($tab_alias["VDATE"][0]).')</i></td>
+						<td class="row1">'.$lang["fiche_hardsoft_lastv"].' '.txt_to_na($tab_alias["VNUM"][0]).' <i>('.(!empty($tab_alias["VDATE"][0]) ? format_date_to_aff($tab_alias["VDATE"][0]) : '-').')</i></td>
 					</tr>';
 					$total++;
 				}
@@ -1480,9 +1484,9 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'hardinstalled_soft')
 				{
 					$aff_gen .= '<tr>
 						<td class="row1">'.$tab_soft_ocs["crit_ocs"][$j].'</td>
-						<td class="row1">'.format_date_to_aff($tab_soft_ocs["lastupdate"][$j]).'</td>
+						<td class="row1">'.(!empty($tab_soft_ocs["lastupdate"][$j]) ? format_date_to_aff($tab_soft_ocs["lastupdate"][$j]) : '-').'</td>
 						<td class="row1">'.$lang["ocs_version"].': '.txt_to_na($tab_soft_ocs["version"][$j]).'</td>
-						<td class="row1">'.$lang["fiche_hardsoft_lastv"].' '.txt_to_na($tab_alias["VNUM"][0]).' <i>('.format_date_to_aff($tab_alias["VDATE"][0]).')</i></td>
+						<td class="row1">'.$lang["fiche_hardsoft_lastv"].' '.txt_to_na($tab_alias["VNUM"][0]).' <i>('.(!empty($tab_alias["VDATE"][0]) ? format_date_to_aff($tab_alias["VDATE"][0]) : '-').')</i></td>
 					</tr>';
 					$total++;
 				}
@@ -1494,7 +1498,11 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'hardinstalled_soft')
 	}
 	else
 	{				
-		$requete = "SELECT ".TAB_HARDSOFT.".*,
+		$requete = "SELECT ".TAB_HARDSOFT.".id, 
+		".TAB_HARDSOFT.".hardware_id,
+		".TAB_HARDSOFT.".software_id,
+		".TAB_HARDSOFT.".version_num,
+		".TAB_HARDSOFT.".version_date_maj,
 		".TAB_SOFT.".dern_version_num AS VNUM,
 		".TAB_SOFT.".dern_version_date AS VDATE,
 		".TAB_HARD.".nom,
@@ -1504,7 +1512,7 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'hardinstalled_soft')
 		  LEFT JOIN ".TAB_SOFT." ON ".TAB_SOFT.".id = ".TAB_HARDSOFT.".software_id
 		  LEFT JOIN ".TAB_HARD." ON ".TAB_HARD.".id = ".TAB_HARDSOFT.".hardware_id
 		WHERE software_id = '".$_GET["s_id"]."' AND ".TAB_HARD.".suivi_rebus = ''
-		GROUP BY hardware_id
+		GROUP BY ".TAB_HARDSOFT.".hardware_id, ".TAB_HARDSOFT.".id
 		ORDER BY version_date_maj DESC, version_num DESC";		
 		$tab = $req1->db_use_query_inv($requete);
 
@@ -1516,9 +1524,9 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'hardinstalled_soft')
 				$aff_site .= '<tr>
 					<td class="row1">'.$tab["nom"][$i].'</td>
 					<td class="row1" colspan="2">'.$lang["fiche_soft_lastversion"].' '.num_to_na($tab["version_num"][$i]).' 
-					'.$lang["fiche_soft_lastdate"].' '.format_date_to_aff($tab["version_date_maj"][$i],'/').'</td>
+					'.$lang["fiche_soft_lastdate"].' '.(!empty($tab["version_date_maj"][$i]) ? format_date_to_aff($tab["version_date_maj"][$i],'/') : '-').'</td>
 					<td class="row1">'.$lang["fiche_hardsoft_lastv"].' '.num_to_na($tab["VNUM"][$i]).' 
-					'.$lang["fiche_soft_lastdate"].' '.format_date_to_aff($tab["VDATE"][$i],'/').'</td>
+					'.$lang["fiche_soft_lastdate"].' '.(!empty($tab["VDATE"][$i]) ? format_date_to_aff($tab["VDATE"][$i],'/') : '-').'</td>
 				</tr>';
 			}
 			else
@@ -1526,9 +1534,9 @@ elseif (isset($_GET['type']) && $_GET['type'] == 'hardinstalled_soft')
 				$aff_gen .= '<tr>
 					<td class="row1">'.$tab["nom"][$i].'</td>
 					<td class="row1" colspan="2">'.$lang["fiche_soft_lastversion"].' '.num_to_na($tab["version_num"][$i]).' 
-					'.$lang["fiche_soft_lastdate"].' '.format_date_to_aff($tab["version_date_maj"][$i],'/').'</td>
+					'.$lang["fiche_soft_lastdate"].' '.(!empty($tab["version_date_maj"][$i]) ? format_date_to_aff($tab["version_date_maj"][$i],'/') : '-').'</td>
 					<td class="row1">'.$lang["fiche_hardsoft_lastv"].' '.num_to_na($tab["VNUM"][$i]).' 
-					'.$lang["fiche_soft_lastdate"].' '.format_date_to_aff($tab["VDATE"][$i],'/').'</td>
+					'.$lang["fiche_soft_lastdate"].' '.(!empty($tab["VDATE"][$i]) ? format_date_to_aff($tab["VDATE"][$i],'/') : '-').'</td>
 				</tr>';
 			}
 			$total++;

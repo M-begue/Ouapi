@@ -406,4 +406,60 @@ function cut_str(string $chaine, int $lenght = 30): string
 }
 
 
+
+/**
+ * Format a custom pfield value for database insertion
+ * Returns NULL without quotes for empty integer/numeric fields
+ * Returns quoted string for other types
+ * 
+ * @param string $value The value to format
+ * @param string $columnType The column type (from SHOW COLUMNS)
+ * @return string Formatted value for SQL query (with or without quotes)
+ */
+function format_pfield_value(string $value, string $columnType): string
+{
+	$value = format_string_db($value);
+	
+	// Check if value is empty
+	if (empty($value)) {
+		// For numeric types, use NULL (without quotes)
+		if (in_array($columnType, ['int', 'integer', 'bigint', 'smallint', 'tinyint', 'float', 'double', 'decimal', 'numeric'])) {
+			return 'NULL';
+		}
+	}
+	
+	// For all other cases, return quoted value
+	return "'" . $value . "'";
+}
+
+/**
+ * Get the types of custom pfield columns from any table
+ * Returns array with column names as keys and types as values
+ * e.g., ['pfield_garantie' => 'int', 'pfield_autre' => 'varchar']
+ * 
+ * @param mysqli $connection Database connection
+ * @param string $tableName Name of the table to query
+ * @return array Associative array of column names and their types
+ */
+function get_pfield_column_types(mysqli $connection, string $tableName): array
+{
+	$columnTypes = [];
+	$query = "SHOW COLUMNS FROM " . $tableName . " LIKE 'pfield_%'";
+	$result = $connection->query($query);
+
+	if ($result instanceof mysqli_result) {
+		while ($row = $result->fetch_assoc()) {
+			if (isset($row['Field']) && isset($row['Type'])) {
+				// Extract base type (e.g., 'int' from 'int(11)', 'varchar' from 'varchar(255)')
+				$type = strtolower($row['Type']);
+				$baseType = preg_replace('/\(.*\)/', '', $type);
+				$columnTypes[$row['Field']] = $baseType;
+			}
+		}
+		$result->free();
+	}
+
+	return $columnTypes;
+}
+
 ?>

@@ -61,9 +61,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		$pfields_values = '';
 		
 		$pfieldColumns = get_users_pfield_columns($req1);
+		$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_USERS);
 		foreach ($pfieldColumns as $fieldName) {
 			$pfields_names .= ',' . $fieldName;
-			$pfields_values .= ",'" . format_string_db($_POST[$fieldName]) . "'";
+			$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+			$pfields_values .= "," . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 		}
 			
 		$requete = "INSERT INTO ".TAB_USERS." (nom,prenom,mail,groupe_id,agence_id,login,mdp,login_win,langue".$pfields_names.")
@@ -354,9 +356,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'add_ldap')
 		$pfields_values = '';
 		
 		$pfieldColumns = get_users_pfield_columns($req1);
+		$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_USERS);
 		foreach ($pfieldColumns as $fieldName) {
 			$pfields_names .= ',' . $fieldName;
-			$pfields_values .= ",'" . format_string_db($_POST[$fieldName]) . "'";
+			$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+			$pfields_values .= "," . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 		}
 			
 		$requete = "INSERT INTO ".TAB_USERS." (nom,prenom,mail,groupe_id,agence_id,login,mdp,login_win,langue".$pfields_names.")
@@ -748,8 +752,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'sync_ldap')
 		// Colonnes perso
 		$pfields_update = '';
 		$pfieldColumns = get_users_pfield_columns($req1);
+		$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_USERS);
 		foreach ($pfieldColumns as $fieldName) {
-			$pfields_update .= "," . $fieldName . "='" . format_string_db($_POST[$fieldName]) . "'";
+			$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+			$pfields_update .= "," . $fieldName . "=" . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 		}
 		
 		$requete = "UPDATE ".TAB_USERS." SET ".US_LNAME."='".$nom."', ".US_FNAME."='".$prenom."', ".US_MAIL."='".$mail."', 
@@ -1121,8 +1127,10 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'Editer')
 		// Colonnes perso
 		$pfields_update = '';
 		$pfieldColumns = get_users_pfield_columns($req1);
+		$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_USERS);
 		foreach ($pfieldColumns as $fieldName) {
-			$pfields_update .= "," . $fieldName . "='" . format_string_db($_POST[$fieldName]) . "'";
+			$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+			$pfields_update .= "," . $fieldName . "=" . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 		}
 		
 		$requete = "UPDATE ".TAB_USERS." SET nom='$nom',prenom='$prenom',mail='$mail',groupe_id='$groupe_id',

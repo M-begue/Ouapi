@@ -82,9 +82,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'add')
 		$pfields_values = '';
 		
 		$pfieldColumns = get_docs_pfield_columns($req1);
+		$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_DOCS);
 		foreach ($pfieldColumns as $fieldName) {
 			$pfields_names .= ',' . $fieldName;
-			$pfields_values .= ",'" . format_string_db($_POST[$fieldName]) . "'";
+			$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+			$pfields_values .= "," . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 		}
 
 		/*********************** Verifications **************************/
@@ -359,8 +361,10 @@ if (isset($_GET['action']) && $_GET['action'] == 'edit')
 		$pfields_update = '';
 		
 		$pfieldColumns = get_docs_pfield_columns($req1);
+		$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_DOCS);
 		foreach ($pfieldColumns as $fieldName) {
-			$pfields_update .= "," . $fieldName . "='" . format_string_db($_POST[$fieldName]) . "'";
+			$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+			$pfields_update .= "," . $fieldName . "=" . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 		}
 
 		/*********************** Verifications **************************/
@@ -636,7 +640,13 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'add_elmt')
 		$elmt_id = $_POST['elmt_id'];
 		$add_type = $_POST['add_type'];
 		
-		$tab = $req1->db_use_query("INSERT INTO ".TAB_LIAISON_DOCS." (doc_id,".$add_type.")	VALUES ('".$doc_id."','".$elmt_id."')");
+		// Build the INSERT query with all columns - use 0 for unused columns instead of NULL
+		$hardware_id = ($add_type === 'hardware_id') ? $elmt_id : 0;
+		$periph_id = ($add_type === 'periph_id') ? $elmt_id : 0;
+		$software_id = ($add_type === 'software_id') ? $elmt_id : 0;
+		
+		$tab = $req1->db_use_query("INSERT INTO ".TAB_LIAISON_DOCS." (doc_id, hardware_id, periph_id, software_id) 
+		VALUES ('".$doc_id."', '".$hardware_id."', '".$periph_id."', '".$software_id."')");
 		
 		$template->assign_block_vars('form_link_post', array(
 			'OK' => $lang["adm_docs_addelmtok"], 					

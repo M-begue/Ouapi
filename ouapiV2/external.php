@@ -312,19 +312,120 @@ if (isset($_GET['num_serie']) && !empty($_GET['num_serie']) && $_SESSION['access
     // Si le champ est vide ou mal formé, on met la date du jour par sécurité
     $fields['creation_date'] = date('Y-m-d');
   }
+
+  $texte_analyse = htmlspecialchars_decode($fields['commentaire'], ENT_QUOTES);
+
+  $lignes = preg_split('/\r\n|\r|\n/', trim($texte_analyse));
+
+  // Initialisation des variables par défaut
+  $cpu_libelle = "";
+  $ram_capacite = null;
+  $ram_type_libelle = "DDR4"; 
+  $disque_capacite = null;
+  $disque_type_libelle = "SSD";
+
+  // --- LIGNE 1 : PROCESSEUR ---
+  if (isset($lignes[0]) && !empty(trim($lignes[0]))) {
+      $cpu_libelle = trim($lignes[0]);
+  }
+
+  // --- LIGNE 2 : CAPACITÉ ET FRÉQUENCE RAM ---
+  if (isset($lignes[1]) && !empty(trim($lignes[1]))) {
+      // On extrait la capacité et la fréquence depuis la ligne 2
+      if (preg_match('/([\d,]+)\s*Go\s*@\s*(\d+)\s*MHz/i', $lignes[1], $matches)) {
+          $ram_capacite = intval(str_replace(',', '.', $matches[1]));
+          $ram_frequence = intval($matches[2]);
+
+          // Logique de détection DDR selon la fréquence
+          if ($ram_frequence >= 4800) { $ram_type_libelle = "DDR5"; }
+          elseif ($ram_frequence >= 2133) { $ram_type_libelle = "DDR4"; }
+          else { $ram_type_libelle = "DDR3"; }
+      } 
+      // Si pas de fréquence, on prend juste le premier nombre de la ligne avant "Go"
+      elseif (preg_match('/([\d,]+)\s*Go/i', $lignes[1], $matches)) {
+          $ram_capacite = intval(str_replace(',', '.', $matches[1]));
+      }
+  }
+
+  // --- LIGNE 3 : CARACTÉRISTIQUES DISQUE (OPTIONNEL) ---
+  // On peut s'en servir pour deviner si c'est un SSD ou HDD/eMMC au besoin
+  if (isset($lignes[3])) {
+      if (stripos($lignes[3], 'SSD') !== false) { $disque_type_libelle = "SSD"; }
+      elseif (stripos($lignes[3], 'MMC') !== false) { $disque_type_libelle = "eMMC"; }
+	  elseif (stripos($lignes[3], 'HDD') !== false) { $disque_type_libelle = "HDD"; }
+  }
+
+  // --- LIGNE 4 : CAPACITÉ DU DISQUE ---
+  if (isset($lignes[3]) && !empty(trim($lignes[3]))) {
+      
+      $ligne_disque_propre = preg_replace('/[^\x20-\x7E]/', '', $lignes[3]);
+      $ligne_disque_propre = str_replace(' ', '', $ligne_disque_propre); 
+
+      if (preg_match('/([\d,.]+?)Go/i', $ligne_disque_propre, $matches)) {
+          
+          $parties = preg_split('/[,.]/', $matches[1]);
+          $capacite_brute = trim($parties[0]);
+          
+          $disque_capacite = intval($capacite_brute);
+      }
+  }
 	
+  function getOrCreateRefId($connection, $tableName, $libelle) {
+    if (empty($libelle)) return null;
+    
+    $query = "SELECT id FROM " . DB_PREFIX . $tableName . " WHERE libelle = ?";
+    $stmt = $connection->prepare($query);
+    if ($stmt) {
+      $stmt->bind_param("s", $libelle);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      if ($row = $result->fetch_assoc()) {
+        $stmt->close();
+        return $row['id'];
+      }
+      $stmt->close();
+    }
+    
+    $queryInsert = "INSERT INTO " . DB_PREFIX . $tableName . " (libelle) VALUES (?)";
+    $stmtInsert = $connection->prepare($queryInsert);
+    if ($stmtInsert) {
+      $stmtInsert->bind_param("s", $libelle);
+      $stmtInsert->execute();
+      $newId = $stmtInsert->insert_id;
+      $stmtInsert->close();
+      return $newId;
+    }
+    return null;
+  }
+
+  // Liaisons avec vos tables de référence (ouapi_ref_...)
+  $cpu_id = getOrCreateRefId($connect->connection, "ref_cpu", $cpu_libelle);
+  $ram_type_id = getOrCreateRefId($connect->connection, "ref_ram_type", $ram_type_libelle);
+  $disque_type_id = getOrCreateRefId($connect->connection, "ref_disque_type", $disque_type_libelle);
+
 	$query = "INSERT INTO " . DB_PREFIX . "hardware 
-	          (num_serie, marque_id, modele_id, type_id, nom, os_id, agence_id, emplacement_id, ip, suivi_rebus, commentaire, creation_date, pfield_garantie, pfield_utilisateurprinc) 
-	          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	          (num_serie, marque_id, modele_id, type_id, nom, os_id, agence_id, emplacement_id, ip, suivi_rebus, commentaire, creation_date, pfield_garantie, pfield_utilisateurprinc, cpu_id, ram_capacite, ram_type_id, disque_capacite, disque_type_id) 
+	          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	$stmt = $connect->connection->prepare($query);
 	
 	if ($stmt) {
-		$stmt->bind_param("ssssssssssssss",
+    $commentaire = "";
+    
+    // Convert empty string to null for integer fields in custom pfields
+    $pfield_garantie = (!empty($fields['pfield_garantie']) ? intval($fields['pfield_garantie']) : null);
+    $pfield_utilisateurprinc = (!empty($fields['pfield_utilisateurprinc']) ? intval($fields['pfield_utilisateurprinc']) : null);
+
+		$stmt->bind_param("sssssssssssssiiiiiiiii",
 			$fields['num_serie'], $fields['marque_id'], $fields['modele_id'], $fields['type_id'],
 			$fields['nom'], $fields['os_id'], $fields['agence_id'], $fields['emplacement_id'],
-			$fields['ip'], $fields['suivi_rebus'], $fields['commentaire'], $fields['creation_date'],
-			$fields['pfield_garantie'], $fields['pfield_utilisateurprinc']
+			$fields['ip'], $fields['suivi_rebus'], $commentaire, $fields['creation_date'],
+			$pfield_garantie, $pfield_utilisateurprinc,
+      $cpu_id, 
+      $ram_capacite, 
+      $ram_type_id, 
+      $disque_capacite, 
+      $disque_type_id
 		);
 		if ($stmt->execute()) {
       $stmt->close();

@@ -1,4 +1,4 @@
-UPDATE `{TAB_CONFIG}` SET `valeur` = '1.5' WHERE `{TAB_CONFIG}`.`nom` = 'gen_version';[END]
+UPDATE `{TAB_CONFIG}` SET `valeur` = '2' WHERE `{TAB_CONFIG}`.`nom` = 'gen_version';[END]
 INSERT INTO `{TAB_CONFIG}` (`nom` ,`subcategory` ,`libelle` ,`description` ,`valeur` ,`form_type` ,`globale`) VALUES ('rght_sum', '', 'Show summary button', 'Show summary button', 'SUM1', 'radio_yn', '1');[END]
 INSERT INTO `{TAB_CONFIG}` (`nom` ,`subcategory` ,`libelle` ,`description` ,`valeur` ,`form_type` ,`globale`) VALUES ('activrub_sum', '', 'Show summary button', 'Show summary button', '1', 'radio_yn', '1');[END]
 INSERT INTO `{TAB_CONFIG}` (`nom` ,`subcategory` ,`libelle` ,`description` ,`valeur` ,`form_type` ,`globale`) VALUES ('ldap_attr_hard_os', 'hard', 'Operating System attribute', 'LDAP field containing the computers\' Operating System' , 'operatingsystem', 'list', '1');[END]

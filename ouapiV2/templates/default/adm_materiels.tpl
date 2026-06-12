@@ -139,7 +139,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.os.action.LINK}" target="_blank"><img src="{form.os.action.IMAGE}"  name="imglink_os" border="0" title="{form.os.action.LIBELLE}" alt="" /></a>
+			<a href="{form.os.action.LINK}"><img src="{form.os.action.IMAGE}"  name="imglink_os" border="0" title="{form.os.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.os.valid.IMAGE}" border="0" name="imglink_os" title="{form.os.valid.LIBELLE}" onClick="{form.os.valid.ONCLICK}" alt="" />
@@ -157,7 +157,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.cpu.action.LINK}" target="_blank"><img src="{form.cpu.action.IMAGE}"  name="imglink_cpu" border="0" title="{form.cpu.action.LIBELLE}" alt="" /></a>
+			<a href="{form.cpu.action.LINK}"><img src="{form.cpu.action.IMAGE}"  name="imglink_cpu" border="0" title="{form.cpu.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.cpu.valid.IMAGE}" border="0" name="imglink_cpu" title="{form.cpu.valid.LIBELLE}" onClick="{form.cpu.valid.ONCLICK}" alt="" />
@@ -180,7 +180,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.ram_type.action.LINK}" target="_blank"><img src="{form.ram_type.action.IMAGE}"  name="imglink_ram_type" border="0" title="{form.ram_type.action.LIBELLE}" alt="" /></a>
+			<a href="{form.ram_type.action.LINK}"><img src="{form.ram_type.action.IMAGE}"  name="imglink_ram_type" border="0" title="{form.ram_type.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.ram_type.valid.IMAGE}" border="0" name="imglink_ram_type" title="{form.ram_type.valid.LIBELLE}" onClick="{form.ram_type.valid.ONCLICK}" alt="" />
@@ -203,7 +203,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.disque_type.action.LINK}" target="_blank"><img src="{form.disque_type.action.IMAGE}"  name="imglink_disque_type" border="0" title="{form.disque_type.action.LIBELLE}" alt="" /></a>
+			<a href="{form.disque_type.action.LINK}"><img src="{form.disque_type.action.IMAGE}"  name="imglink_disque_type" border="0" title="{form.disque_type.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.disque_type.valid.IMAGE}" border="0" name="imglink_disque_type" title="{form.disque_type.valid.LIBELLE}" onClick="{form.disque_type.valid.ONCLICK}" alt="" />
@@ -218,7 +218,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.user.action.LINK}" target="_blank"><img src="{form.user.action.IMAGE}"  name="imglink_user" border="0" title="{form.user.action.LIBELLE}" alt="" /></a>
+			<a href="{form.user.action.LINK}"><img src="{form.user.action.IMAGE}"  name="imglink_user" border="0" title="{form.user.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 		<!-- BEGIN valid -->
 			<img src="{form.user.valid.IMAGE}" border="0" name="imglink_user" title="{form.user.valid.LIBELLE}" onClick="{form.user.valid.ONCLICK}" alt="" />
@@ -236,7 +236,7 @@
 		<!-- END list -->
 	</select>
 		<!-- BEGIN action -->
-			<a href="{form.emplacement.action.LINK}" target="_blank"><img src="{form.emplacement.action.IMAGE}" border="0" title="{form.emplacement.action.LIBELLE}" alt="" /></a>
+			<a href="{form.emplacement.action.LINK}"><img src="{form.emplacement.action.IMAGE}" border="0" title="{form.emplacement.action.LIBELLE}" alt="" /></a>
 		<!-- END action -->	
 	<br/>
 	<!-- END emplacement -->

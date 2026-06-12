@@ -489,7 +489,8 @@ elseif (isset($_GET['action']) && $_GET['action'] == 'editer' && isset($_POST['s
 			$template->assign_block_vars('form_post', array(
 				'OK' => $lang["adm_gen_editfieldok"], 					
 				'CLOSE' => $lang["close"],	
-				'ID' => 'mess_retour'
+				'ID' => 'mess_retour',
+				'ACTION_NAME' => 'addfield',
 			));	
 		}
 		else

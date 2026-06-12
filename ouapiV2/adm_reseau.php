@@ -86,9 +86,11 @@ if (isset($_POST['soumettre']))
 			$pfields_values = '';
 			
 			$pfieldColumns = get_reseau_pfield_columns($req1);
+			$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_RESEAU);
 			foreach ($pfieldColumns as $fieldName) {
 				$pfields_names .= ',' . $fieldName;
-				$pfields_values .= ",'" . format_string_db($_POST[$fieldName]) . "'";
+				$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+				$pfields_values .= "," . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 			}
 			
 			$requete = "INSERT INTO ".TAB_RESEAU." (".RE_PLUGNUMBER.",".RE_LOCATIONID.",".RE_SITEID.",".RE_HARDWAREID.",".RE_NETWORKHARDID.",".RE_PORTID.",type_reseau_materiel_id,type_reseau_equipement_id,POE_materiel,Brancher_POE_materiel,POE_reseau,Brancher_POE_reseau".$pfields_names.") VALUES ('".$num_prise."','".$emplacement_id."','".$agence_id."','".$hardware_id."','".$switch_id."','".$port_id."','".$type_reseau_materiel_id."','".$type_reseau_equipement_id."',".$poe_materiel.",".$brancher_poe_materiel.",".$poe_reseau.",".$brancher_poe_reseau."".$pfields_values.")";
@@ -110,8 +112,10 @@ if (isset($_POST['soumettre']))
 			$pfields_update = '';
 			
 			$pfieldColumns = get_reseau_pfield_columns($req1);
+			$pfieldColumnTypes = get_pfield_column_types($req1->connection, TAB_RESEAU);
 			foreach ($pfieldColumns as $fieldName) {
-				$pfields_update .= "," . $fieldName . "='" . format_string_db($_POST[$fieldName]) . "'";
+				$columnType = $pfieldColumnTypes[$fieldName] ?? 'varchar';
+				$pfields_update .= "," . $fieldName . "=" . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 			}
 
 			$requete = "UPDATE ".TAB_RESEAU." SET num_prise='$num_prise',emplacement_id='$emplacement_id',agence_id='$agence_id',

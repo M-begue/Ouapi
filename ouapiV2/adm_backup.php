@@ -14,6 +14,40 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 /**
+ * Fonction pour vérifier si le répertoire de sauvegarde est accessible
+ */
+function isBackupDirAccessible($dir) {
+	if (!file_exists($dir)) {
+		return false;
+	}
+	if (!is_dir($dir)) {
+		return false;
+	}
+	// Tester l'accès en lecture/écriture
+	return is_readable($dir) && is_writable($dir);
+}
+
+/**
+ * Fonction pour obtenir le répertoire de sauvegarde accessible
+ */
+function getAccessibleBackupDir($primary_dir, $fallback_dir = 'backups_local') {
+	if (isBackupDirAccessible($primary_dir)) {
+		return $primary_dir;
+	}
+	
+	// Si le répertoire primaire n'est pas accessible, utiliser le fallback local
+	if (!is_dir($fallback_dir)) {
+		mkdir($fallback_dir, 0777, TRUE);
+	}
+	
+	if (isBackupDirAccessible($fallback_dir)) {
+		return $fallback_dir;
+	}
+	
+	return null; // Aucun répertoire n'est accessible
+}
+
+/**
  * Fonction pour formater la taille des fichiers
  */
 function formatBytes($bytes, $precision = 2) {
@@ -100,6 +134,27 @@ $affichage = '';
 
 $backup_dir = 'backups';
 $backup_prefix = 'OUAPI_backup_';
+$fallback_dir = 'backups_local';
+
+// Vérifier l'accessibilité du répertoire de sauvegarde
+$actual_backup_dir = getAccessibleBackupDir($backup_dir, $fallback_dir);
+
+if ($actual_backup_dir === null) {
+	// Aucun répertoire n'est accessible
+	$template->assign_block_vars('backup_message', array(
+		'TYPE' => 'error',
+		'TITLE' => $lang["backup_error"] ?? 'Erreur d\'accès',
+		'TEXT' => $lang["backup_dir_unreachable"] ?? 'Le répertoire de sauvegarde n\'est pas accessible. Vérifiez que le NAS est allumé ou que les permissions sont correctes.',
+	));
+	$actual_backup_dir = $backup_dir;
+} else if ($actual_backup_dir !== $backup_dir) {
+	// On utilise le fallback local
+	$template->assign_block_vars('backup_message', array(
+		'TYPE' => 'warning',
+		'TITLE' => $lang["backup_nas_offline"] ?? 'NAS indisponible',
+		'TEXT' => $lang["backup_fallback_local"] ?? 'Le NAS n\'est pas accessible. Les sauvegardes sont effectuées localement (' . $fallback_dir . ').',
+	));
+}
 
 // Gestion des messages depuis les redirections
 if (isset($_GET['deleted']) && $_GET['deleted'] == 1) {
@@ -119,8 +174,12 @@ if (isset($_GET['created']) && $_GET['created'] == 1) {
 }
 
 // Créer le répertoire de sauvegardes s'il n'existe pas
-if (!is_dir($backup_dir)) {
-	mkdir($backup_dir, 0777, TRUE);
+if (!is_dir($actual_backup_dir)) {
+	try {
+		mkdir($actual_backup_dir, 0777, TRUE);
+	} catch (Exception $e) {
+		// Silencieusement échouer si on ne peut pas créer le répertoire
+	}
 }
 
 // Traitement des actions
@@ -129,7 +188,7 @@ if (isset($_POST['action'])) {
 		// Création d'une nouvelle sauvegarde
 		$timestamp = date('Y-m-d_H-i-s');
 		$backup_name = $backup_prefix . $timestamp . '.zip';
-		$backup_path = $backup_dir . '/' . $backup_name;
+		$backup_path = $actual_backup_dir . '/' . $backup_name;
 		$temp_backup_dir = 'temp/backup_' . time();
 		
 		try {
@@ -142,10 +201,15 @@ if (isset($_POST['action'])) {
             if (!is_dir($files_dest_dir)) {
                 mkdir($files_dest_dir, 0777, TRUE);
             }
+            
+            // Vérifier que le répertoire de destination est accessible
+            if (!isBackupDirAccessible($actual_backup_dir)) {
+            	throw new Exception($lang["backup_dir_not_writable"] ?? 'Le répertoire de sauvegarde n\'est pas accessible en écriture. Le NAS est peut-être indisponible.');
+            }
 			
 			// 1. SAUVEGARDE DES FICHIERS
 			$CopieRecursive = new FileRecursive();
-			$CopieRecursive->copie('./', $temp_backup_dir . '/files', '', 1, '', 1, array('temp', 'backups'));
+			$CopieRecursive->copie('./', $temp_backup_dir . '/files', '', 1, '', 1, array('temp', 'backups', 'backups_local'));
 			
 			// 2. SAUVEGARDE DE LA BASE DE DONNÉES
 			$db_backup = '';
@@ -253,13 +317,20 @@ $template->assign_block_vars('backup_interface', array(
 ));
 
 // Lister les sauvegardes existantes
-if (is_dir($backup_dir)) {
+if (is_dir($actual_backup_dir) && isBackupDirAccessible($actual_backup_dir)) {
 	$backups = array();
-	$handle = opendir($backup_dir);
+	$handle = @opendir($actual_backup_dir);
+	
+	if (!$handle) {
+		// Impossible d'ouvrir le répertoire
+		$template->assign_block_vars('backup_interface.error', array(
+			'MESSAGE' => $lang["backup_list_error"] ?? 'Impossible de lister les sauvegardes existantes.',
+		));
+	} else {
 	
 	while (FALSE !== ($file = readdir($handle))) {
 		if (strpos($file, $backup_prefix) === 0 && strtolower(substr($file, -4)) === '.zip') {
-			$file_path = $backup_dir . '/' . $file;
+			$file_path = $actual_backup_dir . '/' . $file;
 			$file_size = filesize($file_path);
 			$file_time = filemtime($file_path);
 			
@@ -273,10 +344,12 @@ if (is_dir($backup_dir)) {
 		}
 	}
 	closedir($handle);
-	
-	// Trier par date décroissante
-	usort($backups, function($a, $b) {
-		return $b['timestamp'] - $a['timestamp'];
+	}
+}
+
+// Trier par date décroissante
+usort($backups, function($a, $b) {
+	return $b['timestamp'] - $a['timestamp'];
 	});
 	
 	// Afficher les sauvegardes
@@ -290,6 +363,5 @@ if (is_dir($backup_dir)) {
 			'CONFIRM_DELETE' => $lang["backup_confirm_delete"] ?? 'Êtes-vous sûr de vouloir supprimer cette sauvegarde ?',
 		));
 	}
-}
 
 ?>

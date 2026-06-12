@@ -91,6 +91,10 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 		// Plusieurs résultats = sous catégories
 		else if (count($tab_subcats) > 1)
 		{
+			
+			$cols_groupcol = array();
+            $cols_sortcol = array();
+
 			$i = 0;
 			while($i < count($tab_subcats))
 			{
@@ -2090,7 +2094,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
     			$requete_ports = "SELECT r.*, e.libelle AS l_empl, h.nom AS hardname
                       			FROM ".TAB_RESEAU." r
                       			LEFT JOIN ".TAB_HARD." h ON h.id = r.hardware_id
-                      			LEFT JOIN ".TAB_EMPL." e ON e.id = r.emplacement_id
+                      			LEFT JOIN ".TAB_EMPL." e ON e.id = h.emplacement_id
                       			WHERE r.agence_id='".intval($_GET["agence_id"])."' 
                       			AND r.equipement_id='".$tab[$i]["equipement_id"]."' 
                       			AND r.port_id <> '0'
@@ -2175,7 +2179,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 			FROM ".TAB_RESEAU."
 				LEFT JOIN ".TAB_PERIPH." ON ".TAB_RESEAU.".equipement_id = ".TAB_PERIPH.".id
 			  LEFT JOIN ".TAB_HARD." ON ".TAB_RESEAU.".".RE_HARDWAREID." = ".TAB_HARD.".id
-			  LEFT JOIN ".TAB_EMPL." ON ".TAB_RESEAU.".".RE_LOCATIONID." = ".TAB_EMPL.".id
+			  LEFT JOIN ".TAB_EMPL." ON ".TAB_HARD.".emplacement_id = ".TAB_EMPL.".id
 			  LEFT JOIN ".TAB_TYPE_RESEAU." tr_mat ON ".TAB_RESEAU.".type_reseau_materiel_id = tr_mat.id
 			  LEFT JOIN ".TAB_TYPE_RESEAU." tr_eq ON ".TAB_RESEAU.".type_reseau_equipement_id = tr_eq.id
 			WHERE ".TAB_RESEAU.".".RE_SITEID."='".intval($_GET["agence_id"])."'
@@ -2375,6 +2379,7 @@ if (isset($_GET["agence_id"])&& $_SESSION["user_agence"] <= 100)
 				if (preg_match('`;'.RGHT_NETW_ADMIN.';`',$_SESSION["grp_rights"]) || $_SESSION["user_grp"] == 10)
 				{
 					$template->assign_block_vars('r_netw.tab_netw.group.list.tools', array(
+							'LINK' => 'index.php?page=adm_reseau.php&amp;action=Supprimer&amp;agence_id='.intval($_GET["agence_id"]).'&amp;id='.($tab_prises[$k]['id'] ?? ''),
 							'IMAGE' => 'templates/'.DEFAULT_TEMPLATE.'/images/delete.gif',
 							'TITLE' => $lang["delete"]
 						));

@@ -122,10 +122,12 @@ if (isset($_POST['soumettre']))
 			$pfields_values = '';
 			
 			$pfieldsColumns = get_hard_pfield_columns($req1);
+			$pfieldsColumnTypes = get_pfield_column_types($req1-> connection, TAB_HARD);
 
 			foreach ($pfieldsColumns as $fieldName) {
 				$pfields_names .= ',' . $fieldName;
-				$pfields_values .= ",'" . format_string_db($_POST[$fieldName]) . "'";
+				$columnType = $pfieldsColumnTypes[$fieldName] ?? 'varchar';
+				$pfields_values .= "," . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 			}
 			
 			$requete = "INSERT INTO ".TAB_HARD." (nom,num_serie,type_id,marque_id,modele_id,os_id,cpu_id,ram_capacite,ram_type_id,disque_capacite,disque_type_id,user_id,agence_id,emplacement_id,ip,reservable,commentaire,suivi_rebus,creation_date".$pfields_names.")
@@ -147,9 +149,11 @@ if (isset($_POST['soumettre']))
 			$pfields_update = '';
 			
 			$pfieldsColumns = get_hard_pfield_columns($req1);
+			$pfieldsColumnTypes = get_pfield_column_types($req1-> connection, TAB_HARD);
 
 			foreach ($pfieldsColumns as $fieldName) {
-				$pfields_update .= "," . $fieldName . "='" . format_string_db($_POST[$fieldName]) . "'";
+				$columnType = $pfieldsColumnTypes[$fieldName] ?? 'varchar';
+				$pfields_update .= "," . $fieldName . "=" . format_pfield_value($_POST[$fieldName] ?? '', $columnType);
 			}
 			
 			$requete = "UPDATE ".TAB_HARD." SET nom='$nom',num_serie='$num_serie',type_id='$type',marque_id='$marque',

@@ -234,6 +234,7 @@ $lang["install_ldap_"] = '';
 
 // Bas de page
 $lang["copyright"] = 'Copyright &copy; Nicolas BIDET 2007-2013';
+$lang["copyright2"] = "Copyright &copy; Assistance Informatique de la Marche 2026";
 $lang[""] = '';
 
 // MAJ

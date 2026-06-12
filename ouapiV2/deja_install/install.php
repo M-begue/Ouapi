@@ -644,6 +644,7 @@ define("OCS_INSTALL","Non");
 	
 	// Connexion à la base
 	$connect_db = @mysqli_connect(DB_HOST, DB_USER, DB_MDP, DB_TRANSM);
+	mysqli_query($connect_db, "SET sql_mode=''");
 	
 	// Lecture de fichier de requetes SQL
 	$page = '';
@@ -715,9 +716,12 @@ define("OCS_INSTALL","Non");
 	
 	// 
 	// Création de l'utilisateur admin
-	//
-	$result = mysqli_query($connect_db, "INSERT INTO ".TAB_USERS." (id,nom,prenom,mail,agence_id,groupe_id,login,mdp,langue) VALUES 
-	('1','Admin','General','".$_SESSION["install_mail_admin"]."','1','10','".$_SESSION["install_login_admin"]."','".password_hash($_SESSION["install_pass_admin"], PASSWORD_BCRYPT)."','".$_SESSION["install_lang"]."')");
+	$sql_admin = "INSERT INTO ".TAB_USERS." 
+	(id, nom, prenom, mail, agence_id, groupe_id, login, mdp, login_win, langue, locked, rights) 
+	VALUES 
+	('1', 'Admin', 'General', '".$_SESSION["install_mail_admin"]."', '1', '10', '".$_SESSION["install_login_admin"]."', '".password_hash($_SESSION["install_pass_admin"], PASSWORD_BCRYPT)."', '', '".$_SESSION["install_lang"]."', '0', '')";
+
+	$result = mysqli_query($connect_db, $sql_admin);
 	
 	// 
 	// Création du site principal

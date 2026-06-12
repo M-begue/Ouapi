@@ -12,6 +12,39 @@ require('common_includes.php');
 
 $backup_dir = 'backups';
 $backup_prefix = 'OUAPI_backup_';
+$fallback_dir = 'backups_local';
+
+/**
+ * Fonction pour vérifier si le répertoire de sauvegarde est accessible
+ */
+function isBackupDirAccessible($dir) {
+	if (!file_exists($dir)) {
+		return false;
+	}
+	if (!is_dir($dir)) {
+		return false;
+	}
+	return is_readable($dir) && is_writable($dir);
+}
+
+/**
+ * Fonction pour obtenir le répertoire de sauvegarde accessible
+ */
+function getAccessibleBackupDir($primary_dir, $fallback_dir = 'backups_local') {
+	if (isBackupDirAccessible($primary_dir)) {
+		return $primary_dir;
+	}
+	
+	if (!is_dir($fallback_dir)) {
+		mkdir($fallback_dir, 0777, TRUE);
+	}
+	
+	if (isBackupDirAccessible($fallback_dir)) {
+		return $fallback_dir;
+	}
+	
+	return null;
+}
 
 function deleteDirectoryRecursive($dir) {
 	if (!file_exists($dir)) {
@@ -72,8 +105,16 @@ function cleanOldBackups($backup_dir, $backup_prefix, $max_backups = 10) {
 
 // Traitement du téléchargement
 if (isset($_GET['action']) && $_GET['action'] == 'download' && isset($_GET['file'])) {
+	$actual_backup_dir = getAccessibleBackupDir($backup_dir, $fallback_dir);
+	
+	if ($actual_backup_dir === null) {
+		header('HTTP/1.0 503 Service Unavailable');
+		echo 'Le répertoire de sauvegarde n\'est pas accessible. Le NAS est peut-être indisponible.';
+		exit;
+	}
+	
 	$backup_file = basename($_GET['file']);
-	$file_path = $backup_dir . '/' . $backup_file;
+	$file_path = $actual_backup_dir . '/' . $backup_file;
 	
 	// Vérifier que c'est un fichier de sauvegarde valide
 	if (file_exists($file_path) && strpos($backup_file, $backup_prefix) === 0 && strtolower(substr($backup_file, -4)) === '.zip') {
@@ -95,8 +136,15 @@ if (isset($_GET['action']) && $_GET['action'] == 'download' && isset($_GET['file
 
 // Traitement de la suppression
 if (isset($_GET['action']) && $_GET['action'] == 'delete' && isset($_GET['file'])) {
+	$actual_backup_dir = getAccessibleBackupDir($backup_dir, $fallback_dir);
+	
+	if ($actual_backup_dir === null) {
+		header('Location: index.php?page=adm_backup.php&error=nas_offline');
+		exit;
+	}
+	
 	$backup_file = basename($_GET['file']);
-	$file_path = $backup_dir . '/' . $backup_file;
+	$file_path = $actual_backup_dir . '/' . $backup_file;
 	
 	// Vérifier que c'est un fichier de sauvegarde valide
 	if (file_exists($file_path) && strpos($backup_file, $backup_prefix) === 0) {
@@ -113,9 +161,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'create_backup') {
 	try {
 		require('config/declare.php');
 		
-		// Créer le répertoire de sauvegardes s'il n'existe pas
-		if (!is_dir($backup_dir)) {
-			mkdir($backup_dir, 0777, TRUE);
+		// Obtenir le répertoire de sauvegarde accessible
+		$actual_backup_dir = getAccessibleBackupDir($backup_dir, $fallback_dir);
+		
+		if ($actual_backup_dir === null) {
+			throw new Exception('Aucun répertoire de sauvegarde n\'est accessible. Vérifiez que le NAS est allumé et accessible.');
 		}
 		
 		// Créer le répertoire de logs s'il n'existe pas
@@ -128,9 +178,13 @@ if (isset($_GET['action']) && $_GET['action'] == 'create_backup') {
 		$log_entry = "[" . date('Y-m-d H:i:s') . "] Début de la sauvegarde automatique\n";
 		file_put_contents($log_file, $log_entry, FILE_APPEND);
 		
+		// Log: Répertoire utilisé
+		$log_dir = 'backups/logs';
+		file_put_contents($log_file, "[" . date('Y-m-d H:i:s') . "] Répertoire de destination: $actual_backup_dir\n", FILE_APPEND);
+		
 		$timestamp = date('Y-m-d_H-i-s');
 		$backup_name = $backup_prefix . $timestamp . '.zip';
-		$backup_path = $backup_dir . '/' . $backup_name;
+		$backup_path = $actual_backup_dir . '/' . $backup_name;
 		$temp_backup_dir = 'temp/backup_' . time();
 		
 		// Créer le répertoire temporaire
@@ -143,9 +197,14 @@ if (isset($_GET['action']) && $_GET['action'] == 'create_backup') {
 			mkdir($files_dest_dir, 0777, TRUE);
 		}
 		
+		// Vérifier que le répertoire de destination est accessible
+		if (!isBackupDirAccessible($actual_backup_dir)) {
+			throw new Exception('Le répertoire de sauvegarde n\'est pas accessible en écriture. Le NAS est peut-être indisponible.');
+		}
+		
 		// 1. SAUVEGARDE DES FICHIERS
 		$CopieRecursive = new FileRecursive();
-		$CopieRecursive->copie('./', $temp_backup_dir . '/files', '', 1, '', 1, array('temp', 'backups'));
+		$CopieRecursive->copie('./', $temp_backup_dir . '/files', '', 1, '', 1, array('temp', 'backups', 'backups_local'));
 		file_put_contents($log_file, "[" . date('Y-m-d H:i:s') . "] Fichiers sauvegardés\n", FILE_APPEND);
 		
 		// 2. SAUVEGARDE DE LA BASE DE DONNÉES
